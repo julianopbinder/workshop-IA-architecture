@@ -42,6 +42,11 @@ const imagens = {
   mcp: "/manus-storage/mcp-bridge_feaf8711.jpg",
   subagentes: "/manus-storage/subagents-workpods_025440cb.jpg",
   logo: "/manus-storage/nexo-symbol_b1647a29.png",
+  oficina: "/manus-storage/copilot-intellij-workshop-hero_cacdcd17.jpg",
+  instalacao: "/manus-storage/copilot-setup-intellij_5ef26b36.jpg",
+  sugestao: "/manus-storage/copilot-inline-java_d3558198.jpg",
+  revisao: "/manus-storage/copilot-chat-review_034b2151.jpg",
+  instrucoes: "/manus-storage/copilot-instructions-repo_a0d8f5ac.jpg",
 };
 
 const roteiro = [
@@ -138,6 +143,92 @@ function FluxoMcp() {
   );
 }
 
+// Central de Prática: oficina guiada para transformar conceitos em ações seguras no IntelliJ com GitHub Copilot.
+function CentralPratica({ voltar }: { voltar: () => void }) {
+  const [etapa, setEtapa] = useState(0);
+  const [copiado, setCopiado] = useState(false);
+  const [concluidas, setConcluidas] = useState<number[]>([]);
+
+  const missoes = [
+    {
+      codigo: "01",
+      titulo: "Ligue o motor",
+      duracao: "5 min",
+      imagem: imagens.instalacao,
+      meta: "Instalar, entrar e confirmar que o Copilot está vivo no editor.",
+      passos: ["No IntelliJ, abra Settings > Plugins.", "Procure GitHub Copilot no Marketplace e instale.", "Reinicie a IDE e entre por Tools > GitHub Copilot > Login to GitHub.", "Abra um arquivo Java simples e observe uma sugestão acinzentada."],
+      prompt: "Não há prompt ainda. A meta é ver uma sugestão pequena antes de seguir.",
+      sinal: "Sinal de sucesso: texto acinzentado aparece enquanto você digita.",
+    },
+    {
+      codigo: "02",
+      titulo: "Peça uma peça pequena",
+      duracao: "7 min",
+      imagem: imagens.sugestao,
+      meta: "Usar uma sugestão inline sem entregar o volante para a IA.",
+      passos: ["Abra um arquivo Java sem dados reais.", "Escreva o comentário abaixo e inicie o método.", "Leia a sugestão acinzentada como se fosse um pull request pequeno.", "Use Tab para aceitar somente se entender; use Esc para descartar."],
+      prompt: "// Return true only when the order id is present and contains digits only.\nboolean hasValidOrderId(String orderId) {",
+      sinal: "Sinal de sucesso: você aceitou, ajustou ou descartou a proposta conscientemente.",
+    },
+    {
+      codigo: "03",
+      titulo: "Pergunte antes de mudar",
+      duracao: "10 min",
+      imagem: imagens.revisao,
+      meta: "Transformar um arquivo desconhecido em uma conversa revisável.",
+      passos: ["Selecione um método pequeno que o grupo quer entender.", "Abra o Copilot Chat e peça uma explicação baseada no código selecionado.", "Peça os três comportamentos mais importantes a testar.", "Revise a proposta antes de copiar ou aceitar qualquer alteração."],
+      prompt: "Explique este método para alguém novo no projeto. Diga: 1) qual problema ele resolve; 2) quais entradas e saídas importam; 3) quais cenários de erro devo testar. Não altere nenhum arquivo.",
+      sinal: "Sinal de sucesso: a resposta aponta para regras do código, não para palpites genéricos.",
+    },
+    {
+      codigo: "04",
+      titulo: "Ensine as regras da casa",
+      duracao: "12 min",
+      imagem: imagens.instrucoes,
+      meta: "Registrar convenções para que cada conversa comece menos do zero.",
+      passos: ["Na raiz do repositório, crie .github/copilot-instructions.md.", "Escreva poucas regras que o time realmente verifica em revisão.", "Inclua testes, segurança e convenções existentes.", "Peça ao Copilot para explicar seu plano antes de uma alteração em vários arquivos."],
+      prompt: "# Convenções do projeto\n\n- Use Java 21 e Spring Boot; mantenha serviços pequenos.\n- Para mudanças de regra, escreva ou atualize testes JUnit 5.\n- Não registre dados pessoais, tokens ou senhas em logs.\n- Antes de editar múltiplos arquivos, explique o plano e os riscos.",
+      sinal: "Sinal de sucesso: o time reduz repetições sem abrir mão de revisão humana.",
+    },
+  ];
+
+  const missao = missoes[etapa];
+  const copiar = async () => {
+    try { await navigator.clipboard.writeText(missao.prompt); setCopiado(true); window.setTimeout(() => setCopiado(false), 1800); } catch { setCopiado(false); }
+  };
+  const alternarConclusao = () => setConcluidas((atual) => atual.includes(etapa) ? atual.filter((item) => item !== etapa) : [...atual, etapa]);
+
+  return (
+    <main className="practice-shell min-h-screen text-[#f4f0e9]">
+      <header className="relative z-20 flex items-center justify-between border-b border-white/10 px-5 py-4 md:px-10">
+        <button onClick={voltar} className="nav-button inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold"><ArrowLeft size={15} /> Voltar ao deck</button>
+        <div className="hidden items-center gap-3 text-right sm:flex"><span className="status-dot" /><div><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#ff9c91]">Central de prática</p><p className="text-xs text-[#9bb0c6]">IntelliJ + GitHub Copilot</p></div></div>
+        <img src={imagens.logo} alt="Nexo" className="h-10 w-10 object-contain" />
+      </header>
+
+      <section className="relative overflow-hidden border-b border-white/10 px-5 pb-14 pt-14 md:px-10 md:pt-18">
+        <div className="signal-route left-0 top-8 w-[36vw]" />
+        <div className="mx-auto grid max-w-[1360px] items-end gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="relative z-10"><Etiqueta cor="coral">Missão: primeiro superpoder</Etiqueta><h1 className="editorial-title mt-6 max-w-3xl text-5xl leading-[0.91] text-[#f7f3ec] md:text-7xl">Não é uma aula.<br /><span className="text-[#ff8174]">É uma primeira missão.</span></h1><p className="mt-6 max-w-xl text-lg leading-relaxed text-[#b8cadc]">Em 34 minutos, o grupo sai de “nunca toquei nisso” para quatro práticas que podem ser testadas no próximo dia de trabalho.</p><div className="mt-9 flex flex-wrap gap-3">{[["04", "missões"], ["01", "projeto de teste"], ["100%", "revisão humana"]].map(([numero, legenda]) => <div key={legenda} className="panel-glass rounded-2xl px-4 py-3"><span className="font-display text-2xl text-[#ff9c91]">{numero}</span><span className="ml-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[#aabfd2]">{legenda}</span></div>)}</div></div>
+          <div className="relative"><div className="absolute -left-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-[#ff6958]/40 bg-[#091427]/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#ff9c91] md:block">da pergunta à revisão</div><img src={imagens.oficina} alt="Oficina visual de código que representa o uso seguro do Copilot" className="relative w-full rounded-[2rem] border border-white/15 object-cover shadow-2xl shadow-black/35" /></div>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-[1360px] gap-6 px-5 py-10 md:px-10 lg:grid-cols-[280px_1fr]">
+        <aside className="lg:sticky lg:top-7 lg:self-start"><p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#7892ad]">Roteiro da oficina</p><div className="grid gap-2 sm:grid-cols-2 lg:block lg:space-y-2">{missoes.map((item, indice) => <button key={item.codigo} onClick={() => setEtapa(indice)} className={`group w-full rounded-2xl border p-4 text-left transition ${etapa === indice ? "border-[#ff6958]/60 bg-[#ff6958]/12" : "border-white/10 bg-white/[0.025] hover:border-[#77b9e4]/45 hover:bg-white/[0.05]"}`}><div className="flex items-center justify-between"><span className="text-xs font-bold text-[#ff9c91]">{item.codigo}</span>{concluidas.includes(indice) && <CheckCircle2 size={16} className="text-[#9dd7f8]" />}</div><p className="mt-4 font-bold text-[#eff5f9]">{item.titulo}</p><p className="mt-1 text-xs text-[#8ea7c0]">{item.duracao}</p></button>)}</div><div className="mt-5 rounded-2xl border border-[#77b9e4]/20 bg-[#77b9e4]/[0.07] p-4 text-xs leading-relaxed text-[#c7e6f8]"><strong>Por que em missões?</strong> Cada etapa produz uma evidência concreta, não apenas uma conversa sobre IA.</div></aside>
+
+        <article className="min-w-0"><div className="mb-5 flex flex-wrap items-end justify-between gap-3"><div><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#ff9c91]">Missão {missao.codigo} · {missao.duracao}</p><h2 className="editorial-title mt-3 text-4xl text-[#f7f3ec] md:text-6xl">{missao.titulo}</h2></div><button onClick={alternarConclusao} className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold transition ${concluidas.includes(etapa) ? "border-[#77b9e4]/50 bg-[#77b9e4]/14 text-[#c9eaff]" : "border-white/15 text-[#c7d6e3] hover:border-[#ff6958]/50"}`}><CheckCircle2 size={15} />{concluidas.includes(etapa) ? "Missão concluída" : "Marcar como feita"}</button></div>
+          <p className="max-w-2xl text-lg leading-relaxed text-[#b8cadc]">{missao.meta}</p>
+          <div className="mt-7 overflow-hidden rounded-[2rem] border border-white/12 bg-[#10213b] shadow-2xl shadow-black/20"><img src={missao.imagem} alt={`Ilustração passo a passo da missão ${missao.codigo} no IntelliJ`} className="h-auto w-full object-cover" /></div>
+          <div className="mt-7 grid gap-6 xl:grid-cols-[1.1fr_0.9fr]"><div className="slide-card rounded-[2rem] p-6 md:p-8"><div className="flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#ff6958] text-xs font-bold text-[#091427]">{missao.codigo}</span><p className="text-sm font-bold">Faça assim, sem pular etapas</p></div><ol className="mt-7 space-y-5">{missao.passos.map((passo, indice) => <li key={passo} className="flex gap-4"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#77b9e4]/35 text-[10px] font-bold text-[#9dd7f8]">{indice + 1}</span><span className="text-sm leading-relaxed text-[#c4d3e0]">{passo}</span></li>)}</ol></div><div className="rounded-[2rem] border border-[#ff6958]/25 bg-[#ff6958]/[0.07] p-6 md:p-8"><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ff9c91]">Use este texto</p><pre className="practice-prompt mt-5 whitespace-pre-wrap rounded-xl border border-white/10 bg-[#091427]/80 p-4 text-xs leading-relaxed text-[#d9e7f0]">{missao.prompt}</pre><button onClick={copiar} className="coral-button mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold">{copiado ? <Check size={14} /> : <ClipboardList size={14} />}{copiado ? "Copiado" : "Copiar para a prancheta"}</button></div></div>
+          <div className="mt-6 flex gap-4 rounded-2xl border border-[#77b9e4]/25 bg-[#77b9e4]/[0.07] p-5"><ShieldCheck className="mt-0.5 shrink-0 text-[#9dd7f8]" size={20} /><p className="text-sm leading-relaxed text-[#c8e6f8]"><strong>Checkpoint humano.</strong> {missao.sinal} Nunca aceite uma mudança que você não consegue explicar, testar ou revisar.</p></div>
+          <div className="mt-9 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6"><p className="text-xs text-[#8ea7c0]">Baseado na documentação do GitHub Copilot para JetBrains. Recursos e telas podem variar conforme versão e políticas da empresa.</p><a className="text-xs font-bold text-[#ff9c91] hover:text-[#ffb0a7]" href="https://docs.github.com/copilot" target="_blank" rel="noreferrer">Ver documentação oficial ↗</a></div>
+        </article>
+      </section>
+    </main>
+  );
+}
+
 function Home() {
   const [slideAtual, setSlideAtual] = useState(0);
   const [menuAberto, setMenuAberto] = useState(false);
@@ -145,6 +236,7 @@ function Home() {
   const [cenario, setCenario] = useState<string | null>(null);
   const [respostaQuiz, setRespostaQuiz] = useState<string | null>(null);
   const [mostrarNotas, setMostrarNotas] = useState(false);
+  const [centralPratica, setCentralPratica] = useState(false);
 
   const progresso = useMemo(() => `${((slideAtual + 1) / TOTAL_SLIDES) * 100}%`, [slideAtual]);
 
@@ -174,18 +266,18 @@ function Home() {
   const renderizarSlide = () => {
     switch (slideAtual) {
       case 0:
-        return <Moldura numero={0} etiqueta="Sessão de 60 minutos" titulo={<>Skills, MCPs<br />e Subagentes.</>} subtitulo="Não decore siglas. Em uma hora, você vai entender quem faz o quê — e quando usar cada recurso para a IA trabalhar de verdade.">
+        return <Moldura numero={0} etiqueta="Missão 01 · 60 minutos" titulo={<>Uma IA genial.<br /><span className="text-[#ff8174]">Uma mesa pequena.</span></>} subtitulo="Hoje você vai aprender a organizar a mesa dela — e desbloquear quatro superpoderes para programar com IA, sem precisar decorar nenhuma sigla.">
           <div className="grid items-end gap-10 lg:grid-cols-[0.86fr_1.14fr]">
             <div className="relative z-10 pb-4">
-              <Etiqueta cor="coral">Programação com IA — do zero</Etiqueta>
-              <p className="mt-8 max-w-md text-lg leading-relaxed text-[#c3d1e1]">A metáfora que vai guiar tudo hoje:</p>
-              <p className="editorial-title mt-3 text-3xl leading-tight text-[#f7f3ec]">“A IA é brilhante.<br /><span className="text-[#ff8174]">Mas sua mesa é pequena.</span>”</p>
-              <button onClick={proximo} className="coral-button mt-9 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold">Começar a jornada <ArrowRight size={16} /></button>
+              <div className="flex flex-wrap items-center gap-3"><Etiqueta cor="coral">Programação com IA — do zero</Etiqueta><div className="hidden items-center gap-2 lg:flex"><NexoRota compacta /><span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#8ca5c0]">Nexo em operação</span></div></div>
+              <p className="mt-7 max-w-md text-base leading-relaxed text-[#c3d1e1]">Antes das siglas, uma missão humana: dar à IA o contexto, o método e os acessos certos — sem lotar a mesa.</p>
+              <div className="relative mt-7 overflow-hidden rounded-2xl border border-[#77b9e4]/20 bg-[#77b9e4]/[0.07] p-4"><div className="signal-route bottom-0 left-4 right-4" /><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ff9c91]">Superpoderes a desbloquear</p><div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-[#c8e5f6]"><span>01 · Contexto certo</span><span>02 · Processo repetível</span><span>03 · Trabalho profundo</span><span>04 · Conexão segura</span></div></div>
+              <div className="mt-9 flex flex-wrap gap-3"><button onClick={proximo} className="coral-button inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold">Começar a jornada <ArrowRight size={16} /></button><button onClick={() => setCentralPratica(true)} className="nav-button inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold">Ir para a oficina <Zap size={15} /></button></div>
             </div>
-            <div className="relative overflow-hidden rounded-[2rem] border border-[#cfe1ef]/15 bg-[#102440] shadow-2xl shadow-black/30">
+            <div className="relative overflow-hidden rounded-[2rem] border border-[#cfe1ef]/15 bg-[#102440] shadow-2xl shadow-black/30"><div className="absolute left-6 top-5 z-10 hidden scale-125 lg:block"><NexoRota /></div><div className="signal-route left-0 top-[74px] z-10 w-2/5" />
               <img src={imagens.hero} alt="Sala de controle conceitual que representa o contexto da IA" className="h-[290px] w-full object-cover object-right md:h-[370px]" />
               <div className="absolute inset-0 bg-gradient-to-r from-[#102440] via-[#102440]/20 to-transparent" />
-              <div className="absolute bottom-5 right-5 rounded-full border border-white/15 bg-[#091427]/70 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[#d4e4f1] backdrop-blur">A empresa da IA</div>
+              <div className="absolute bottom-5 left-5 rounded-full border border-[#ff6958]/35 bg-[#091427]/75 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[#ffb5ac] backdrop-blur">Rota ativa · a empresa da IA</div>
             </div>
           </div>
         </Moldura>;
@@ -288,11 +380,13 @@ function Home() {
     }
   };
 
+  if (centralPratica) return <CentralPratica voltar={() => setCentralPratica(false)} />;
+
   return (
     <main className="presentation-shell">
       <header className="fixed left-0 right-0 top-0 z-30 flex items-center justify-between px-5 py-5 md:px-8">
         <button onClick={() => irPara(0)} className="flex items-center gap-3 text-left"><img src={imagens.logo} alt="Símbolo Nexo" className="h-12 w-12 object-contain" /><span className="hidden text-xs font-bold uppercase tracking-[0.18em] text-[#dce8f2] sm:block">Nexo / IA</span><NexoRota compacta /></button>
-        <div className="hidden items-center gap-3 md:flex"><button onClick={() => setMostrarNotas(!mostrarNotas)} className={`nav-button rounded-full px-4 py-2 text-xs font-bold ${mostrarNotas ? "border-[#ff6958]/60 text-[#ff9c91]" : ""}`}>{mostrarNotas ? "Notas ativas" : "Notas do apresentador"}</button><button onClick={() => setRoteiroAberto(!roteiroAberto)} className="nav-button inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold">Roteiro <ChevronDown size={14} /></button></div>
+        <div className="hidden items-center gap-3 md:flex"><button onClick={() => setCentralPratica(true)} className="nav-button inline-flex items-center gap-2 rounded-full border-[#ff6958]/35 px-4 py-2 text-xs font-bold text-[#ffaca3]">Central de prática <Zap size={14} /></button><button onClick={() => setMostrarNotas(!mostrarNotas)} className={`nav-button rounded-full px-4 py-2 text-xs font-bold ${mostrarNotas ? "border-[#ff6958]/60 text-[#ff9c91]" : ""}`}>{mostrarNotas ? "Notas ativas" : "Notas do apresentador"}</button><button onClick={() => setRoteiroAberto(!roteiroAberto)} className="nav-button inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold">Roteiro <ChevronDown size={14} /></button></div>
         <button onClick={() => setMenuAberto(!menuAberto)} className="nav-button flex h-10 w-10 items-center justify-center rounded-full md:hidden" aria-label="Abrir menu">{menuAberto ? <X size={18} /> : <Menu size={18} />}</button>
       </header>
 

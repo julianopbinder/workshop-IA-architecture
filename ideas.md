@@ -62,3 +62,22 @@ O logotipo é o **Nexo**: três trilhas que convergem em um nó central, represe
 - A **linha de sinal coral** atravessa cada lâmina relevante como trilha pontilhada ou rota direcional; ela sempre indica avanço narrativo, uma conexão ou uma decisão.
 - O **Nexo** é uma marca sem texto feita de três trilhas que convergem em um nó central. A mesma geometria se repete na navegação e nas rotas visuais, para que o sistema seja reconhecível mesmo sem o nome.
 - Imagens e diagramas partem da metáfora da **Empresa da IA**: primeiro apresentam funções e relações humanas; só depois introduzem o nome técnico de cada recurso.
+
+## Evolução: Missão “Primeiro Superpoder”
+
+A experiência deixa de ser somente uma explicação de conceitos e passa a ser uma **missão guiada**. A abertura desafia o grupo a resolver uma situação corporativa simples — entender um bug, aplicar um padrão de código e consultar uma informação — e a cada ato revela qual “superpoder” de IA resolve aquela parte. O público não assiste a uma lista de siglas: acompanha uma operação que ganha capacidade a cada escolha.
+
+O novo menu, **Central de Prática**, funciona como uma pequena sala de treinamento para o IntelliJ com GitHub Copilot. Ele organiza quatro momentos: preparar o ambiente, perguntar sobre um arquivo, pedir uma alteração segura e revisar o resultado. Cada etapa terá uma imagem instrucional, um prompt pronto para copiar e uma definição direta de “o que observar”.
+
+### Regras da evolução
+
+- Cada conceito passa a estar ligado a um cenário comum de trabalho — bug, melhoria, revisão ou busca de informação — antes de qualquer definição técnica.
+- A apresentação ganha um marcador de missão e um placar de superpoderes para tornar a progressão mais tangível e participativa.
+- A Central de Prática usa visuais no estilo de uma oficina de código: telas organizadas, realces coral somente nas ações e passos numerados em sequência.
+
+## Decisões de estilo — missão e prática
+
+- A primeira tela começa pela missão humana — uma IA genial com uma mesa pequena — e deixa as siglas técnicas para a descoberta posterior.
+- O coral significa uma rota de decisão ativa; cada módulo de missão deve revelar qual ação ou capacidade está sendo desbloqueada.
+- O símbolo Nexo de três rotas convergentes aparece como marca independente na navegação e em composições principais, não somente acompanhado por texto.
+- A promessa prática de IntelliJ + Copilot aparece como rota paralela desde o início: a pessoa entende o conceito e pode praticá-lo com segurança em seguida.
