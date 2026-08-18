@@ -123,6 +123,13 @@
 - [x] Reescrever os trechos como conteúdo próprio da biblioteca.
 - [x] Validar e publicar a versão autoral do módulo.
 
+## Tutorial único de MCP sem MCP Inspector
+
+- [x] Remover o print do MCP Inspector e o conteúdo atual abaixo dele.
+- [x] Criar um roteiro mínimo para preparar, iniciar e testar uma ferramenta MCP.
+- [x] Explicar o resultado de sucesso no terminal para iniciantes.
+- [x] Validar e publicar o tutorial único de MCP.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.

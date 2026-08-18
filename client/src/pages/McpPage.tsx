@@ -1,11 +1,10 @@
 // Design: linguagem editorial mineral da biblioteca, com coral usado para destacar a ponte e as ações do MCP.
 import { useState } from "react";
-import { ArrowRight, Boxes, CheckCircle2, ExternalLink, PlugZap, Server, Wrench, X } from "lucide-react";
+import { ArrowRight, Boxes, ExternalLink, PlugZap, Server, Wrench, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
 
 const imagens = {
   arquitetura: "/manus-storage/mcp-arquitetura-referencia_2d831c18.jpg",
-  capacidades: "/manus-storage/mcp-tools-prompts-resources-referencia_05ef3422.png",
 };
 
 function Figura({ src, alt, legenda }: { src: string; alt: string; legenda: string }) {
@@ -79,50 +78,56 @@ export default function McpPage() {
             <article><Boxes size={22} /><h3>Prompts</h3><p><strong>Modelos reutilizáveis.</strong> Um roteiro pronto para investigar um erro, criar um documento ou seguir um processo.</p><span>Exemplo: investigar deploy</span></article>
             <article><Server size={22} /><h3>Resources</h3><p><strong>Dados para ler.</strong> Arquivos, logs, documentos ou informações de um banco de dados.</p><span>Exemplo: arquivo de logs</span></article>
           </div>
-          <div className="mcp-reference-visual"><Figura src={imagens.capacidades} alt="Interface MCP com ferramentas, prompts e recursos" legenda="Exemplo visual: um MCP Server pode disponibilizar Tools, Prompts e Resources para a IA." /></div>
         </div>
       </section>
 
       <section id="exemplo" className="java-section mcp-practice">
         <div className="page-width">
-          <div className="identificador"><span>03</span><i /><p>Exemplo para iniciantes</p></div>
+          <div className="identificador"><span>03</span><i /><p>Seu primeiro MCP do zero</p></div>
           <div className="chapter-heading">
-            <h2>Peça para a IA verificar um <em>ambiente de testes.</em></h2>
-            <p>Para começar sem complexidade, use uma ferramenta já conectada que apenas informa se o ambiente está online. Depois, o mesmo padrão pode atender sistemas maiores.</p>
+            <h2>Crie uma ferramenta que apenas <em>diz “olá”.</em></h2>
+            <p>Não vamos conectar banco de dados, Kubernetes ou outro sistema. Primeiro, você cria uma ferramenta local, inicia o MCP e confere se ela respondeu corretamente.</p>
           </div>
-          <div className="mcp-beginner-warning"><CheckCircle2 size={18} /><span><strong>Importante:</strong> este é um exemplo didático. Para funcionar de verdade, alguém do time precisa configurar e autorizar o MCP Server uma única vez.</span></div>
 
           <div className="walkthrough mcp-walkthrough">
             <article className="walk-step">
-              <div className="step-text"><p className="step-number">PASSO 01</p><h3>O time disponibiliza uma ferramenta</h3><p>Imagine que o time de infraestrutura criou no MCP uma ferramenta chamada <code>status_ambiente</code>. Ela só responde se o ambiente de testes está online ou offline.</p><div className="mcp-tool-card"><span>TOOL DO MCP</span><code>status_ambiente</code><p>Permissão: apenas consulta</p></div></div>
-              <div className="mcp-flow-card"><p>AGENTE DE IA</p><strong>“Preciso verificar o ambiente.”</strong><i>↓</i><p>MCP SERVER</p><strong>“Existe a tool status_ambiente.”</strong><i>↓</i><p>SERVIÇO EXTERNO</p><strong>“ambiente-testes: ONLINE”</strong></div>
+              <div className="step-text"><p className="step-number">PASSO 01</p><h3>Crie a pasta e instale o MCP</h3><p>No Windows, abra o <strong>Terminal</strong>. Copie um comando de cada vez e pressione Enter. O primeiro cria uma pasta para seu exemplo; o segundo instala a ferramenta.</p><div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">COMANDOS PARA COPIAR</p><pre>{`mkdir meu-primeiro-mcp
+cd meu-primeiro-mcp
+python -m pip install "mcp[cli]"`}</pre></div><p>Ao terminar, você terá uma pasta chamada <code>meu-primeiro-mcp</code>. É nela que ficará seu arquivo Python.</p></div>
+              <div className="mcp-summary-card"><p>O QUE VOCÊ FEZ</p><h3>Criou o lugar do projeto e instalou o <em>kit de criação</em> do MCP.</h3></div>
             </article>
             <article className="walk-step flipped">
-              <div className="step-text"><p className="step-number">PASSO 02</p><h3>Você faz um pedido simples</h3><p>No agente de IA que está conectado ao MCP, escreva:</p><div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">PROMPT PARA COPIAR</p><pre>{`Verifique o status do ambiente de testes.
-Use a ferramenta disponível no MCP.
-Não faça nenhuma alteração.`}</pre></div><p>Você não precisa escrever comandos de infraestrutura. O agente escolhe a ferramenta disponibilizada pelo MCP.</p></div>
-              <div className="mcp-chat-card"><div className="mcp-chat-top">AGENTE DE IA · MCP CONECTADO</div><div className="mcp-user-msg">Verifique o status do ambiente de testes.</div><div className="mcp-agent-msg">Vou usar a ferramenta <code>status_ambiente</code>.</div><div className="mcp-tool-result"><span>RESULTADO DA TOOL</span><strong>ambiente-testes: ONLINE</strong></div></div>
+              <div className="step-text"><p className="step-number">PASSO 02</p><h3>Crie o arquivo <code>server.py</code></h3><p>Na pasta <code>meu-primeiro-mcp</code>, crie um arquivo chamado <code>server.py</code>. Copie tudo abaixo e salve.</p><pre>{`# Importa a biblioteca que cria o MCP.
+from mcp.server.fastmcp import FastMCP
+
+# Cria um servidor MCP com um nome simples.
+mcp = FastMCP("Meu Primeiro MCP")
+
+# Registra uma ferramenta que recebe um nome.
+@mcp.tool()
+def cumprimentar(nome: str) -> str:
+    # Devolve uma mensagem para quem chamou a ferramenta.
+    return f"Olá, {nome}!"
+
+# Inicia o MCP quando este arquivo é executado.
+if __name__ == "__main__":
+    # Mantém a conversa pelo terminal.
+    mcp.run(transport="stdio")`}</pre><p>O nome da sua primeira ferramenta é <code>cumprimentar</code>. Ela recebe um nome e devolve uma saudação.</p></div>
+              <div className="mcp-tool-card"><span>TOOL CRIADA</span><code>cumprimentar</code><p>Entrada: nome<br />Saída: uma saudação</p></div>
             </article>
             <article className="walk-step">
-              <div className="step-text"><p className="step-number">PASSO 03</p><h3>Confira o resultado e os limites</h3><p>O MCP deu ao agente uma forma controlada de consultar o ambiente. Ele retornou um resultado, mas não recebeu autorização para fazer deploy, apagar dados ou mudar configurações.</p><div className="decision-card"><p><b>PODE</b><span>Consultar o status permitido pela ferramenta.</span></p><p><b>NÃO PODE</b><span>Executar ações que o MCP não disponibilizou ou autorizou.</span></p></div></div>
-              <div className="mcp-summary-card"><p>MCP EM UMA FRASE</p><h3>O agente usa uma <em>ponte controlada</em> para pedir algo a uma ferramenta externa.</h3></div>
+              <div className="step-text"><p className="step-number">PASSO 03</p><h3>Inicie o MCP</h3><p>Com o Terminal ainda aberto na pasta <code>meu-primeiro-mcp</code>, execute:</p><div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">COMANDO PARA COPIAR</p><pre>{`mcp dev server.py`}</pre></div><p>Esse comando inicia seu MCP localmente e abre uma página de teste no navegador. Não feche o Terminal enquanto estiver testando.</p></div>
+              <div className="mcp-flow-card"><p>SEU ARQUIVO</p><strong>server.py</strong><i>↓</i><p>MCP INICIADO</p><strong>ferramenta cumprimentar disponível</strong><i>↓</i><p>PÁGINA DE TESTE</p><strong>pronta para testar</strong></div>
+            </article>
+            <article className="walk-step flipped">
+              <div className="step-text"><p className="step-number">PASSO 04</p><h3>Teste a ferramenta</h3><div className="beginner-steps"><p><b>1.</b> Na página que abriu, clique em <strong>List Tools</strong>.</p><p><b>2.</b> Escolha a ferramenta <code>cumprimentar</code>.</p><p><b>3.</b> No campo <code>nome</code>, escreva <code>Ana</code>.</p><p><b>4.</b> Clique em <strong>Run Tool</strong>.</p></div><div className="decision-card"><p><b>DEU CERTO</b><span>Você verá uma resposta parecida com: <strong>Olá, Ana!</strong></span></p><p><b>DEU ERRO</b><span>Leia a mensagem no Terminal, corrija o arquivo <code>server.py</code>, salve e rode <code>mcp dev server.py</code> novamente.</span></p></div></div>
+              <div className="mcp-summary-card"><p>RESULTADO FINAL</p><h3>Você criou e testou uma <em>ferramenta MCP.</em></h3><p>Depois, essa mesma ideia pode ser usada por um agente de IA conectado ao seu MCP.</p></div>
             </article>
           </div>
         </div>
       </section>
 
-      <section className="chapter chapter-soft">
-        <div className="page-width">
-          <div className="identificador"><span>04</span><i /><p>Quando usar</p></div>
-          <div className="when-grid">
-            <div><h2>Use MCP quando a IA precisa <em>agir fora da conversa.</em></h2></div>
-            <div><p>Você quer que a IA consulte dados, leia documentos, veja logs ou use uma ferramenta de outro sistema — sempre com permissões e limites definidos.</p><div className="use-cases"><span>Consultar Kubernetes</span><span>Ler logs</span><span>Abrir Notion</span><span>Buscar dados</span><span>Usar Figma</span></div></div>
-          </div>
-          <div className="mcp-next-module"><Server size={21} /><p><strong>O próximo conceito são os Subagentes.</strong> Depois de conectar ferramentas pelo MCP, um agente principal pode delegar pesquisa, DevOps ou testes a especialistas.</p><a href="/subagentes">Ver Subagentes <ArrowRight size={16} /></a></div>
-        </div>
-      </section>
-
-      <footer className="footer page-width"><p><strong>Resumo:</strong> Skill diz como trabalhar; MCP dá ao agente um caminho controlado para usar ferramentas e dados externos.</p><a href="#top">Voltar ao topo ↑</a></footer>
+      <footer className="footer page-width"><p><strong>Resumo:</strong> você criou uma ferramenta MCP local, iniciou o servidor e testou a resposta sem conectar nenhum sistema externo.</p><a href="#top">Voltar ao topo ↑</a></footer>
     </main>
   );
 }
