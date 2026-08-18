@@ -116,7 +116,7 @@ cd C:\\meu-primeiro-mcp`}</pre></div>
                 <p className="step-number">PASSO 02</p>
                 <h3>Instale o FastMCP uma única vez</h3>
                 <p>Copie este comando exatamente como está. Ele usa o caminho completo do Python, portanto <strong>não precisa configurar PATH</strong>.</p>
-                <div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">COPIE NO POWERSHELL</p><pre>{`& "C:\\Users\\Juliano\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe" -m pip install fastmcp`}</pre></div>
+                <div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">COPIE NO POWERSHELL</p><pre>{`& "$env:LocalAppData\\Python\\pythoncore-3.14-64\\python.exe" -m pip install fastmcp`}</pre></div>
                 <p>Espere o terminal terminar. Quando aparecer <code>Successfully installed</code> ou <code>Requirement already satisfied</code>, avance.</p>
               </div>
               <div className="mcp-summary-card"><p>POR QUE ESTA ETAPA EXISTE</p><h3>O FastMCP é a <em>caixa de ferramentas</em> que permite criar e testar seu MCP.</h3></div>
@@ -154,7 +154,7 @@ from server import mcp
 
 async def testar_ferramenta():
     async with Client(mcp) as cliente:
-        resultado = await cliente.call_tool("cumprimentar", {"nome": "Juliano"})
+        resultado = await cliente.call_tool("cumprimentar", {"nome": "João"})
         print("TESTE CONCLUÍDO COM SUCESSO")
         print(resultado.data)
 
@@ -168,9 +168,9 @@ asyncio.run(testar_ferramenta())`}</pre>
                 <p className="step-number">PASSO 05</p>
                 <h3>Execute o teste final</h3>
                 <p>Volte ao PowerShell, que ainda deve estar em <code>C:\meu-primeiro-mcp</code>, e copie apenas este comando.</p>
-                <div className="prompt-card"><Terminal size={22} /><p className="prompt-label">COMANDO FINAL</p><pre>{`& "C:\\Users\\Juliano\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe" testar_mcp.py`}</pre></div>
+                <div className="prompt-card"><Terminal size={22} /><p className="prompt-label">COMANDO FINAL</p><pre>{`& "$env:LocalAppData\\Python\\pythoncore-3.14-64\\python.exe" testar_mcp.py`}</pre></div>
                 <div className="mcp-success-terminal"><p>O RESULTADO CORRETO É:</p><pre>{`TESTE CONCLUÍDO COM SUCESSO
-Olá, Juliano! Sua ferramenta MCP está funcionando.`}</pre></div>
+Olá, João! Sua ferramenta MCP está funcionando.`}</pre></div>
               </div>
               <div className="mcp-summary-card"><p>SE VOCÊ VIU A FRASE ACIMA</p><h3>Parabéns: você criou e testou uma <em>ferramenta MCP.</em></h3><p>O próximo passo, mais adiante, é conectar essa ferramenta a um agente de IA.</p></div>
             </article>

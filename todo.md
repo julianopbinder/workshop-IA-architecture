@@ -152,6 +152,10 @@
 - [x] Deixar explícito qual mensagem confirma o sucesso.
 - [ ] Validar, publicar e entregar o módulo MCP simplificado.
 
+## Ajuste do exemplo MCP
+
+- [x] Trocar o nome exibido no exemplo de Juliano para João.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
