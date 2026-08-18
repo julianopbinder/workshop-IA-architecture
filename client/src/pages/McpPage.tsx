@@ -4,7 +4,6 @@ import { ArrowRight, Boxes, CheckCircle2, ExternalLink, PlugZap, Server, Wrench,
 import { LibraryNav } from "@/components/LibraryNav";
 
 const imagens = {
-  capaVideo: "/manus-storage/video-mcp-capa-referencia_a5d95d2d.jpg",
   arquitetura: "/manus-storage/mcp-arquitetura-referencia_2d831c18.jpg",
   capacidades: "/manus-storage/mcp-tools-prompts-resources-referencia_05ef3422.png",
 };
@@ -51,7 +50,7 @@ export default function McpPage() {
 
       <section className="chapter chapter-soft">
         <div className="page-width">
-          <div className="identificador"><span>01</span><i /><p>O que aparece no vídeo</p></div>
+          <div className="identificador"><span>01</span><i /><p>Como o MCP funciona</p></div>
           <div className="chapter-heading">
             <h2>Um MCP funciona como uma <em>USB para agentes de IA.</em></h2>
             <p>Em vez de criar uma integração diferente para cada IA, o MCP oferece uma forma padrão de ligar o agente a um serviço externo.</p>
@@ -73,7 +72,7 @@ export default function McpPage() {
           <div className="identificador"><span>02</span><i /><p>Três capacidades</p></div>
           <div className="chapter-heading">
             <h2>O que um MCP pode oferecer <em>para a IA?</em></h2>
-            <p>O vídeo separa o MCP em três partes fáceis de guardar: ações, modelos de pergunta e dados para consultar.</p>
+            <p>Para entender o MCP com facilidade, separe suas capacidades em três grupos: ações, modelos de pergunta e dados para consultar.</p>
           </div>
           <div className="mcp-capabilities">
             <article><Wrench size={22} /><h3>Tools</h3><p><strong>Ações.</strong> A IA pode chamar uma função permitida, como verificar o status de um ambiente.</p><span>Exemplo: <code>status_ambiente</code></span></article>
@@ -89,7 +88,7 @@ export default function McpPage() {
           <div className="identificador"><span>03</span><i /><p>Exemplo para iniciantes</p></div>
           <div className="chapter-heading">
             <h2>Peça para a IA verificar um <em>ambiente de testes.</em></h2>
-            <p>O exemplo real com Kubernetes do vídeo exige configuração e permissões. Por isso, aqui usamos uma versão menor: uma ferramenta já conectada que só informa se o ambiente está online.</p>
+            <p>Para começar sem complexidade, use uma ferramenta já conectada que apenas informa se o ambiente está online. Depois, o mesmo padrão pode atender sistemas maiores.</p>
           </div>
           <div className="mcp-beginner-warning"><CheckCircle2 size={18} /><span><strong>Importante:</strong> este é um exemplo didático. Para funcionar de verdade, alguém do time precisa configurar e autorizar o MCP Server uma única vez.</span></div>
 
@@ -119,7 +118,7 @@ Não faça nenhuma alteração.`}</pre></div><p>Você não precisa escrever coma
             <div><h2>Use MCP quando a IA precisa <em>agir fora da conversa.</em></h2></div>
             <div><p>Você quer que a IA consulte dados, leia documentos, veja logs ou use uma ferramenta de outro sistema — sempre com permissões e limites definidos.</p><div className="use-cases"><span>Consultar Kubernetes</span><span>Ler logs</span><span>Abrir Notion</span><span>Buscar dados</span><span>Usar Figma</span></div></div>
           </div>
-          <div className="mcp-next-module"><Server size={21} /><p><strong>O trecho do vídeo também cita Subagentes.</strong> Depois de conectar ferramentas pelo MCP, um agente principal pode delegar pesquisa, DevOps ou testes a especialistas.</p><a href="/subagentes">Ver Subagentes <ArrowRight size={16} /></a></div>
+          <div className="mcp-next-module"><Server size={21} /><p><strong>O próximo conceito são os Subagentes.</strong> Depois de conectar ferramentas pelo MCP, um agente principal pode delegar pesquisa, DevOps ou testes a especialistas.</p><a href="/subagentes">Ver Subagentes <ArrowRight size={16} /></a></div>
         </div>
       </section>
 

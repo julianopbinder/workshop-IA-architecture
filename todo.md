@@ -117,6 +117,12 @@
 - [x] Criar um exemplo simplificado para quem está começando.
 - [x] Validar e publicar o novo módulo.
 
+## Conteúdo autoral do módulo MCP
+
+- [x] Remover referências diretas ao vídeo em títulos e explicações.
+- [x] Reescrever os trechos como conteúdo próprio da biblioteca.
+- [x] Validar e publicar a versão autoral do módulo.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
