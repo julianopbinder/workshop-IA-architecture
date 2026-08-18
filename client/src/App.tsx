@@ -6,6 +6,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import McpPage from "./pages/McpPage";
 import TopicPage from "./pages/TopicPage";
 
 function Router() {
@@ -13,7 +14,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/skill"} component={Home} />
-      <Route path={"/mcps"}>{() => <TopicPage ativo="mcps" tema="MCPs" descricao="Uma página própria para entender como agentes de IA se conectam a ferramentas, dados e sistemas externos." />}</Route>
+      <Route path={"/mcps"} component={McpPage} />
       <Route path={"/subagentes"}>{() => <TopicPage ativo="subagentes" tema="Subagentes" descricao="Uma página própria para entender como uma IA pode delegar partes de uma tarefa maior a outros agentes." />}</Route>
       <Route path={"/rag"}>{() => <TopicPage ativo="rag" tema="RAG" descricao="Uma página própria para entender como a IA busca informações antes de formular uma resposta." />}</Route>
       <Route path={"/404"} component={NotFound} />

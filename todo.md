@@ -109,6 +109,14 @@
 - [x] Mostrar o prompt de análise da Skill no Copilot Chat e o resultado esperado.
 - [x] Validar e publicar o roteiro completo.
 
+## Novo módulo baseado no vídeo: 7:45–11:05
+
+- [x] Transcrever e identificar o tema do trecho indicado.
+- [x] Criar uma página própria e um item no menu para o tema identificado.
+- [x] Preparar prints equivalentes aos elementos didáticos exibidos no vídeo.
+- [x] Criar um exemplo simplificado para quem está começando.
+- [x] Validar e publicar o novo módulo.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
