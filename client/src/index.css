@@ -132,6 +132,9 @@ pre { overflow: auto; margin: 0; white-space: pre-wrap; }
 .beginner-steps { margin-top: 18px; border-top: 1px solid var(--line); }
 .beginner-steps p { margin: 0; border-bottom: 1px solid var(--line); padding: 10px 0; color: var(--ink-muted); font-size: 13px; line-height: 1.5; }
 .beginner-steps b { display: inline-block; width: 21px; color: var(--accent); }
+.rules-mini { margin: 17px 0 0; border-top: 1px solid var(--line); padding: 0; list-style-position: inside; }
+.rules-mini li { border-bottom: 1px solid var(--line); padding: 8px 0; color: var(--ink-muted); font-size: 13px; line-height: 1.45; }
+.rules-mini li::marker { color: var(--accent); font-weight: 800; }
 .folder-card { align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
 .agent-guide { margin-top: 18px; border: 1px solid #b4c0bc; padding: 13px 15px; background: #edf2ef; }
 .agent-guide-label { margin: 0 0 9px; color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .12em; }

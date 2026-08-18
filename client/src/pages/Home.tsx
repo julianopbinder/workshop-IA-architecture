@@ -14,6 +14,9 @@ const imagens = {
   chat: "/manus-storage/copilot-chat-intellij_43e82322.png",
   revisao: "/manus-storage/copilot-revisao-regras-java_a343fbd2.png",
   aceitarRecusar: "/manus-storage/copilot-aceitar-recusar-intellij_aab6cdba.png",
+  codigoSimples: "/manus-storage/passo4-codigo-java-simples_8b0ddc63.png",
+  validarMd: "/manus-storage/passo5-validar-arquivo-md_dde8d914.png",
+  resultadoTestes: "/manus-storage/passo6-resultado-testes-skill_c75f55ad.png",
 };
 
 // Identificador de capítulo para manter o conteúdo longo fácil de percorrer.
@@ -99,7 +102,7 @@ description: Use esta Skill ao criar ou revisar validações de endpoints Java.
               <Figura src={imagens.instalar} alt="Imagem instrucional mostrando o plugin GitHub Copilot no IntelliJ" legenda="No IntelliJ: Settings → Plugins → GitHub Copilot." />
             </article>
             <article className="walk-step flipped">
-              <div className="step-text"><p className="step-number">PASSO 02</p><h3>Registre as regras do projeto</h3><p>Para o Copilot no IntelliJ, crie <code>.github/copilot-instructions.md</code> e copie as regras da Skill. Plataformas com suporte a Skills usam o diretório com <code>SKILL.md</code>.</p></div>
+              <div className="step-text"><p className="step-number">PASSO 02</p><h3>Registre as mesmas regras no projeto</h3><p>Crie <code>.github/copilot-instructions.md</code>. Dentro dele, copie <strong>exatamente as mesmas quatro regras</strong> do arquivo <code>SKILL.md</code> mostrado acima.</p><ol className="rules-mini"><li>Use Java 21 e mantenha métodos pequenos.</li><li>Crie ou atualize testes JUnit 5 para cada regra nova.</li><li>Não registre tokens, senhas ou dados pessoais em logs.</li><li>Antes de editar vários arquivos, explique o plano e os riscos.</li></ol></div>
               <Figura src={imagens.instrucoes} alt="Imagem instrucional mostrando o arquivo de instruções do repositório" legenda="No repositório: .github/copilot-instructions.md." />
             </article>
             <article className="walk-step no-image">
@@ -111,26 +114,16 @@ description: Use esta Skill ao criar ou revisar validações de endpoints Java.
         └── SKILL.md`}</pre></div>
             </article>
             <article className="walk-step">
-              <div className="step-text"><p className="step-number">PASSO 04</p><h3>Abra o lugar onde você conversa com a IA</h3><p>Para este tutorial, o <strong>agente</strong> é o painel <strong>GitHub Copilot Chat</strong>. É nele que você escreve o pedido e recebe a revisão.</p><div className="beginner-steps"><p><b>1.</b> No topo do IntelliJ, clique em <strong>View</strong>.</p><p><b>2.</b> Clique em <strong>Tool Windows</strong>.</p><p><b>3.</b> Clique em <strong>GitHub Copilot Chat</strong>.</p><p><b>4.</b> Olhe para o lado direito: o painel de conversa apareceu.</p></div><p><strong>Não escreva nada ainda.</strong> Primeiro, no próximo passo, vamos abrir o código e preparar o pedido.</p></div>
-              <Figura src={imagens.chat} alt="Print do IntelliJ com o GitHub Copilot Chat aberto no lado direito e uma caixa de pergunta na parte inferior" legenda="Print do Passo 04: o Copilot Chat está no painel da direita. A caixa na parte inferior é onde você enviará o pedido no próximo passo." />
+              <div className="step-text"><p className="step-number">PASSO 04</p><h3>Abra o código Java simples</h3><p>Este é o código que vamos validar pelas quatro regras do Passo 02.</p></div>
+              <Figura src={imagens.codigoSimples} alt="Print do IntelliJ mostrando um método Java simples chamado hasValidOrderId" legenda="Código Java simples que será validado pelas regras do arquivo .md." />
             </article>
             <article className="walk-step flipped">
-              <div className="step-text"><p className="step-number">PASSO 05</p><h3>Peça ao Copilot para usar as regras</h3><p>O Copilot do IntelliJ não usa o <code>SKILL.md</code> diretamente. Para ele, as regras da Skill devem estar salvas em <code>.github/copilot-instructions.md</code>. Esse arquivo é a receita que orienta a revisão.</p><div className="beginner-steps"><p><b>1.</b> Confirme que <code>.github/copilot-instructions.md</code> está salvo.</p><p><b>2.</b> Abra o arquivo Java que você quer conferir.</p><p><b>3.</b> Copie o método abaixo e cole na caixa do Copilot Chat.</p><p><b>4.</b> Depois do método, cole o pedido de revisão e envie pela seta.</p></div><div className="practice-code"><p className="prompt-label">CÓDIGO JAVA PARA COLAR NO CHAT</p><pre>{`public boolean hasValidOrderId(String orderId) {
-    return orderId != null
-        && !orderId.isBlank()
-        && orderId.matches("\\d+");
-}`}</pre></div><div className="prompt-card real-review-prompt"><TerminalSquare size={22} /><p className="prompt-label">DEPOIS DO CÓDIGO, COLE ESTA PERGUNTA</p><pre>{`Use as regras de .github/copilot-instructions.md
-deste projeto para revisar o método acima.
-
-Não altere arquivos. Diga:
-1. quais regras você usou;
-2. o que está correto ou incorreto;
-3. quais testes JUnit 5 faltam.`}</pre></div></div>
-              <Figura src={imagens.revisao} alt="Print didático mostrando o arquivo copilot-instructions.md aberto e o Copilot Chat recebendo um pedido de revisão Java" legenda="Print do Passo 05: o arquivo à esquerda contém as regras; a pergunta no Chat pede que o Copilot aplique essas regras ao método Java." />
+              <div className="step-text"><p className="step-number">PASSO 05</p><h3>Peça para validar pelo arquivo .md</h3><div className="beginner-steps"><p><b>1.</b> Salve <code>.github/copilot-instructions.md</code>.</p><p><b>2.</b> Abra o Copilot Chat.</p><p><b>3.</b> Cole esta frase e envie:</p></div><div className="skill-call"><p>Valide este código Java usando as regras do arquivo <strong>copilot-instructions.md</strong>. Não altere nada.</p></div><p>Pronto. Agora o Copilot deve conferir o código usando as quatro regras que você colocou no arquivo.</p></div>
+              <Figura src={imagens.validarMd} alt="Print escuro do IntelliJ mostrando o arquivo copilot-instructions.md e a instrução de validação no Copilot Chat" legenda="O arquivo .md contém as regras; a frase no Chat pede para o Copilot validar o código por elas." />
             </article>
             <article className="walk-step">
-              <div className="step-text"><p className="step-number">PASSO 06</p><h3>Leia a resposta e decida: aceitar ou recusar</h3><p>O Copilot deve primeiro explicar a revisão. Antes de deixar qualquer código entrar no seu arquivo, confira se a resposta fez as três coisas abaixo.</p><div className="validation-lane"><p><b>1.</b><span><strong>Citou as regras:</strong> método pequeno, testes JUnit 5 e cuidado com dados em logs.</span></p><p><b>2.</b><span><strong>Encontrou o que falta:</strong> neste exemplo, devem aparecer testes para nulo, vazio, letras e somente números.</span></p><p><b>3.</b><span><strong>Explicou antes de mudar:</strong> se não explicou, peça novamente. Não aceite uma alteração no automático.</span></p></div><p>Se a revisão estiver correta, envie: <strong>“Agora mostre apenas a sugestão de código para os testes.”</strong> Quando a sugestão aparecer no editor, escolha:</p><div className="decision-card"><p><b>ACEITAR</b><span>Pressione <strong>Tab</strong> apenas se você leu e concorda com a sugestão.</span></p><p><b>RECUSAR</b><span>Pressione <strong>Esc</strong> se a sugestão não respeita as regras ou se você não entendeu.</span></p></div></div>
-              <Figura src={imagens.aceitarRecusar} alt="Print do IntelliJ mostrando uma sugestão do Copilot com as opções Go To Accept e Reject" legenda="Print do Passo 06: depois de conferir a sugestão, Tab aceita. Esc recusa. Você sempre decide o que entra no código." />
+              <div className="step-text"><p className="step-number">PASSO 06</p><h3>Veja se passou ou se precisa corrigir</h3><p>Olhe o resultado dos testes no IntelliJ.</p><div className="decision-card"><p><b>VERDE</b><span>Os testes passaram. Leia a sugestão e aceite somente se você concordar.</span></p><p><b>VERMELHO</b><span>Existe algo para corrigir. Não aceite; peça ao Copilot para explicar e corrigir.</span></p></div></div>
+              <Figura src={imagens.resultadoTestes} alt="Print escuro do IntelliJ mostrando quatro testes aprovados e regras atendidas" legenda="Verde significa que os testes passaram. Se aparecer vermelho, corrija antes de aceitar qualquer sugestão." />
             </article>
           </div>
           <div className="java-footer"><Play size={18} /><p><strong>Resultado esperado:</strong> o Copilot não decide por você. Ele trabalha com mais contexto e segue melhor o padrão que o seu time definiu.</p></div>

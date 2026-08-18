@@ -85,6 +85,14 @@
 - [x] Reescrever os Passos 04 a 06 em linguagem estritamente sequencial para iniciantes.
 - [x] Validar e publicar a receita visual revisada.
 
+## Simplificação final: regras, validação e testes
+
+- [x] Repetir no Passo 02 as quatro regras exibidas no exemplo Java.
+- [x] Mostrar no Passo 04 somente o código Java simples a ser validado.
+- [x] Mostrar no Passo 05 apenas a instrução para validar o código pelo arquivo .md.
+- [x] Criar no Passo 06 um print escuro de resultado: passou nos testes ou precisa corrigir.
+- [x] Validar e publicar a sequência simplificada.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
