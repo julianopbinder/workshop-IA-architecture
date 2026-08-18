@@ -49,6 +49,12 @@
 - [x] Criar página própria de MCPs como próximo módulo.
 - [x] Permitir abrir todos os prints em visualização ampliada e nítida.
 - [x] Validar a navegação e publicar a atualização.
+
+## Correção do Passo 03
+
+- [x] Explicar o nome e o local do arquivo SKILL.md no exemplo Java.
+- [x] Mostrar como a Skill é chamada e o que ela executa.
+- [x] Validar e publicar a correção do tutorial.
 - [x] Validar o resultado e publicar a nova versão.
 
 ## Simplificação urgente — Skill no IntelliJ

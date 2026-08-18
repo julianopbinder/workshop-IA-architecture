@@ -124,6 +124,11 @@ pre { overflow: auto; margin: 0; white-space: pre-wrap; }
 .step-text > p:not(.step-number) { margin: 20px 0 0; color: var(--ink-muted); font-size: 16px; line-height: 1.6; }
 .step-text strong { color: var(--ink); }
 .step-text > pre { margin-top: 20px; border: 1px solid #b4c0bc; padding: 16px; background: #edf2ef; color: var(--ink); font-size: 12px; line-height: 1.55; }
+.skill-call { margin-top: 19px; border-left: 3px solid var(--accent); padding: 13px 16px; background: rgb(207 98 53 / 7%); }
+.skill-call p { margin: 0; color: var(--ink); font-size: 14px; line-height: 1.5; }
+.execution-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 16px; color: var(--ink-muted); font-size: 11px; font-weight: 700; line-height: 1.45; }
+.execution-flow span { border: 1px solid #b8c4c0; padding: 7px 8px; background: #edf2ef; }
+.execution-flow i { color: var(--accent); font-style: normal; }
 .review-check { display: flex; gap: 10px; align-items: flex-start; margin-top: 23px; color: var(--accent); font-size: 14px; font-weight: 700; line-height: 1.45; }
 .review-check svg { flex: 0 0 auto; }
 .prompt-card { padding: 29px; border: 1px solid #aeb9b6; background: var(--surface); }
