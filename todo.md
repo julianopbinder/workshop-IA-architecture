@@ -1,5 +1,33 @@
 # Reformulação — apresentação e prática no IntelliJ
 
+## Recursos de estudo
+
+- [x] Pesquisar cursos e guias introdutórios confiáveis.
+- [x] Organizar uma trilha curta com links diretos.
+
+## Conceitos antes da prática
+
+- [x] Encontrar cursos e vídeos que expliquem Skills, MCPs e subagentes sem exigir programação.
+- [x] Organizar uma sequência curta de estudo conceitual, sem Copilot ou IntelliJ.
+
+## Vídeos conceituais
+
+- [x] Encontrar vídeos didáticos sobre Skills, MCPs, subagentes e RAG.
+- [x] Selecionar uma ordem curta de vídeos para iniciantes.
+
+## Vídeos em português
+
+- [x] Pesquisar vídeos em português sobre Skills, MCPs, subagentes e RAG.
+- [x] Selecionar links em português adequados para iniciantes.
+
+## Guia definitivo de Skills
+
+- [x] Definir quatro seções simples: o que é, onde usar, exemplo e IntelliJ.
+- [x] Refazer a página com menu superior funcional e visual minimalista.
+- [x] Destacar imagens grandes e numeradas no tutorial do IntelliJ.
+- [x] Corrigir os ativos visuais do tutorial e reforçar a progressão de leitura.
+- [x] Validar o resultado e publicar a nova versão.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
