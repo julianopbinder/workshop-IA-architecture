@@ -26,6 +26,13 @@
 - [x] Refazer a página com menu superior funcional e visual minimalista.
 - [x] Destacar imagens grandes e numeradas no tutorial do IntelliJ.
 - [x] Corrigir os ativos visuais do tutorial e reforçar a progressão de leitura.
+
+## Página única com conteúdo do usuário
+
+- [x] Organizar o texto do usuário em definição, tipos, estrutura, carregamento e usos.
+- [x] Preparar os dois prints anexados como imagens permanentes do site.
+- [x] Redesenhar a página com menu único, fundo suave e separadores visuais.
+- [x] Validar e publicar a página atualizada.
 - [x] Validar o resultado e publicar a nova versão.
 
 ## Simplificação urgente — Skill no IntelliJ
