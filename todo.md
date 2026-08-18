@@ -33,6 +33,14 @@
 - [x] Preparar os dois prints anexados como imagens permanentes do site.
 - [x] Redesenhar a página com menu único, fundo suave e separadores visuais.
 - [x] Validar e publicar a página atualizada.
+
+## Revisão completa com Java e IntelliJ
+
+- [x] Inserir todo o conteúdo do arquivo anexado, sem resumir as explicações importantes.
+- [x] Reduzir a tipografia e estruturar um menu expansível para futuros itens.
+- [x] Criar um exemplo Java simples, do problema ao teste, para o tutorial do Copilot.
+- [x] Inserir imagens grandes e instruções em sequência para IntelliJ e Copilot.
+- [x] Validar e publicar a nova versão.
 - [x] Validar o resultado e publicar a nova versão.
 
 ## Simplificação urgente — Skill no IntelliJ
