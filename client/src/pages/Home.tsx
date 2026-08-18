@@ -17,6 +17,9 @@ const imagens = {
   codigoSimples: "/manus-storage/passo4-codigo-java-simples_8b0ddc63.png",
   validarMd: "/manus-storage/passo5-validar-arquivo-md_dde8d914.png",
   resultadoTestes: "/manus-storage/passo6-resultado-testes-skill_c75f55ad.png",
+  orderValidatorPasso4: "/manus-storage/order-validator-passo4_ee2121e7.png",
+  orderValidatorPasso5: "/manus-storage/order-validator-passo5-validar-md_5daf6bfa.png",
+  orderValidatorPasso6: "/manus-storage/order-validator-passo6-testes_dbb0586f.png",
 };
 
 // Identificador de capítulo para manter o conteúdo longo fácil de percorrer.
@@ -114,16 +117,16 @@ description: Use esta Skill ao criar ou revisar validações de endpoints Java.
         └── SKILL.md`}</pre></div>
             </article>
             <article className="walk-step">
-              <div className="step-text"><p className="step-number">PASSO 04</p><h3>Abra o código Java simples</h3><p>Este é o código que vamos validar pelas quatro regras do Passo 02.</p></div>
-              <Figura src={imagens.codigoSimples} alt="Print do IntelliJ mostrando um método Java simples chamado hasValidOrderId" legenda="Código Java simples que será validado pelas regras do arquivo .md." />
+              <div className="step-text"><p className="step-number">PASSO 04</p><h3>Abra <code>OrderValidator.java</code></h3><p>Vamos usar <strong>esta mesma classe</strong> até o final. Ela só verifica se o código do pedido foi preenchido.</p></div>
+              <Figura src={imagens.orderValidatorPasso4} alt="Print do IntelliJ mostrando a classe Java simples OrderValidator.java" legenda="Passo 04: esta é a classe OrderValidator.java que será validada e testada nos próximos passos." />
             </article>
             <article className="walk-step flipped">
-              <div className="step-text"><p className="step-number">PASSO 05</p><h3>Peça para validar pelo arquivo .md</h3><div className="beginner-steps"><p><b>1.</b> Salve <code>.github/copilot-instructions.md</code>.</p><p><b>2.</b> Abra o Copilot Chat.</p><p><b>3.</b> Cole esta frase e envie:</p></div><div className="skill-call"><p>Valide este código Java usando as regras do arquivo <strong>copilot-instructions.md</strong>. Não altere nada.</p></div><p>Pronto. Agora o Copilot deve conferir o código usando as quatro regras que você colocou no arquivo.</p></div>
-              <Figura src={imagens.validarMd} alt="Print escuro do IntelliJ mostrando o arquivo copilot-instructions.md e a instrução de validação no Copilot Chat" legenda="O arquivo .md contém as regras; a frase no Chat pede para o Copilot validar o código por elas." />
+              <div className="step-text"><p className="step-number">PASSO 05</p><h3>Valide <code>OrderValidator.java</code> pelo arquivo .md</h3><div className="beginner-steps"><p><b>1.</b> Salve <code>.github/copilot-instructions.md</code>.</p><p><b>2.</b> Deixe <code>OrderValidator.java</code> aberto.</p><p><b>3.</b> No Copilot Chat, copie e envie:</p></div><div className="skill-call"><p>Valide <strong>OrderValidator.java</strong> usando as regras de <strong>copilot-instructions.md</strong>. Não altere nada.</p></div><p>O Copilot compara a classe aberta com as quatro regras que estão no arquivo .md.</p></div>
+              <Figura src={imagens.orderValidatorPasso5} alt="Print do IntelliJ mostrando OrderValidator.java aberto, o arquivo copilot-instructions.md e o pedido de validação no Copilot Chat" legenda="Passo 05: a mesma classe OrderValidator.java está aberta; o Chat recebe o pedido para validá-la pelas regras do arquivo .md." />
             </article>
             <article className="walk-step">
-              <div className="step-text"><p className="step-number">PASSO 06</p><h3>Veja se passou ou se precisa corrigir</h3><p>Olhe o resultado dos testes no IntelliJ.</p><div className="decision-card"><p><b>VERDE</b><span>Os testes passaram. Leia a sugestão e aceite somente se você concordar.</span></p><p><b>VERMELHO</b><span>Existe algo para corrigir. Não aceite; peça ao Copilot para explicar e corrigir.</span></p></div></div>
-              <Figura src={imagens.resultadoTestes} alt="Print escuro do IntelliJ mostrando quatro testes aprovados e regras atendidas" legenda="Verde significa que os testes passaram. Se aparecer vermelho, corrija antes de aceitar qualquer sugestão." />
+              <div className="step-text"><p className="step-number">PASSO 06</p><h3>Execute o teste de <code>OrderValidator.java</code></h3><div className="beginner-steps"><p><b>1.</b> Abra o teste <code>OrderValidatorTest</code>.</p><p><b>2.</b> Clique no triângulo verde <strong>▶</strong> para executar.</p><p><b>3.</b> Olhe o resultado na parte de baixo do IntelliJ.</p></div><div className="decision-card"><p><b>VERDE</b><span><strong>TESTES PASSARAM</strong>: deu certo. Leia a sugestão e aceite somente se concordar.</span></p><p><b>VERMELHO</b><span>Deu erro. Não aceite: corrija primeiro e execute novamente.</span></p></div></div>
+              <Figura src={imagens.orderValidatorPasso6} alt="Print do IntelliJ mostrando OrderValidator.java e os testes OrderValidatorTest aprovados" legenda="Passo 06: clique em executar e procure o verde em OrderValidatorTest. Verde significa que a validação deu certo." />
             </article>
           </div>
           <div className="java-footer"><Play size={18} /><p><strong>Resultado esperado:</strong> o Copilot não decide por você. Ele trabalha com mais contexto e segue melhor o padrão que o seu time definiu.</p></div>

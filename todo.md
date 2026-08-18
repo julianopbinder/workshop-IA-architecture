@@ -93,6 +93,13 @@
 - [x] Criar no Passo 06 um print escuro de resultado: passou nos testes ou precisa corrigir.
 - [x] Validar e publicar a sequência simplificada.
 
+## Mesma classe Java do começo ao fim
+
+- [x] Usar a classe simples OrderValidator.java nos Passos 04, 05 e 06.
+- [x] Mostrar o arquivo OrderValidator.java no print de validação do Passo 05.
+- [x] Mostrar como executar os testes e interpretar o resultado no Passo 06.
+- [x] Validar e publicar a sequência unificada.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
