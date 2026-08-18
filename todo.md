@@ -57,6 +57,12 @@
 - [x] Validar e publicar a correção do tutorial.
 - [x] Validar o resultado e publicar a nova versão.
 
+## Passo inicial para iniciantes
+
+- [x] Explicar onde criar a pasta da Skill no Windows e dentro do projeto aberto no IntelliJ.
+- [x] Reordenar o tutorial para apresentar a criação da pasta antes da chamada da Skill.
+- [x] Validar e publicar a explicação revisada.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.

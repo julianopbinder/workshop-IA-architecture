@@ -129,6 +129,10 @@ pre { overflow: auto; margin: 0; white-space: pre-wrap; }
 .execution-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 16px; color: var(--ink-muted); font-size: 11px; font-weight: 700; line-height: 1.45; }
 .execution-flow span { border: 1px solid #b8c4c0; padding: 7px 8px; background: #edf2ef; }
 .execution-flow i { color: var(--accent); font-style: normal; }
+.beginner-steps { margin-top: 18px; border-top: 1px solid var(--line); }
+.beginner-steps p { margin: 0; border-bottom: 1px solid var(--line); padding: 10px 0; color: var(--ink-muted); font-size: 13px; line-height: 1.5; }
+.beginner-steps b { display: inline-block; width: 21px; color: var(--accent); }
+.folder-card { align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
 .review-check { display: flex; gap: 10px; align-items: flex-start; margin-top: 23px; color: var(--accent); font-size: 14px; font-weight: 700; line-height: 1.45; }
 .review-check svg { flex: 0 0 auto; }
 .prompt-card { padding: 29px; border: 1px solid #aeb9b6; background: var(--surface); }
