@@ -41,6 +41,14 @@
 - [x] Criar um exemplo Java simples, do problema ao teste, para o tutorial do Copilot.
 - [x] Inserir imagens grandes e instruções em sequência para IntelliJ e Copilot.
 - [x] Validar e publicar a nova versão.
+
+## Biblioteca por módulos
+
+- [x] Definir navegação por páginas separadas: Skill, MCPs e próximos assuntos.
+- [x] Reduzir a escala dos títulos e ajustar o menu profissional.
+- [x] Criar página própria de MCPs como próximo módulo.
+- [x] Permitir abrir todos os prints em visualização ampliada e nítida.
+- [x] Validar a navegação e publicar a atualização.
 - [x] Validar o resultado e publicar a nova versão.
 
 ## Simplificação urgente — Skill no IntelliJ

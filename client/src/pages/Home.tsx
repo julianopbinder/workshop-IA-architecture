@@ -1,6 +1,8 @@
 // Página de referência sobre Skills: conteúdo completo do usuário, arquitetura de Skills e exemplo Java no IntelliJ.
 
-import { ArrowRight, Check, ChevronRight, Code2, FileText, Layers3, Play, TerminalSquare } from "lucide-react";
+import { ArrowRight, Check, ChevronRight, Code2, FileText, Layers3, Play, TerminalSquare, X } from "lucide-react";
+import { useState } from "react";
+import { LibraryNav } from "@/components/LibraryNav";
 
 // Prints enviados pelo usuário e imagens instrucionais preparadas para o tutorial prático.
 const imagens = {
@@ -11,25 +13,6 @@ const imagens = {
   sugestao: "/manus-storage/skill-intellij-suggestion_c2e2cea4.jpg",
 };
 
-// Cabeçalho expansível, preparado para receber novos módulos além de Skill.
-function MenuPrincipal() {
-  return (
-    <header className="site-header">
-      <div className="header-inner">
-        <a className="marca" href="#inicio" aria-label="Início">Skill<span>.</span></a>
-        <nav className="nav-modulos" aria-label="Conteúdo sobre Skill">
-          <a href="#conceito">Conceito</a>
-          <a href="#tipos">Tipos</a>
-          <a href="#estrutura">Estrutura</a>
-          <a href="#carregamento">Como funciona</a>
-          <a href="#java">Java + IntelliJ</a>
-        </nav>
-        <span className="header-tag">Módulo 01</span>
-      </div>
-    </header>
-  );
-}
-
 // Identificador de capítulo para manter o conteúdo longo fácil de percorrer.
 function Identificador({ numero, titulo }: { numero: string; titulo: string }) {
   return <div className="identificador"><span>{numero}</span><i /><p>{titulo}</p></div>;
@@ -37,14 +20,15 @@ function Identificador({ numero, titulo }: { numero: string; titulo: string }) {
 
 // Card de imagem com legenda para os prints e telas instrucionais.
 function Figura({ src, alt, legenda }: { src: string; alt: string; legenda: string }) {
-  return <figure className="figura"><img src={src} alt={alt} loading="lazy" /><figcaption>{legenda}</figcaption></figure>;
+  const [aberta, setAberta] = useState(false);
+  return <><figure className="figura"><button type="button" onClick={() => setAberta(true)} className="figura-button" aria-label={`Ampliar: ${alt}`}><img src={src} alt={alt} loading="lazy" /><span>Ampliar imagem ↗</span></button><figcaption>{legenda}</figcaption></figure>{aberta && <div className="image-lightbox" role="dialog" aria-modal="true" aria-label="Imagem ampliada" onClick={() => setAberta(false)}><button type="button" className="lightbox-close" aria-label="Fechar imagem ampliada" onClick={() => setAberta(false)}><X size={20} /></button><img src={src} alt={alt} onClick={(event) => event.stopPropagation()} /></div>}</>;
 }
 
 // Página principal com conteúdo conceitual completo e tutorial prático ao final.
 export default function Home() {
   return (
     <main id="inicio" className="skill-reference">
-      <MenuPrincipal />
+      <LibraryNav ativo="skill" />
 
       <section className="hero page-width">
         <div className="hero-grid">
