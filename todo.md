@@ -100,6 +100,15 @@
 - [x] Mostrar como executar os testes e interpretar o resultado no Passo 06.
 - [x] Validar e publicar a sequência unificada.
 
+## Roteiro completo: Skill Java com Pessoa
+
+- [x] Mostrar a criação do projeto Java 21 skill-java-demo.
+- [x] Mostrar a estrutura .github/skills/java-simple/SKILL.md.
+- [x] Exibir o conteúdo mínimo da Skill java-simple.
+- [x] Mostrar Pessoa.java e PessoaTest.java com JUnit 5.
+- [x] Mostrar o prompt de análise da Skill no Copilot Chat e o resultado esperado.
+- [x] Validar e publicar o roteiro completo.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
