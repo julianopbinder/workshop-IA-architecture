@@ -70,6 +70,13 @@
 - [x] Separar a chamada da Skill da sugestão de código do Copilot no exemplo Java.
 - [x] Validar e publicar a revisão para iniciantes.
 
+## Demonstração prática no Copilot Chat
+
+- [x] Criar um print guiado que mostre o Copilot Chat aberto e o local de enviar a pergunta.
+- [x] Substituir a sugestão genérica por um procedimento de revisão que usa as regras do projeto.
+- [x] Mostrar como conferir cada regra na resposta antes de aceitar uma alteração.
+- [x] Validar e publicar o tutorial prático revisado.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
