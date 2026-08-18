@@ -77,6 +77,14 @@
 - [x] Mostrar como conferir cada regra na resposta antes de aceitar uma alteração.
 - [x] Validar e publicar o tutorial prático revisado.
 
+## Receita visual completa: Chat, regras e decisão
+
+- [x] Criar um print para abrir o Copilot Chat e identificar a caixa de conversa.
+- [x] Criar um print para mostrar a relação entre copilot-instructions.md e a pergunta enviada.
+- [x] Criar um print para mostrar a resposta de revisão e os controles de aceitar ou recusar.
+- [x] Reescrever os Passos 04 a 06 em linguagem estritamente sequencial para iniciantes.
+- [x] Validar e publicar a receita visual revisada.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
