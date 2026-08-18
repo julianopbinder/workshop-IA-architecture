@@ -81,3 +81,9 @@ O novo menu, **Central de Prática**, funciona como uma pequena sala de treiname
 - O coral significa uma rota de decisão ativa; cada módulo de missão deve revelar qual ação ou capacidade está sendo desbloqueada.
 - O símbolo Nexo de três rotas convergentes aparece como marca independente na navegação e em composições principais, não somente acompanhado por texto.
 - A promessa prática de IntelliJ + Copilot aparece como rota paralela desde o início: a pessoa entende o conceito e pode praticá-lo com segurança em seguida.
+
+## Style Decisions
+
+- O módulo MCP usa uma **missão de treinamento**: descobrir a ponte, criar a ferramenta e confirmar a resposta. A pessoa sempre sabe em qual etapa está.
+- A linha coral acompanha etapas e conexões reais; ela não é decoração. No roteiro prático, ela marca o avanço de cada passo concluído.
+- O símbolo **Nexo** reaparece como três rotas que convergem para um nó: agente, servidor MCP e ferramenta. O fundo mineral permanece dominante, pois é uma exigência explícita deste material para iniciantes.

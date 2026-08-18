@@ -1,29 +1,6 @@
-// Design: linguagem editorial mineral da biblioteca, com coral usado para destacar a ponte e as ações do MCP.
-import { useState } from "react";
-import { ArrowRight, Boxes, ExternalLink, PlugZap, Server, Wrench, X } from "lucide-react";
+// Design: missão guiada em fundo mineral, com rota coral e Nexo como sinais visuais de progresso para iniciantes.
+import { ArrowRight, Ban, Boxes, CheckCircle2, ExternalLink, FileText, FolderPlus, PlugZap, Server, Terminal, Wrench } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
-
-const imagens = {
-  arquitetura: "/manus-storage/mcp-arquitetura-referencia_2d831c18.jpg",
-};
-
-function Figura({ src, alt, legenda }: { src: string; alt: string; legenda: string }) {
-  const [aberta, setAberta] = useState(false);
-
-  return <>
-    <figure className="figura">
-      <button type="button" className="figura-button" onClick={() => setAberta(true)} aria-label={`Ampliar: ${legenda}`}>
-        <img src={src} alt={alt} />
-        <span>Ampliar ↗</span>
-      </button>
-      <figcaption>{legenda}</figcaption>
-    </figure>
-    {aberta && <div className="image-lightbox" role="dialog" aria-modal="true" aria-label={legenda} onClick={() => setAberta(false)}>
-      <button type="button" className="lightbox-close" onClick={() => setAberta(false)} aria-label="Fechar imagem ampliada"><X size={20} /></button>
-      <img src={src} alt={alt} onClick={(event) => event.stopPropagation()} />
-    </div>}
-  </>;
-}
 
 export default function McpPage() {
   return (
@@ -33,13 +10,14 @@ export default function McpPage() {
       <section className="hero mcp-hero">
         <div className="page-width hero-grid">
           <div>
-            <p className="eyebrow">BIBLIOTECA DE CONHECIMENTO · MCP</p>
+            <div className="mcp-mission-kicker"><span>MISSÃO 02</span><i /><p>CRIAR SUA PRIMEIRA FERRAMENTA</p></div>
             <h1>A ponte entre a <em>IA</em> e o mundo externo.</h1>
             <p className="hero-text">MCP significa <strong>Model Context Protocol</strong>. Para quem está começando: ele é um padrão para um agente de IA conversar com ferramentas, sistemas e dados de fora.</p>
             <a className="button-link" href="#exemplo">Ver o exemplo simples <ArrowRight size={16} /></a>
           </div>
           <div className="mcp-hero-card">
             <p className="mcp-hero-label">A ANALOGIA MAIS SIMPLES</p>
+            <div className="mcp-nexo" aria-label="Três rotas convergem para uma conexão MCP"><span /><span /><span /><b /></div>
             <h2>Skill é a receita.<br />MCP são os <em>utensílios.</em></h2>
             <p>A Skill ensina como trabalhar. O MCP permite que a IA use uma ferramenta: consultar um sistema, ler dados ou executar uma ação permitida.</p>
             <div className="mcp-hero-route"><span>Agente</span><i>→</i><span>MCP</span><i>→</i><span>Ferramenta</span></div>
@@ -61,7 +39,17 @@ export default function McpPage() {
               <p><strong>3. Serviço externo:</strong> o sistema que realmente tem a informação ou executa a ação.</p>
               <div className="mcp-note"><PlugZap size={18} /><span>O agente não ganha acesso total ao sistema. Ele só usa as ferramentas que o MCP Server disponibiliza e permite.</span></div>
             </div>
-            <Figura src={imagens.arquitetura} alt="Diagrama de arquitetura do Model Context Protocol" legenda="A ideia principal: agente de IA, MCP Server e serviço externo formam uma ponte." />
+            <div className="mcp-control-diagram" aria-label="Diagrama: agente conecta ao servidor MCP, que se conecta a uma ferramenta externa">
+              <p className="control-map-label">MAPA DA MISSÃO</p>
+              <div className="control-map-route">
+                <article><span>01</span><strong>Agente de IA</strong><p>Entende o pedido.</p></article>
+                <i aria-hidden="true" />
+                <article className="control-map-focus"><span>02</span><strong>MCP Server</strong><p>Define o acesso.</p></article>
+                <i aria-hidden="true" />
+                <article><span>03</span><strong>Ferramenta</strong><p>Faz a ação permitida.</p></article>
+              </div>
+              <div className="control-map-foot"><b>REGRA DE SEGURANÇA</b><span>A IA só enxerga as ferramentas que o MCP disponibiliza.</span></div>
+            </div>
           </div>
         </div>
       </section>
@@ -83,51 +71,116 @@ export default function McpPage() {
 
       <section id="exemplo" className="java-section mcp-practice">
         <div className="page-width">
-          <div className="identificador"><span>03</span><i /><p>Seu primeiro MCP do zero</p></div>
+          <div className="identificador"><span>03</span><i /><p>Prática única · Windows</p></div>
           <div className="chapter-heading">
-            <h2>Crie uma ferramenta que apenas <em>diz “olá”.</em></h2>
-            <p>Não vamos conectar banco de dados, Kubernetes ou outro sistema. Primeiro, você cria uma ferramenta local, inicia o MCP e confere se ela respondeu corretamente.</p>
+            <h2>Seu primeiro MCP, sem navegador e <em>sem Node.js.</em></h2>
+            <p>Esta é a única sequência que você precisa seguir. No final, o próprio terminal mostra se sua ferramenta respondeu.</p>
+          </div>
+
+          <div className="mcp-one-path">
+            <Terminal size={20} />
+            <p><strong>Antes de começar:</strong> abra o <strong>Windows PowerShell</strong>. Faça um passo inteiro antes de ir para o próximo. Não use <code>mcp.exe</code>, <code>mcp dev</code>, navegador ou Node.js neste primeiro teste.</p>
+          </div>
+
+          <div className="mcp-mission-progress" aria-label="Progresso da missão em cinco etapas">
+            <div><p>MISSÃO GUIADA</p><strong>5 passos. Um único resultado.</strong></div>
+            <ol>
+              <li><span>01</span><b>Pasta</b></li>
+              <li><span>02</span><b>Instalar</b></li>
+              <li><span>03</span><b>Ferramenta</b></li>
+              <li><span>04</span><b>Teste</b></li>
+              <li><span>05</span><b>Confirmar</b></li>
+            </ol>
+          </div>
+
+          <div className="mcp-file-roles" aria-label="Os dois arquivos do exemplo">
+            <article><FileText size={20} /><p>ARQUIVO 1</p><strong>server.py</strong><span>Guarda a ferramenta MCP <code>cumprimentar</code>.</span></article>
+            <article><CheckCircle2 size={20} /><p>ARQUIVO 2</p><strong>testar_mcp.py</strong><span>Chama a ferramenta e mostra a resposta no terminal.</span></article>
           </div>
 
           <div className="walkthrough mcp-walkthrough">
             <article className="walk-step">
-              <div className="step-text"><p className="step-number">PASSO 01</p><h3>Crie a pasta e instale o MCP</h3><p>No Windows, abra o <strong>Terminal</strong>. Copie um comando de cada vez e pressione Enter. O primeiro cria uma pasta para seu exemplo; o segundo instala a ferramenta.</p><div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">COMANDOS PARA COPIAR</p><pre>{`mkdir meu-primeiro-mcp
-cd meu-primeiro-mcp
-python -m pip install "mcp[cli]"`}</pre></div><p>Ao terminar, você terá uma pasta chamada <code>meu-primeiro-mcp</code>. É nela que ficará seu arquivo Python.</p></div>
-              <div className="mcp-summary-card"><p>O QUE VOCÊ FEZ</p><h3>Criou o lugar do projeto e instalou o <em>kit de criação</em> do MCP.</h3></div>
+              <div className="step-text">
+                <p className="step-number">PASSO 01</p>
+                <h3>Crie a pasta do exemplo</h3>
+                <p>Copie as duas linhas abaixo no PowerShell e pressione <strong>Enter</strong>. A segunda linha coloca você dentro da pasta certa.</p>
+                <div className="prompt-card"><FolderPlus size={22} /><p className="prompt-label">COPIE NO POWERSHELL</p><pre>{`mkdir C:\\meu-primeiro-mcp
+cd C:\\meu-primeiro-mcp`}</pre></div>
+                <p><strong>Confira antes de continuar:</strong> a última linha do terminal deve começar com <code>PS C:\meu-primeiro-mcp&gt;</code>.</p>
+              </div>
+              <div className="mcp-flow-card"><p>ONDE VOCÊ ESTÁ</p><strong>C:\meu-primeiro-mcp</strong><i>↓</i><p>O QUE VAI FICAR AQUI</p><strong>server.py<br />testar_mcp.py</strong></div>
             </article>
+
             <article className="walk-step flipped">
-              <div className="step-text"><p className="step-number">PASSO 02</p><h3>Crie o arquivo <code>server.py</code></h3><p>Na pasta <code>meu-primeiro-mcp</code>, crie um arquivo chamado <code>server.py</code>. Copie tudo abaixo e salve.</p><pre>{`# Importa a biblioteca que cria o MCP.
-from mcp.server.fastmcp import FastMCP
-
-# Cria um servidor MCP com um nome simples.
-mcp = FastMCP("Meu Primeiro MCP")
-
-# Registra uma ferramenta que recebe um nome.
-@mcp.tool()
-def cumprimentar(nome: str) -> str:
-    # Devolve uma mensagem para quem chamou a ferramenta.
-    return f"Olá, {nome}!"
-
-# Inicia o MCP quando este arquivo é executado.
-if __name__ == "__main__":
-    # Mantém a conversa pelo terminal.
-    mcp.run(transport="stdio")`}</pre><p>O nome da sua primeira ferramenta é <code>cumprimentar</code>. Ela recebe um nome e devolve uma saudação.</p></div>
-              <div className="mcp-tool-card"><span>TOOL CRIADA</span><code>cumprimentar</code><p>Entrada: nome<br />Saída: uma saudação</p></div>
+              <div className="step-text">
+                <p className="step-number">PASSO 02</p>
+                <h3>Instale o FastMCP uma única vez</h3>
+                <p>Copie este comando exatamente como está. Ele usa o caminho completo do Python, portanto <strong>não precisa configurar PATH</strong>.</p>
+                <div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">COPIE NO POWERSHELL</p><pre>{`& "C:\\Users\\Juliano\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe" -m pip install fastmcp`}</pre></div>
+                <p>Espere o terminal terminar. Quando aparecer <code>Successfully installed</code> ou <code>Requirement already satisfied</code>, avance.</p>
+              </div>
+              <div className="mcp-summary-card"><p>POR QUE ESTA ETAPA EXISTE</p><h3>O FastMCP é a <em>caixa de ferramentas</em> que permite criar e testar seu MCP.</h3></div>
             </article>
+
             <article className="walk-step">
-              <div className="step-text"><p className="step-number">PASSO 03</p><h3>Inicie o MCP</h3><p>Com o Terminal ainda aberto na pasta <code>meu-primeiro-mcp</code>, execute:</p><div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">COMANDO PARA COPIAR</p><pre>{`mcp dev server.py`}</pre></div><p>Esse comando inicia seu MCP localmente e abre uma página de teste no navegador. Não feche o Terminal enquanto estiver testando.</p></div>
-              <div className="mcp-flow-card"><p>SEU ARQUIVO</p><strong>server.py</strong><i>↓</i><p>MCP INICIADO</p><strong>ferramenta cumprimentar disponível</strong><i>↓</i><p>PÁGINA DE TESTE</p><strong>pronta para testar</strong></div>
+              <div className="step-text">
+                <p className="step-number">PASSO 03</p>
+                <h3>Crie o arquivo <code>server.py</code></h3>
+                <p>Primeiro, execute <code>notepad server.py</code>. Se o Windows perguntar se deseja criar o arquivo, clique em <strong>Sim</strong>. No Bloco de Notas, apague tudo, cole o código abaixo, pressione <strong>Ctrl + S</strong> e feche o Bloco de Notas.</p>
+                <div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">PRIMEIRO, NO POWERSHELL</p><pre>{`notepad server.py`}</pre></div>
+                <pre>{`from fastmcp import FastMCP
+
+mcp = FastMCP("Servidor de Cumprimentos")
+
+@mcp.tool
+def cumprimentar(nome: str) -> str:
+    return f"Olá, {nome}! Sua ferramenta MCP está funcionando."
+
+if __name__ == "__main__":
+    mcp.run()`}</pre>
+              </div>
+              <div className="mcp-tool-card"><span>FERRAMENTA CRIADA</span><code>cumprimentar</code><p>Entrada: nome<br />Saída: uma saudação</p></div>
             </article>
+
             <article className="walk-step flipped">
-              <div className="step-text"><p className="step-number">PASSO 04</p><h3>Teste a ferramenta</h3><div className="beginner-steps"><p><b>1.</b> Na página que abriu, clique em <strong>List Tools</strong>.</p><p><b>2.</b> Escolha a ferramenta <code>cumprimentar</code>.</p><p><b>3.</b> No campo <code>nome</code>, escreva <code>Ana</code>.</p><p><b>4.</b> Clique em <strong>Run Tool</strong>.</p></div><div className="decision-card"><p><b>DEU CERTO</b><span>Você verá uma resposta parecida com: <strong>Olá, Ana!</strong></span></p><p><b>DEU ERRO</b><span>Leia a mensagem no Terminal, corrija o arquivo <code>server.py</code>, salve e rode <code>mcp dev server.py</code> novamente.</span></p></div></div>
-              <div className="mcp-summary-card"><p>RESULTADO FINAL</p><h3>Você criou e testou uma <em>ferramenta MCP.</em></h3><p>Depois, essa mesma ideia pode ser usada por um agente de IA conectado ao seu MCP.</p></div>
+              <div className="step-text">
+                <p className="step-number">PASSO 04</p>
+                <h3>Crie o arquivo de teste</h3>
+                <p>Agora execute <code>notepad testar_mcp.py</code>. De novo: clique em <strong>Sim</strong>, cole o código, pressione <strong>Ctrl + S</strong> e feche o Bloco de Notas.</p>
+                <div className="prompt-card"><ExternalLink size={22} /><p className="prompt-label">PRIMEIRO, NO POWERSHELL</p><pre>{`notepad testar_mcp.py`}</pre></div>
+                <pre>{`import asyncio
+from fastmcp import Client
+from server import mcp
+
+async def testar_ferramenta():
+    async with Client(mcp) as cliente:
+        resultado = await cliente.call_tool("cumprimentar", {"nome": "Juliano"})
+        print("TESTE CONCLUÍDO COM SUCESSO")
+        print(resultado.data)
+
+asyncio.run(testar_ferramenta())`}</pre>
+              </div>
+              <div className="mcp-flow-card"><p>O QUE ESSE ARQUIVO FAZ</p><strong>abre o MCP</strong><i>↓</i><strong>chama cumprimentar</strong><i>↓</i><strong>mostra a resposta</strong></div>
+            </article>
+
+            <article className="walk-step">
+              <div className="step-text">
+                <p className="step-number">PASSO 05</p>
+                <h3>Execute o teste final</h3>
+                <p>Volte ao PowerShell, que ainda deve estar em <code>C:\meu-primeiro-mcp</code>, e copie apenas este comando.</p>
+                <div className="prompt-card"><Terminal size={22} /><p className="prompt-label">COMANDO FINAL</p><pre>{`& "C:\\Users\\Juliano\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe" testar_mcp.py`}</pre></div>
+                <div className="mcp-success-terminal"><p>O RESULTADO CORRETO É:</p><pre>{`TESTE CONCLUÍDO COM SUCESSO
+Olá, Juliano! Sua ferramenta MCP está funcionando.`}</pre></div>
+              </div>
+              <div className="mcp-summary-card"><p>SE VOCÊ VIU A FRASE ACIMA</p><h3>Parabéns: você criou e testou uma <em>ferramenta MCP.</em></h3><p>O próximo passo, mais adiante, é conectar essa ferramenta a um agente de IA.</p></div>
             </article>
           </div>
+
+          <div className="mcp-stop-card"><Ban size={20} /><p><strong>Para este exemplo, pare aqui.</strong> Não digite <code>mcp.exe</code>, <code>mcp dev</code> ou <code>fastmcp dev</code>. Eles são alternativas mais avançadas e não fazem parte deste primeiro teste.</p></div>
         </div>
       </section>
 
-      <footer className="footer page-width"><p><strong>Resumo:</strong> você criou uma ferramenta MCP local, iniciou o servidor e testou a resposta sem conectar nenhum sistema externo.</p><a href="#top">Voltar ao topo ↑</a></footer>
+      <footer className="footer page-width"><p><strong>Resumo:</strong> você criou uma pasta, instalou o FastMCP, escreveu dois arquivos e confirmou a resposta da ferramenta. É a forma mais curta de validar que seu primeiro MCP funciona.</p><a href="#top">Voltar ao topo ↑</a></footer>
     </main>
   );
 }

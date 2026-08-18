@@ -130,6 +130,28 @@
 - [x] Explicar o resultado de sucesso no terminal para iniciantes.
 - [x] Validar e publicar o tutorial único de MCP.
 
+## Arquivo MCP pronto para download
+
+- [x] Gerar server.py com uma ferramenta MCP simples.
+- [x] Entregar o arquivo e o comando de execução no Windows.
+
+## Correção de compatibilidade FastMCP
+
+- [x] Confirmar o pacote FastMCP e a sintaxe atual compatível.
+- [x] Gerar um server.py corrigido para download.
+- [ ] Entregar o comando de instalação e execução sem PATH.
+- [ ] Reenviar imediatamente o arquivo Python corrigido para download.
+- [x] Substituir o teste via mcp.exe por uma execução direta sem Node.js.
+- [ ] Orientar o salvamento de server.py e testar_mcp.py na pasta C:\\meu-primeiro-mcp.
+
+## Reescrita do tutorial MCP para iniciantes
+
+- [x] Remover caminhos alternativos e comandos que não serão usados.
+- [x] Explicar onde salvar cada arquivo antes de abrir o terminal.
+- [x] Organizar um único fluxo: pasta, arquivos, instalação e teste.
+- [x] Deixar explícito qual mensagem confirma o sucesso.
+- [ ] Validar, publicar e entregar o módulo MCP simplificado.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
