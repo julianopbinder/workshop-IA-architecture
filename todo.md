@@ -63,6 +63,13 @@
 - [x] Reordenar o tutorial para apresentar a criação da pasta antes da chamada da Skill.
 - [x] Validar e publicar a explicação revisada.
 
+## Clareza dos prints e do fluxo do agente
+
+- [x] Ampliar os prints de estrutura e carregamento sem perder nitidez.
+- [x] Explicar visualmente o que é um agente e onde a pessoa envia a chamada da Skill.
+- [x] Separar a chamada da Skill da sugestão de código do Copilot no exemplo Java.
+- [x] Validar e publicar a revisão para iniciantes.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
