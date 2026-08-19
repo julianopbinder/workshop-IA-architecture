@@ -295,3 +295,6 @@
 - [x] Atualizar testes para cobrir o início e o encerramento públicos.
 - [ ] Validar no domínio publicado o começo, a contagem e a finalização sem login.
 - [ ] Publicar e entregar o fluxo público simplificado.
+- [x] Remover referências visíveis ao organizador da tela pública do Quiz.
+- [ ] Republicar a versão após remover as referências ao organizador da interface.
+- [ ] Confirmar no domínio publicado que não há mais textos visíveis de login ou organizador.
