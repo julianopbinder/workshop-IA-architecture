@@ -97,3 +97,9 @@ O novo menu, **Central de Prática**, funciona como uma pequena sala de treiname
 
 - A leitura do módulo Subagentes é uma missão de cinco atos: delegar, orquestrar, delimitar, padronizar e decidir. Cada ato declara a capacidade que foi desbloqueada.
 - A trilha coral é estrutural: conecta os atos, sinaliza a missão ativa e aparece como três rotas Nexo entre envio, contextos isolados e retorno consolidado.
+
+## Decisões de estilo — Resumo
+
+- A página **Resumo** é o fechamento da apresentação em três lâminas: padrão, acesso e execução. Uma régua coral marca o avanço entre elas.
+- A síntese usa a metáfora de uma **Central de Operação**: Skill é playbook, MCP é ponte de acesso e Subagente é frente especializada. Não usar metáforas de cozinha, receitas ou sous-chefs.
+- O diagrama final é nativo do sistema Nexo: três rotas convergem da demanda do agente principal para um resultado consolidado; coral indica rota ativa e verde discreto confirma a entrega.

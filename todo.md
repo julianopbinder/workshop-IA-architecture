@@ -179,6 +179,14 @@
 - [x] Mostrar em destaque a combinação Subagentes + Skills no exemplo DevOps.
 - [ ] Validar, publicar e entregar o novo módulo.
 
+## Página Resumo
+
+- [x] Trocar o acesso Biblioteca por Resumo na navegação.
+- [x] Criar uma página que sintetize Skills, MCPs e Subagentes.
+- [x] Explicar os três conceitos por uma analogia profissional de operação.
+- [x] Criar um diagrama que mostre como os três se complementam.
+- [ ] Validar, publicar e entregar a página Resumo.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.

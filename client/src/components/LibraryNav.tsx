@@ -1,6 +1,6 @@
 // Design: navegação editorial mineral com o símbolo Nexo como marca visual de três rotas que convergem.
 
-type ModuloAtivo = "skill" | "mcps" | "subagentes" | "rag";
+type ModuloAtivo = "skill" | "mcps" | "subagentes" | "rag" | "resumo";
 
 // Cabeçalho preparado para crescer com módulos adicionais, mantendo o item atual em destaque.
 export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
@@ -14,13 +14,13 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a className="marca" href="/skill" aria-label="Nexo — Biblioteca de IA">
+        <a className="marca" href="/resumo" aria-label="Nexo — Resumo de IA">
           <span className="nexo-mark" aria-hidden="true"><i /><i /><i /><b /></span>
         </a>
         <nav className="nav-modulos" aria-label="Módulos da biblioteca">
           {itens.map((item) => <a key={item.id} className={ativo === item.id ? "active" : ""} href={item.href}>{item.label}</a>)}
         </nav>
-        <span className="header-tag">Biblioteca</span>
+        <a className={`header-tag ${ativo === "resumo" ? "active" : ""}`} href="/resumo">Resumo</a>
       </div>
     </header>
   );
