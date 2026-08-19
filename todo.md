@@ -438,3 +438,4 @@
 - [x] Corrigir a escuta da porta atribuída pela Railway para impedir o encerramento do servidor após as migrações.
 - [ ] Confirmar no domínio Railway o carregamento das imagens públicas e o endpoint quiz.leaderboard sem erro 500.
 - [x] Capturar a causa do crash persistente do processo Railway e eliminar o encerramento automático após o start.
+- [x] Localizar e corrigir o segundo path.join que ainda recebe caminho indefinido no Node 18 da Railway.

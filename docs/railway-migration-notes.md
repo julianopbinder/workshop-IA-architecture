@@ -31,3 +31,9 @@ Foi verificada a configuração disponível nesta sessão e não existe conector
 ## Publicação iniciada
 
 Em 19/08/2026, o repositório `julianopbinder/workshop-IA-architecture` foi conectado novamente à branch `main` e a publicação foi confirmada no painel Railway. A implantação `df860c52-e746-49ae-8632-0de53c234ca0` iniciou a construção da versão que contém as correções. Os registros de build confirmam o comando de início `pnpm drizzle-kit migrate && pnpm start`, que deve criar as tabelas do Quiz antes de subir o servidor. Os avisos de Docker sobre `JWT_SECRET` e `NIXPACKS_PATH` foram apresentados como avisos de lint durante a criação da imagem, sem indicar falha de build naquele momento.
+
+## Correção do crash de produção
+
+O deploy seguinte confirmou que as migrações foram aplicadas, mas o processo encerrava ao servir os arquivos estáticos porque o bundle Node executava `path.join` com `import.meta.dirname` indefinido. A resolução de diretório foi substituída por `fileURLToPath(import.meta.url)`, compatível com o runtime Node da Railway. A versão foi validada localmente com os 20 testes automatizados, build de produção e resposta HTTP 200. Um novo deploy do checkpoint `9b5ba9e3` está em construção na Railway e será validado no domínio público após ficar ativo.
+
+Embora o painel tenha exibido o deploy `9b5ba9e3` como ativo, a primeira requisição externa ao domínio Railway retornou HTTP 502. A aplicação está, portanto, indisponível para validação de imagens e Quiz; os logs de execução do container precisam ser revisados novamente antes de uma nova publicação.
