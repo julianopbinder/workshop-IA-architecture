@@ -271,5 +271,5 @@
 - [x] Impedir novos envios quando a rodada estiver encerrada e explicar o próximo passo aos participantes.
 - [x] Cobrir a abertura e o encerramento de rodada com testes automatizados.
 - [x] Validar a experiência completa, publicar e entregar as instruções de condução.
-- [ ] Salvar um checkpoint final da versão com rodadas cronometradas e publicar a atualização.
-- [ ] Entregar ao organizador as instruções de condução da rodada de 10 minutos.
+- [x] Salvar um checkpoint final da versão com rodadas cronometradas e publicar a atualização.
+- [x] Entregar ao organizador as instruções de condução da rodada de 10 minutos.
