@@ -341,4 +341,4 @@
 - [x] Exibir a faixa “Participação da rodada” apenas enquanto o Quiz estiver ativo.
 - [x] Ocultar a faixa imediatamente ao finalizar o Quiz ou ao acabar o tempo.
 - [x] Validar o ajuste de visibilidade no estado encerrado.
-- [ ] Salvar checkpoint e publicar o ajuste de visibilidade.
+- [x] Salvar checkpoint e publicar o ajuste de visibilidade.
