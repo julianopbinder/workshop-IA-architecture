@@ -350,3 +350,8 @@
 - [x] Sincronizar o relógio pelo prazo persistido da rodada, compensando a diferença entre o horário local e o servidor.
 - [x] Criar testes para autorização do encerramento e para o cálculo de tempo compartilhado.
 - [x] Validar em navegadores independentes, publicar e entregar a correção.
+
+## Placar após encerramento
+
+- [x] Ocultar o rótulo “você” do placar ao finalizar a rodada.
+- [ ] Testar o placar nos estados ativo e encerrado, publicar e entregar o ajuste.
