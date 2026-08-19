@@ -10,3 +10,5 @@
 Em 19 de agosto de 2026, a rota publicada `https://skillspres-gxq6mono.manus.space/quiz` respondeu normalmente, mas ainda exibiu a versão anterior: o relógio mostrou a rodada encerrada e o controle **ENTRAR COMO ORGANIZADOR** permaneceu no placar. A nova versão local do Quiz já mostra **COMEÇAR QUIZ** e **FINALIZAR QUIZ** no topo; é necessária uma nova confirmação no domínio após a propagação do checkpoint `85ed984a`.
 
 Uma segunda consulta, com o parâmetro `?release=85ed984a` para evitar cache do navegador, confirmou o mesmo conteúdo anterior. Portanto, a atualização ainda não havia propagado para o domínio no momento da verificação.
+
+Após a republicação no checkpoint `54463c16`, uma terceira consulta com `?release=54463c16` ainda retornou o conteúdo anterior. O domínio está saudável, porém a implantação pública não refletiu a versão simplificada nos primeiros instantes após o salvamento.

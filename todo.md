@@ -284,3 +284,4 @@
 - [x] Salvar o checkpoint e publicar a dinâmica simplificada.
 - [ ] Confirmar no domínio publicado a presença dos botões COMEÇAR QUIZ e FINALIZAR QUIZ.
 - [ ] Validar no domínio publicado que o relógio inicia apenas ao começar e que finalizar bloqueia novos envios.
+- [x] Exibir COMEÇAR QUIZ e FINALIZAR QUIZ já na página pública, conduzindo o organizador ao login quando necessário.
