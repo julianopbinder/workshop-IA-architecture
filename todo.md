@@ -215,6 +215,13 @@
 - [x] Atualizar a página Resumo com a definição de RAG e a distinção essencial.
 - [ ] Validar, publicar e entregar o complemento.
 
+## Ajuste do Resumo — formato simples
+
+- [x] Restaurar o layout simples aprovado anteriormente.
+- [x] Manter a imagem original e as três definições existentes.
+- [x] Inserir apenas uma informação curta sobre RAG abaixo das definições.
+- [ ] Validar, publicar e entregar o ajuste.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
