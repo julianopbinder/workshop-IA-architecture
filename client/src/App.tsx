@@ -11,8 +11,8 @@ import QuizPage from "./pages/QuizPage";
 import RagPage from "./pages/RagPage";
 import SubagentsPage from "./pages/SubagentsPage";
 import SummaryPage from "./pages/SummaryPage";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
