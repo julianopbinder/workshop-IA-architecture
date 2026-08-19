@@ -3,7 +3,7 @@ import { useState } from "react";
 import { LibraryNav } from "@/components/LibraryNav";
 
 // Mantém a imagem aprovada pelo usuário disponível para visualização ampliada.
-const imagemResumo = "/manus-storage/resumo-stack-simples_718874af.png";
+const imagemResumo = "https://skillspres-gxq6mono.manus.space/manus-storage/resumo-stack-simples_718874af.png";
 
 // Resume a relação entre Skills, MCPs e SubAgentes, com uma informação complementar sobre RAG.
 export default function SummaryPage() {

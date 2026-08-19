@@ -7,7 +7,7 @@ import "./RagPage.css";
 import "./RagMission.css";
 
 // Diagrama enviado pelo usuário e preservado no armazenamento permanente do projeto.
-const diagramaRag = "/manus-storage/rag-fluxo-retrieval-augmented-generation_e9d78b2c.png";
+const diagramaRag = "https://skillspres-gxq6mono.manus.space/manus-storage/rag-fluxo-retrieval-augmented-generation_e9d78b2c.png";
 
 // Exibe a imagem de referência em tela cheia sem reduzir sua qualidade de leitura.
 function FiguraFluxoRag() {

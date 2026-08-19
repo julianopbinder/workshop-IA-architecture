@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ArrowRight, Ban, Boxes, CheckCircle2, ExternalLink, FileText, FolderPlus, PlugZap, Server, Terminal, Wrench, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
 
-const arquiteturaMcp = "/manus-storage/arquitetura-mcp-explicada_ead4e8f7.png";
+const arquiteturaMcp = "https://skillspres-gxq6mono.manus.space/manus-storage/arquitetura-mcp-explicada_ead4e8f7.png";
 
 function FiguraArquiteturaMcp() {
   const [aberta, setAberta] = useState(false);

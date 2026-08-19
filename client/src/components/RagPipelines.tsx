@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Archive, Bot, Database, FileInput, FileSearch, FileText, Search, ShieldCheck, Sparkles, Tags, X } from "lucide-react";
 import "./RagPipelines.css";
 
-const diagramaAgenteRag = "/manus-storage/rag-agente-consulta_7bc87d64.png";
-const diagramaPipelines = "/manus-storage/rag-pipelines_ef3b299b.png";
+const diagramaAgenteRag = "https://skillspres-gxq6mono.manus.space/manus-storage/rag-agente-consulta_7bc87d64.png";
+const diagramaPipelines = "https://skillspres-gxq6mono.manus.space/manus-storage/rag-pipelines_ef3b299b.png";
 
 type EvidenciaProps = { imagem: string; legenda: string; titulo: string; aoAbrir: (imagem: string) => void };
 

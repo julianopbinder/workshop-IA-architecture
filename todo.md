@@ -355,3 +355,49 @@
 
 - [x] Ocultar o rótulo “você” do placar ao finalizar a rodada.
 - [x] Testar o placar nos estados ativo e encerrado, publicar e entregar o ajuste.
+
+## Migração para Railway
+
+- [ ] Inspecionar o projeto Railway informado e confirmar acesso à aplicação e ao banco de destino.
+- [ ] Preparar os arquivos de implantação e as variáveis de ambiente necessárias para Railway.
+- [ ] Exportar os dados do banco atual e importar no banco Railway sem apagar a origem.
+- [ ] Configurar a aplicação Railway, validar os módulos e o Quiz em produção.
+- [ ] Entregar a URL Railway e as orientações finais de domínio.
+
+## Autenticação de login na Railway
+
+- [ ] Configurar as variáveis e o redirecionamento OAuth do domínio Railway.
+- [ ] Validar login, sessão e retorno ao site publicado na Railway.
+
+## Acesso público sem autenticação
+
+- [ ] Remover o fluxo de login e OAuth do código da aplicação.
+- [ ] Remover dependências e variáveis de ambiente exclusivas de autenticação.
+- [ ] Garantir que os módulos e o Quiz continuem públicos após a remoção.
+
+## Fidelidade visual na Railway
+
+- [ ] Restaurar os caminhos das imagens instrucionais no ambiente Railway.
+- [ ] Preservar a paleta, tipografia e estilos da versão aprovada na Manus.
+- [ ] Comparar a Railway com a versão Manus e corrigir diferenças visuais.
+
+## Execução prioritária
+
+- [ ] Concluir os ajustes essenciais de acesso público e visual sem novas etapas de análise.
+
+## Prioridade de cinco minutos
+
+- [ ] Restaurar as imagens públicas e concluir a importação do banco Railway em paralelo.
+
+## Prioridade final de quatro minutos
+
+- [ ] Aplicar o schema e os dados do Quiz no MySQL Railway e publicar a versão pública.
+
+## Prioridade final de três minutos
+
+- [ ] Aplicar imediatamente dados do Quiz no MySQL Railway e publicar a versão pública.
+
+## Execução paralela solicitada
+
+- [ ] Restaurar o visual e preparar a transferência do banco em paralelo.
+- [ ] Importar o schema e os dados do Quiz no MySQL Railway sem alterar a base de origem.
