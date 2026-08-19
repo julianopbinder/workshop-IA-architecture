@@ -334,4 +334,11 @@
 - [x] Ocultar as perguntas até que o primeiro nome seja confirmado no modal.
 - [x] Preservar o placar compartilhado e o registro de entrada/conclusão existentes.
 - [x] Validar no desktop e no celular o Quiz com o visual restaurado.
-- [ ] Salvar checkpoint e publicar o Quiz com o visual restaurado.
+- [x] Salvar checkpoint e publicar o Quiz com o visual restaurado.
+
+## Resumo de participação somente durante a rodada
+
+- [x] Exibir a faixa “Participação da rodada” apenas enquanto o Quiz estiver ativo.
+- [x] Ocultar a faixa imediatamente ao finalizar o Quiz ou ao acabar o tempo.
+- [x] Validar o ajuste de visibilidade no estado encerrado.
+- [ ] Salvar checkpoint e publicar o ajuste de visibilidade.
