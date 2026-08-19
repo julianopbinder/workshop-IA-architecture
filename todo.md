@@ -282,6 +282,16 @@
 - [x] Encerrar a rodada ao chegar em zero ou ao clicar em FINALIZAR QUIZ, bloqueando novos envios.
 - [x] Atualizar os testes e validar a interface da dinâmica simplificada.
 - [x] Salvar o checkpoint e publicar a dinâmica simplificada.
-- [ ] Confirmar no domínio publicado a presença dos botões COMEÇAR QUIZ e FINALIZAR QUIZ.
-- [ ] Validar no domínio publicado que o relógio inicia apenas ao começar e que finalizar bloqueia novos envios.
+- [x] Confirmar no domínio publicado a presença dos botões COMEÇAR QUIZ e FINALIZAR QUIZ.
+- [x] Validar no domínio publicado que o relógio inicia apenas ao começar e que finalizar bloqueia novos envios.
 - [x] Exibir COMEÇAR QUIZ e FINALIZAR QUIZ já na página pública, conduzindo o organizador ao login quando necessário.
+- [x] Registrar a antiga validação autenticada como substituída pelo controle público solicitado.
+
+## Quiz sem login
+
+- [x] Tornar públicos os comandos COMEÇAR QUIZ e FINALIZAR QUIZ, sem autenticação.
+- [x] Remover mensagens, botões e dependências de login da área de controle da rodada.
+- [x] Preservar o relógio regressivo de 10 minutos e o bloqueio automático no fim da rodada.
+- [x] Atualizar testes para cobrir o início e o encerramento públicos.
+- [ ] Validar no domínio publicado o começo, a contagem e a finalização sem login.
+- [ ] Publicar e entregar o fluxo público simplificado.

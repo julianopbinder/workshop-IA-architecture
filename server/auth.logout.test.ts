@@ -59,13 +59,4 @@ describe("auth.logout", () => {
       path: "/",
     });
   });
-
-  it("bloqueia participantes comuns de iniciar uma nova rodada", async () => {
-    const { ctx } = createAuthContext();
-    const caller = appRouter.createCaller(ctx);
-
-    await expect(caller.quiz.startNextRound()).rejects.toMatchObject({
-      code: "FORBIDDEN",
-    });
-  });
 });

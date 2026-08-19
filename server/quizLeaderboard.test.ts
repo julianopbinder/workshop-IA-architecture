@@ -19,9 +19,9 @@ vi.mock("./db", async importOriginal => {
 
 import { appRouter } from "./routers";
 
-function createContext(role: "admin" | "user" = "admin"): TrpcContext {
+function createPublicContext(): TrpcContext {
   return {
-    user: { id: 1, openId: "presentation-owner", email: "organizador@example.com", name: "Organizador", loginMethod: "manus", role, createdAt: new Date(), updatedAt: new Date(), lastSignedIn: new Date() },
+    user: null,
     req: { protocol: "https", headers: {} } as TrpcContext["req"],
     res: { clearCookie: vi.fn() } as unknown as TrpcContext["res"],
   };
@@ -38,18 +38,18 @@ const activeRound = {
 };
 
 describe("quiz rounds", () => {
-  it("permite que o organizador abra uma nova rodada de dez minutos", async () => {
+  it("permite que um visitante comece uma nova rodada de dez minutos sem login", async () => {
     startNextQuizRoundMock.mockResolvedValueOnce(activeRound);
-    const caller = appRouter.createCaller(createContext());
+    const caller = appRouter.createCaller(createPublicContext());
 
     await expect(caller.quiz.startNextRound()).resolves.toEqual({ round: activeRound });
     expect(startNextQuizRoundMock).toHaveBeenCalledTimes(1);
   });
 
-  it("permite que o organizador encerre a rodada antes do prazo", async () => {
+  it("permite que um visitante finalize a rodada antes do prazo sem login", async () => {
     const closedRound = { ...activeRound, status: "closed" as const, endedAt: new Date("2026-08-19T10:04:00Z") };
     finishCurrentQuizRoundMock.mockResolvedValueOnce(closedRound);
-    const caller = appRouter.createCaller(createContext());
+    const caller = appRouter.createCaller(createPublicContext());
 
     await expect(caller.quiz.finishRound()).resolves.toEqual({ round: closedRound });
     expect(finishCurrentQuizRoundMock).toHaveBeenCalledTimes(1);
@@ -57,7 +57,7 @@ describe("quiz rounds", () => {
 
   it("rejeita o envio depois que a rodada foi encerrada", async () => {
     getCurrentQuizRoundMock.mockResolvedValueOnce({ ...activeRound, status: "closed" as const, endedAt: activeRound.endsAt });
-    const caller = appRouter.createCaller({ ...createContext(), user: null });
+    const caller = appRouter.createCaller(createPublicContext());
 
     await expect(caller.quiz.submitScore({ participantName: "Ana", participantKey: "c3563eef-0ca0-4731-b4f0-24de58c14dce", totalScore: 20, skillScore: 5, mcpScore: 5, subagentsScore: 5, ragScore: 5 })).rejects.toMatchObject({ code: "CONFLICT" });
   });

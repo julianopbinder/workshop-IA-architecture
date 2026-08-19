@@ -1,8 +1,6 @@
 // Central de Verificação: perguntas, identificação simples, rodadas cronometradas e placar compartilhado.
 import { useEffect, useMemo, useState } from "react";
-import { Check, ChevronRight, CircleHelp, Clock3, Crown, Loader2, LogIn, Medal, RotateCcw, Send, Trophy, UserRound, X } from "lucide-react";
-import { useAuth } from "@/_core/hooks/useAuth";
-import { startLogin } from "@/const";
+import { Check, ChevronRight, CircleHelp, Clock3, Crown, Loader2, Medal, RotateCcw, Send, Trophy, UserRound, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
 import { trpc } from "@/lib/trpc";
 import "./QuizPage.css";
@@ -78,7 +76,6 @@ export default function QuizPage() {
   const [now, setNow] = useState(() => Date.now());
   const atual = quiz[tema];
   const trpcUtils = trpc.useUtils();
-  const { user, loading: authLoading } = useAuth();
   const leaderboardQuery = trpc.quiz.leaderboard.useQuery(undefined, { refetchInterval: 5_000 });
   const round = leaderboardQuery.data?.round;
   const remainingMilliseconds = round ? Math.max(0, new Date(round.endsAt).getTime() - now) : 0;
@@ -108,14 +105,14 @@ export default function QuizPage() {
       setRespostas({}); setTema("skill"); setSubmissionMessage("Nova rodada aberta. O relógio foi reiniciado em 10:00.");
       await trpcUtils.quiz.leaderboard.invalidate();
     },
-    onError: () => setSubmissionMessage("Não foi possível abrir uma nova rodada. Entre como organizador e tente novamente."),
+    onError: () => setSubmissionMessage("Não foi possível começar uma nova rodada agora. Tente novamente em instantes."),
   });
   const finishRound = trpc.quiz.finishRound.useMutation({
     onSuccess: async () => {
       setSubmissionMessage("Quiz finalizado. O placar desta rodada permanece disponível para consulta.");
       await trpcUtils.quiz.leaderboard.invalidate();
     },
-    onError: () => setSubmissionMessage("Não foi possível finalizar o Quiz agora. Entre como organizador e tente novamente."),
+    onError: () => setSubmissionMessage("Não foi possível finalizar o Quiz agora. Tente novamente em instantes."),
   });
 
   function confirmarParticipante(event: React.FormEvent<HTMLFormElement>) {
@@ -152,7 +149,7 @@ export default function QuizPage() {
     <LibraryNav ativo="quiz" />
     <section className="quiz-hero"><div className="page-width quiz-hero-grid">
       <div><p className="quiz-kicker"><CircleHelp size={15} />CENTRAL DE VERIFICAÇÃO</p><h1>Teste o que você <em>entendeu.</em></h1><p>O organizador começa o Quiz. A equipe tem dez minutos para responder as quatro frentes e entrar no placar compartilhado.</p></div>
-      <div className="quiz-round-control"><div className={`quiz-round-clock ${roundOpen ? "" : "is-closed"}`}><Clock3 size={19} /><div><small>{roundOpen ? "QUIZ EM ANDAMENTO · TEMPO RESTANTE" : "QUIZ AGUARDANDO INÍCIO"}</small><strong>{leaderboardQuery.isLoading ? "--:--" : formatClock(remainingMilliseconds)}</strong></div></div><div className="quiz-round-buttons">{!user && !authLoading && <><button type="button" onClick={startLogin}>COMEÇAR QUIZ</button><button type="button" className="quiz-finish-button" onClick={startLogin}>FINALIZAR QUIZ</button><small>Entre como organizador para controlar a rodada.</small></>}{user?.role === "admin" && <><button type="button" onClick={comecarQuiz} disabled={roundOpen || startNextRound.isPending}>{startNextRound.isPending ? <><Loader2 size={14} className="quiz-spin" />COMEÇANDO…</> : "COMEÇAR QUIZ"}</button><button type="button" className="quiz-finish-button" onClick={finalizarQuiz} disabled={!roundOpen || finishRound.isPending}>{finishRound.isPending ? <><Loader2 size={14} className="quiz-spin" />FINALIZANDO…</> : "FINALIZAR QUIZ"}</button></>}{user && user.role !== "admin" && <small>Esta conta não possui permissão de organizador.</small>}</div></div>
+      <div className="quiz-round-control"><div className={`quiz-round-clock ${roundOpen ? "" : "is-closed"}`}><Clock3 size={19} /><div><small>{roundOpen ? "QUIZ EM ANDAMENTO · TEMPO RESTANTE" : "QUIZ AGUARDANDO INÍCIO"}</small><strong>{leaderboardQuery.isLoading ? "--:--" : formatClock(remainingMilliseconds)}</strong></div></div><div className="quiz-round-buttons"><button type="button" onClick={comecarQuiz} disabled={roundOpen || startNextRound.isPending}>{startNextRound.isPending ? <><Loader2 size={14} className="quiz-spin" />COMEÇANDO…</> : "COMEÇAR QUIZ"}</button><button type="button" className="quiz-finish-button" onClick={finalizarQuiz} disabled={!roundOpen || finishRound.isPending}>{finishRound.isPending ? <><Loader2 size={14} className="quiz-spin" />FINALIZANDO…</> : "FINALIZAR QUIZ"}</button></div></div>
     </div></section>
     <section className="quiz-workspace"><div className="page-width">
       {!leaderboardQuery.isLoading && !roundOpen && <aside className="quiz-round-closed"><Clock3 size={22} /><div><p>QUIZ AGUARDANDO INÍCIO</p><strong>O Quiz ainda não começou ou já foi finalizado.</strong><span>O organizador deve usar o botão COMEÇAR QUIZ acima. Quando iniciar, todos terão dez minutos para responder.</span></div></aside>}

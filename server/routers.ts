@@ -3,7 +3,7 @@ import { TRPCError } from "@trpc/server";
 import { finishCurrentQuizRound, getCurrentQuizRound, listQuizScores, saveQuizScore, startNextQuizRound } from "./db";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { adminProcedure, publicProcedure, router } from "./_core/trpc";
+import { publicProcedure, router } from "./_core/trpc";
 import { formatParticipantName, quizScoreInputSchema } from "./quizScore";
 
 export const appRouter = router({
@@ -50,14 +50,14 @@ export const appRouter = router({
 
       return { success: true } as const;
     }),
-    /** Fecha a rodada antes do prazo; disponível somente para o organizador autenticado. */
-    finishRound: adminProcedure.mutation(async () => {
+    /** Fecha publicamente a rodada antes do prazo solicitado pela equipe. */
+    finishRound: publicProcedure.mutation(async () => {
       const round = await finishCurrentQuizRound();
       if (!round) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Não foi possível encerrar a rodada agora." });
       return { round };
     }),
-    /** Inicia uma nova rodada de dez minutos e preserva os resultados anteriores. */
-    startNextRound: adminProcedure.mutation(async () => {
+    /** Inicia publicamente uma nova rodada de dez minutos e preserva os resultados anteriores. */
+    startNextRound: publicProcedure.mutation(async () => {
       const round = await startNextQuizRound();
       if (!round) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Não foi possível iniciar uma nova rodada agora." });
       return { round };
