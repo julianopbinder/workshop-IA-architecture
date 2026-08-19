@@ -313,7 +313,7 @@
 - [x] Garantir que o relógio de dez minutos seja compartilhado entre todas as máquinas.
 - [x] Encerrar o acesso para todos ao chegar a zero ou quando o apresentador usar FINALIZAR QUIZ.
 - [x] Cobrir o fluxo público com testes e validar em mais de uma sessão.
-- [ ] Salvar checkpoint e publicar a rodada pública com identificação por primeiro nome.
+- [x] Salvar checkpoint e publicar a rodada pública com identificação por primeiro nome.
 - [x] Adicionar teste verificável para início em 10:00 e tempo restante calculado a partir do fim persistido da rodada.
 - [x] Validar visualmente o estado de rodada encerrada após FINALIZAR QUIZ, incluindo relógio em 00:00 e bloqueio de entrada.
 - [x] Confirmar em teste o timestamp de entrada registrado para cada participante.
@@ -322,3 +322,5 @@
 - [x] Adicionar teste de integração do fluxo de entrada que comprove a persistência de joinedAt no registro do participante.
 - [x] Executar e registrar duas consultas públicas independentes que retornem a mesma rodada e o mesmo prazo final.
 - [ ] Validar a publicação final após registrar as evidências de persistência e prazo compartilhado.
+- [x] Corrigir a concordância verbal da contagem pública de participantes e conclusões.
+- [ ] Publicar a correção da contagem de participação e confirmar a versão no domínio final.
