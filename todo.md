@@ -187,6 +187,13 @@
 - [x] Criar um diagrama que mostre como os três se complementam.
 - [ ] Validar, publicar e entregar a página Resumo.
 
+## Simplificação da página Resumo
+
+- [x] Trocar a imagem atual pela nova imagem fornecida.
+- [x] Remover o diagrama nativo, cartões e a régua de progresso.
+- [x] Manter apenas as três definições e um texto curto sem cores decorativas.
+- [ ] Validar, publicar e entregar a página simplificada.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.

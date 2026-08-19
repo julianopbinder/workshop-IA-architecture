@@ -24,6 +24,37 @@ code, pre { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospac
 .skill-reference { overflow: hidden; background: radial-gradient(circle at 100% 0%, #ffffff 0, transparent 36rem), var(--bg); }
 .page-width { width: min(1140px, calc(100% - 56px)); margin-inline: auto; }
 .site-header { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--line); background: rgb(237 240 238 / 95%); backdrop-filter: blur(14px); }
+
+/* Página Resumo: leitura reduzida, sem cartões coloridos ou elementos de distração. */
+.summary-simple-page { min-height: 100vh; background: #f3f4f2; }
+.summary-simple-page .site-header { background: rgb(243 244 242 / 96%); }
+.summary-simple-page .nav-modulos a.active { border-color: var(--ink); color: var(--ink); }
+.summary-simple-page .header-tag.active { border-color: var(--ink); color: var(--ink); }
+.summary-simple { padding: clamp(48px, 8vw, 100px) 0 92px; }
+.summary-simple-inner { width: min(820px, calc(100% - 40px)); margin-inline: auto; }
+.summary-simple-header { border-bottom: 1px solid #bfc5c1; padding-bottom: 28px; text-align: center; }
+.summary-simple-header p { margin: 0 0 14px; color: #4a555d; font-size: 11px; font-weight: 800; letter-spacing: .16em; }
+.summary-simple-header h1 { margin: 0; color: #182630; font-size: clamp(2.25rem, 5vw, 4.25rem); line-height: .98; }
+.summary-simple-header span { display: block; margin: 20px auto 0; color: #53616a; font-size: 16px; line-height: 1.55; }
+.summary-simple-figure { margin: 42px 0 0; border: 1px solid #c3c9c5; padding: 12px; background: #171717; }
+.summary-simple-image-button { position: relative; display: block; width: 100%; border: 0; padding: 0; background: #171717; cursor: zoom-in; }
+.summary-simple-image-button img { display: block; width: 100%; height: auto; }
+.summary-simple-image-button span { position: absolute; right: 10px; bottom: 10px; opacity: 0; padding: 7px 9px; background: rgb(0 0 0 / 75%); color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .08em; transition: opacity 160ms var(--ease); }
+.summary-simple-image-button:hover span, .summary-simple-image-button:focus-visible span { opacity: 1; }
+.summary-simple-definitions { margin-top: 42px; border-top: 1px solid #bfc5c1; }
+.summary-simple-definitions p { display: grid; grid-template-columns: 150px 1fr; gap: 26px; margin: 0; border-bottom: 1px solid #bfc5c1; padding: 19px 0; }
+.summary-simple-definitions strong { color: #182630; font-family: Georgia, "Times New Roman", serif; font-size: 22px; font-weight: 400; }
+.summary-simple-definitions span { color: #53616a; font-size: 16px; line-height: 1.55; }
+.summary-simple-conclusion { max-width: 660px; margin: 32px auto 0; color: #53616a; font-size: 15px; line-height: 1.62; text-align: center; }
+@media (max-width: 600px) {
+  .summary-simple { padding-top: 46px; }
+  .summary-simple-inner { width: min(100% - 30px, 820px); }
+  .summary-simple-figure { margin-top: 30px; padding: 7px; }
+  .summary-simple-definitions { margin-top: 30px; }
+  .summary-simple-definitions p { grid-template-columns: 1fr; gap: 5px; padding: 16px 0; }
+  .summary-simple-definitions strong { font-size: 20px; }
+  .summary-simple-definitions span { font-size: 15px; }
+}
 .header-inner { display: grid; grid-template-columns: 130px 1fr 100px; align-items: center; min-height: 70px; width: min(1140px, calc(100% - 56px)); margin-inline: auto; }
 .marca { display: inline-flex; align-items: center; height: 34px; }
 .nexo-mark { position: relative; display: block; width: 42px; height: 28px; }
