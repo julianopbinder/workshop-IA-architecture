@@ -15,3 +15,19 @@ O serviço `workshop-IA-architecture` recebeu a variável `DATABASE_URL` apontan
 No momento da configuração, a implantação anterior permanecia ativa e a nova implantação estava em fase de construção. A Railway informa execução em `US West`, com um réplica Node.js, e expõe o domínio provisório `https://workshop-ia-architecture-production.up.railway.app`.
 
 Também foi configurada uma `JWT_SECRET` aleatória diretamente como segredo do serviço, sem registrar seu valor em arquivos. O painel do MySQL oferece as áreas `Database` e `Console`, que serão usadas para aplicar as quatro migrações versionadas e importar os dados sem abrir as credenciais de conexão.
+
+## Bloqueio atual de implantação
+
+O serviço Railway mostra a origem `julianopbinder/workshop-IA-architecture`, porém o painel informa **“GitHub Repo not found”**. Ao tentar editar a origem, a integração da Railway só oferece acesso ao repositório `julianopbinder/desafio-votos`. Assim, a Railway permanece na implantação anterior e ainda não recebeu a versão corrigida enviada ao repositório da aplicação. É necessário conceder à aplicação GitHub da Railway acesso ao repositório `julianopbinder/workshop-IA-architecture` e reconectar a origem para que o deploy atual seja aplicado.
+
+## Diagnóstico confirmado posteriormente
+
+O domínio Railway responde, porém as chamadas do Quiz retornam HTTP 500 porque a implantação ativa ainda usa um comando que inicia somente o servidor, sem executar as migrações. A tabela `quiz_rounds` ainda não existe no MySQL Railway. Além disso, o painel de configurações do serviço voltou a indicar **Connect Source**, confirmando que a origem GitHub continua desconectada. Ao reconectar `julianopbinder/workshop-IA-architecture`, deve ser executada a versão que inclui o `railway.json`, cuja inicialização aplica `pnpm drizzle-kit migrate` antes de iniciar a aplicação.
+
+Em tentativas posteriores, a lista do Railway exibiu o repositório correto, mas a seleção fechou a janela sem persistir o vínculo: a tela permaneceu em **Connect Source**. Portanto, não há uma implantação nova em andamento e a etapa de conexão da origem requer intervenção pelo painel autenticado da Railway.
+
+Foi verificada a configuração disponível nesta sessão e não existe conector ou cliente Railway autenticado que permita disparar o vínculo ou a implantação fora do painel web. O repositório permanece visível na lista da Railway, mas a operação de vínculo ainda não é persistida pelo painel automatizado.
+
+## Publicação iniciada
+
+Em 19/08/2026, o repositório `julianopbinder/workshop-IA-architecture` foi conectado novamente à branch `main` e a publicação foi confirmada no painel Railway. A implantação `df860c52-e746-49ae-8632-0de53c234ca0` iniciou a construção da versão que contém as correções. Os registros de build confirmam o comando de início `pnpm drizzle-kit migrate && pnpm start`, que deve criar as tabelas do Quiz antes de subir o servidor. Os avisos de Docker sobre `JWT_SECRET` e `NIXPACKS_PATH` foram apresentados como avisos de lint durante a criação da imagem, sem indicar falha de build naquele momento.

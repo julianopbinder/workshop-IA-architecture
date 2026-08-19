@@ -397,7 +397,43 @@
 
 - [ ] Aplicar imediatamente dados do Quiz no MySQL Railway e publicar a versão pública.
 
+## Correção urgente da Railway
+
+- [ ] Corrigir a conexão do Quiz com o MySQL Railway em produção.
+- [ ] Restaurar todas as imagens instrucionais no próprio domínio Railway.
+- [ ] Validar o Quiz e as imagens no endereço Railway antes da entrega.
+
+## Correção mínima urgente
+
+- [ ] Aplicar imediatamente a configuração essencial de banco e imagens na Railway.
+
 ## Execução paralela solicitada
 
 - [ ] Restaurar o visual e preparar a transferência do banco em paralelo.
 - [ ] Importar o schema e os dados do Quiz no MySQL Railway sem alterar a base de origem.
+
+## Aplicação imediata
+
+- [ ] Aplicar as alterações pendentes e disparar o deploy Railway sem novas verificações.
+
+## Deploy final imediato
+
+- [ ] Conectar o repositório autorizado e iniciar o deploy Railway da versão atual.
+
+## Conclusão urgente
+
+- [ ] Aplicar o vínculo e o deploy da Railway para restaurar o Quiz e as imagens.
+
+## Execução final urgente
+
+- [ ] Conectar a origem do repositório e iniciar agora o deploy Railway atualizado.
+
+## Publicação imediata
+
+- [ ] Conectar o repositório e disparar agora a publicação Railway da versão atual.
+
+## Falha atual do Quiz na Railway
+
+- [ ] Criar as tabelas quiz_rounds, quiz_participants e quiz_scores no MySQL Railway e validar quiz.leaderboard sem erro 500.
+- [x] Corrigir a escuta da porta atribuída pela Railway para impedir o encerramento do servidor após as migrações.
+- [ ] Confirmar no domínio Railway o carregamento das imagens públicas e o endpoint quiz.leaderboard sem erro 500.

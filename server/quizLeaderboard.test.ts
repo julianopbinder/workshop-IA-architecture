@@ -33,15 +33,16 @@ function createPublicContext(): TrpcContext {
   };
 }
 
+const now = Date.now();
 const activeRound = {
   id: 2,
   status: "active" as const,
-  startedAt: new Date("2026-08-19T10:00:00Z"),
+  startedAt: new Date(now - 60_000),
   startedByParticipantKey: "a55db342-5c91-4d37-93cc-c87aec58b6b2",
-  endsAt: new Date("2026-08-19T10:10:00Z"),
+  endsAt: new Date(now + 9 * 60_000),
   endedAt: null,
-  createdAt: new Date("2026-08-19T10:00:00Z"),
-  updatedAt: new Date("2026-08-19T10:00:00Z"),
+  createdAt: new Date(now - 60_000),
+  updatedAt: new Date(now - 60_000),
 };
 
 describe("quiz rounds", () => {
@@ -55,7 +56,7 @@ describe("quiz rounds", () => {
   });
 
   it("permite que quem iniciou a rodada a finalize antes do prazo sem login", async () => {
-    const closedRound = { ...activeRound, status: "closed" as const, endedAt: new Date("2026-08-19T10:04:00Z") };
+    const closedRound = { ...activeRound, status: "closed" as const, endedAt: new Date(now) };
     getCurrentQuizRoundMock.mockResolvedValueOnce(activeRound);
     finishCurrentQuizRoundMock.mockResolvedValueOnce(closedRound);
     const caller = appRouter.createCaller(createPublicContext());
@@ -74,7 +75,7 @@ describe("quiz rounds", () => {
 
   it("permite a entrada de uma pessoa pelo primeiro nome durante a rodada pública", async () => {
     getCurrentQuizRoundMock.mockResolvedValueOnce(activeRound);
-    const joinedAt = new Date("2026-08-19T10:02:00Z");
+    const joinedAt = new Date(now);
     registerQuizParticipantMock.mockResolvedValueOnce({ participantName: "Andre", joinedAt });
     const caller = appRouter.createCaller(createPublicContext());
 
