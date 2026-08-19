@@ -196,8 +196,16 @@
 
 ## Padronização SubAgentes
 
-- [ ] Trocar todas as referências visíveis de Subagentes para SubAgentes.
-- [ ] Validar e publicar a atualização de nomenclatura.
+- [x] Trocar todas as referências visíveis de Subagentes para SubAgentes.
+- [x] Validar e publicar a atualização de nomenclatura.
+
+## Módulo RAG para iniciantes
+
+- [x] Estudar o curso indicado e separar os conceitos essenciais de RAG.
+- [x] Escrever uma explicação autoral e direta: busca, contexto e resposta.
+- [x] Integrar o diagrama enviado como apoio visual com visualização ampliada.
+- [x] Criar um exemplo passo a passo de RAG que um público leigo consiga acompanhar.
+- [ ] Validar, publicar e entregar a nova página RAG.
 
 ## Simplificação urgente — Skill no IntelliJ
 

@@ -103,3 +103,9 @@ O novo menu, **Central de Prática**, funciona como uma pequena sala de treiname
 - A página **Resumo** é o fechamento da apresentação em três lâminas: padrão, acesso e execução. Uma régua coral marca o avanço entre elas.
 - A síntese usa a metáfora de uma **Central de Operação**: Skill é playbook, MCP é ponte de acesso e Subagente é frente especializada. Não usar metáforas de cozinha, receitas ou sous-chefs.
 - O diagrama final é nativo do sistema Nexo: três rotas convergem da demanda do agente principal para um resultado consolidado; coral indica rota ativa e verde discreto confirma a entrega.
+
+## Style Decisions — missão RAG
+
+- O módulo RAG é organizado como uma sequência de **estações de consulta**: pergunta, fonte, contexto e resposta verificável.
+- A linha coral é uma rota operacional visível. Ela sempre mostra direção, decisão ou validação; nunca é apenas sublinhado decorativo.
+- Diagramas externos entram como **evidência de estação**: moldura azul-noite, rótulo curto, legenda e conexão visual com a geometria Nexo.
