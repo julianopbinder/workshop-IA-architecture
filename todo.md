@@ -156,6 +156,13 @@
 
 - [x] Trocar o nome exibido no exemplo de Juliano para João.
 
+## Diagrama de arquitetura MCP
+
+- [x] Armazenar permanentemente a imagem de arquitetura enviada pelo usuário.
+- [x] Inserir a imagem no módulo MCP com ampliação ao clicar.
+- [x] Escrever uma explicação simples dos blocos: agente, servidor, tools, prompts e resources.
+- [ ] Validar e publicar a atualização visual.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.

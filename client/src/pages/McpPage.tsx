@@ -1,6 +1,27 @@
 // Design: missão guiada em fundo mineral, com rota coral e Nexo como sinais visuais de progresso para iniciantes.
-import { ArrowRight, Ban, Boxes, CheckCircle2, ExternalLink, FileText, FolderPlus, PlugZap, Server, Terminal, Wrench } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Ban, Boxes, CheckCircle2, ExternalLink, FileText, FolderPlus, PlugZap, Server, Terminal, Wrench, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
+
+const arquiteturaMcp = "/manus-storage/arquitetura-mcp-explicada_ead4e8f7.png";
+
+function FiguraArquiteturaMcp() {
+  const [aberta, setAberta] = useState(false);
+
+  return <>
+    <figure className="mcp-architecture-figure">
+      <button type="button" onClick={() => setAberta(true)} aria-label="Ampliar diagrama de arquitetura MCP">
+        <img src={arquiteturaMcp} alt="Arquitetura MCP: agente de IA conversa com um servidor MCP, que disponibiliza tools, prompts e resources de serviços externos" />
+        <span>CLIQUE PARA AMPLIAR ↗</span>
+      </button>
+      <figcaption>Arquitetura MCP: o servidor organiza o que a IA pode fazer, pedir e consultar.</figcaption>
+    </figure>
+    {aberta && <div className="image-lightbox" role="dialog" aria-modal="true" aria-label="Diagrama de arquitetura MCP ampliado" onClick={() => setAberta(false)}>
+      <button type="button" className="lightbox-close" onClick={() => setAberta(false)} aria-label="Fechar imagem ampliada"><X size={20} /></button>
+      <img src={arquiteturaMcp} alt="Arquitetura MCP ampliada" onClick={(event) => event.stopPropagation()} />
+    </div>}
+  </>;
+}
 
 export default function McpPage() {
   return (
@@ -51,6 +72,21 @@ export default function McpPage() {
               <div className="control-map-foot"><b>REGRA DE SEGURANÇA</b><span>A IA só enxerga as ferramentas que o MCP disponibiliza.</span></div>
             </div>
           </div>
+
+          <div className="mcp-diagram-explainer">
+            <div className="mcp-diagram-intro">
+              <p className="eyebrow">ESTAÇÃO 01 · OBSERVE A ROTA</p>
+              <h3>A IA não entra nos sistemas <em>sozinha.</em></h3>
+              <p>Leia da esquerda para a direita: você fala com a IA; ela pede algo ao servidor MCP; e o servidor usa apenas os recursos que foram liberados.</p>
+            </div>
+            <FiguraArquiteturaMcp />
+            <div className="mcp-simple-legend" aria-label="Explicação simples dos elementos do diagrama">
+              <article><b>1</b><div><strong>MCP Client</strong><p>É a IA que recebe seu pedido.</p></div></article>
+              <article><b>2</b><div><strong>MCP Server</strong><p>É o porteiro: decide quais conexões a IA pode usar.</p></div></article>
+              <article><b>3</b><div><strong>Tools, Prompts e Resources</strong><p>São, respectivamente, ações, roteiros prontos e informações para consultar.</p></div></article>
+              <article><b>4</b><div><strong>Serviços externos</strong><p>São os sistemas da empresa, como documentos, plataformas e ambientes técnicos.</p></div></article>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -62,9 +98,9 @@ export default function McpPage() {
             <p>Para entender o MCP com facilidade, separe suas capacidades em três grupos: ações, modelos de pergunta e dados para consultar.</p>
           </div>
           <div className="mcp-capabilities">
-            <article><Wrench size={22} /><h3>Tools</h3><p><strong>Ações.</strong> A IA pode chamar uma função permitida, como verificar o status de um ambiente.</p><span>Exemplo: <code>status_ambiente</code></span></article>
-            <article><Boxes size={22} /><h3>Prompts</h3><p><strong>Modelos reutilizáveis.</strong> Um roteiro pronto para investigar um erro, criar um documento ou seguir um processo.</p><span>Exemplo: investigar deploy</span></article>
-            <article><Server size={22} /><h3>Resources</h3><p><strong>Dados para ler.</strong> Arquivos, logs, documentos ou informações de um banco de dados.</p><span>Exemplo: arquivo de logs</span></article>
+            <article><p className="mcp-capability-label">CAPACIDADE 01</p><Wrench size={22} /><h3>Tools</h3><p><strong>Ações.</strong> A IA pode chamar uma função permitida, como verificar o status de um ambiente.</p><span>Exemplo: <code>status_ambiente</code></span></article>
+            <article><p className="mcp-capability-label">CAPACIDADE 02</p><Boxes size={22} /><h3>Prompts</h3><p><strong>Modelos reutilizáveis.</strong> Um roteiro pronto para investigar um erro, criar um documento ou seguir um processo.</p><span>Exemplo: investigar deploy</span></article>
+            <article><p className="mcp-capability-label">CAPACIDADE 03</p><Server size={22} /><h3>Resources</h3><p><strong>Dados para ler.</strong> Arquivos, logs, documentos ou informações de um banco de dados.</p><span>Exemplo: arquivo de logs</span></article>
           </div>
         </div>
       </section>

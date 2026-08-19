@@ -1,4 +1,4 @@
-// Navegação compartilhada da biblioteca, com cada assunto apontando para sua própria página.
+// Design: navegação editorial mineral com o símbolo Nexo como marca visual de três rotas que convergem.
 
 type ModuloAtivo = "skill" | "mcps" | "subagentes" | "rag";
 
@@ -14,7 +14,9 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a className="marca" href="/skill" aria-label="Biblioteca de IA">AI<span>.</span></a>
+        <a className="marca" href="/skill" aria-label="Nexo — Biblioteca de IA">
+          <span className="nexo-mark" aria-hidden="true"><i /><i /><i /><b /></span>
+        </a>
         <nav className="nav-modulos" aria-label="Módulos da biblioteca">
           {itens.map((item) => <a key={item.id} className={ativo === item.id ? "active" : ""} href={item.href}>{item.label}</a>)}
         </nav>
