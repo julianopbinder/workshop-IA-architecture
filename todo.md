@@ -321,7 +321,17 @@
 - [x] Remover referências residuais ao organizador das mensagens públicas de encerramento.
 - [x] Adicionar teste de integração do fluxo de entrada que comprove a persistência de joinedAt no registro do participante.
 - [x] Executar e registrar duas consultas públicas independentes que retornem a mesma rodada e o mesmo prazo final.
-- [ ] Validar a publicação final após registrar as evidências de persistência e prazo compartilhado.
+- [x] Validar a publicação final após registrar as evidências de persistência e prazo compartilhado.
 - [x] Corrigir a concordância verbal da contagem pública de participantes e conclusões.
-- [ ] Publicar a correção da contagem de participação e confirmar a versão no domínio final.
-- [ ] Forçar uma nova publicação do checkpoint confirmado, pois o domínio ainda está servindo o pacote anterior em cache.
+- [x] Publicar a correção da contagem de participação e confirmar a versão no domínio final.
+- [x] Forçar uma nova publicação do checkpoint confirmado, pois o domínio ainda está servindo o pacote anterior em cache.
+
+## Visual restaurado e entrada por modal
+
+- [x] Restaurar a composição visual anterior, com hero escuro e área de perguntas em cartões claros.
+- [x] Exibir para o apresentador os controles de iniciar e finalizar sem poluir a experiência dos participantes.
+- [x] Abrir um modal simples de primeiro nome quando um participante entra durante uma rodada ativa.
+- [x] Ocultar as perguntas até que o primeiro nome seja confirmado no modal.
+- [x] Preservar o placar compartilhado e o registro de entrada/conclusão existentes.
+- [x] Validar no desktop e no celular o Quiz com o visual restaurado.
+- [ ] Salvar checkpoint e publicar o Quiz com o visual restaurado.
