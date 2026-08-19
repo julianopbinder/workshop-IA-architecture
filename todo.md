@@ -170,6 +170,15 @@
 - [x] Mostrar a chamada da ferramenta cumprimentar e a resposta no terminal.
 - [ ] Inserir o diagrama após o exemplo prático, validar e publicar.
 
+## Módulo Subagentes
+
+- [x] Substituir a página provisória por uma introdução clara de Subagentes.
+- [x] Explicar contexto isolado, delegação, permissões e execução paralela.
+- [x] Usar uma analogia corporativa, sem a metáfora da cozinha.
+- [x] Criar um diagrama de agente principal, especialistas e retorno resumido.
+- [x] Mostrar em destaque a combinação Subagentes + Skills no exemplo DevOps.
+- [ ] Validar, publicar e entregar o novo módulo.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.

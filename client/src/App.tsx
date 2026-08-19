@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import McpPage from "./pages/McpPage";
+import SubagentsPage from "./pages/SubagentsPage";
 import TopicPage from "./pages/TopicPage";
 
 function Router() {
@@ -15,7 +16,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/skill"} component={Home} />
       <Route path={"/mcps"} component={McpPage} />
-      <Route path={"/subagentes"}>{() => <TopicPage ativo="subagentes" tema="Subagentes" descricao="Uma página própria para entender como uma IA pode delegar partes de uma tarefa maior a outros agentes." />}</Route>
+      <Route path={"/subagentes"} component={SubagentsPage} />
       <Route path={"/rag"}>{() => <TopicPage ativo="rag" tema="RAG" descricao="Uma página própria para entender como a IA busca informações antes de formular uma resposta." />}</Route>
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />

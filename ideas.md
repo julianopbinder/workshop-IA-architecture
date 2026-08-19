@@ -90,3 +90,10 @@ O novo menu, **Central de Prática**, funciona como uma pequena sala de treiname
 - A imagem técnica de arquitetura MCP entra em uma moldura editorial azul-noite, com rótulo de estação e legenda explicativa; assim, ela é apresentada como parte da missão, não como uma captura solta.
 - As capacidades Tools, Prompts e Resources recebem marcadores sequenciais de capacidade para reforçar que o coral indica um desbloqueio ou rota ativa.
 - A prática em Windows é uma sequência de estações: cada passo começa na linha coral, apresenta uma ação dominante e termina em uma confirmação visual. O Nexo reaparece no fluxo final como comando, MCP e resposta convergindo no mesmo resultado.
+- O módulo Subagentes será uma **Central de Operação**: um agente principal distribui uma missão para especialistas de pesquisa, DevOps e qualidade, que trabalham com contexto próprio e retornam relatórios curtos. A metáfora é uma operação corporativa coordenada, não uma cozinha.
+- O diagrama principal usa a geometria Nexo como caminho de delegação e retorno: coral indica missão enviada, azul-noite indica contexto isolado e verde discreto indica resultado consolidado. A combinação **Subagentes + Skills** aparece como um kit operacional: especialista + manual reutilizável.
+
+## Style Decisions
+
+- A leitura do módulo Subagentes é uma missão de cinco atos: delegar, orquestrar, delimitar, padronizar e decidir. Cada ato declara a capacidade que foi desbloqueada.
+- A trilha coral é estrutural: conecta os atos, sinaliza a missão ativa e aparece como três rotas Nexo entre envio, contextos isolados e retorno consolidado.
