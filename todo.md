@@ -139,10 +139,10 @@
 
 - [x] Confirmar o pacote FastMCP e a sintaxe atual compatível.
 - [x] Gerar um server.py corrigido para download.
-- [ ] Entregar o comando de instalação e execução sem PATH.
-- [ ] Reenviar imediatamente o arquivo Python corrigido para download.
+- [x] Entregar o comando de instalação e execução sem PATH.
+- [x] Reenviar imediatamente o arquivo Python corrigido para download.
 - [x] Substituir o teste via mcp.exe por uma execução direta sem Node.js.
-- [ ] Orientar o salvamento de server.py e testar_mcp.py na pasta C:\\meu-primeiro-mcp.
+- [x] Orientar o salvamento de server.py e testar_mcp.py na pasta C:\\meu-primeiro-mcp.
 
 ## Reescrita do tutorial MCP para iniciantes
 
@@ -150,7 +150,7 @@
 - [x] Explicar onde salvar cada arquivo antes de abrir o terminal.
 - [x] Organizar um único fluxo: pasta, arquivos, instalação e teste.
 - [x] Deixar explícito qual mensagem confirma o sucesso.
-- [ ] Validar, publicar e entregar o módulo MCP simplificado.
+- [x] Validar, publicar e entregar o módulo MCP simplificado.
 
 ## Ajuste do exemplo MCP
 
@@ -161,14 +161,14 @@
 - [x] Armazenar permanentemente a imagem de arquitetura enviada pelo usuário.
 - [x] Inserir a imagem no módulo MCP com ampliação ao clicar.
 - [x] Escrever uma explicação simples dos blocos: agente, servidor, tools, prompts e resources.
-- [ ] Validar e publicar a atualização visual.
+- [x] Validar e publicar a atualização visual.
 
 ## Diagrama do exemplo FastMCP
 
 - [x] Mostrar onde o comando é digitado e qual arquivo é executado.
 - [x] Visualizar como testar_mcp.py importa o MCP criado em server.py.
 - [x] Mostrar a chamada da ferramenta cumprimentar e a resposta no terminal.
-- [ ] Inserir o diagrama após o exemplo prático, validar e publicar.
+- [x] Inserir o diagrama após o exemplo prático, validar e publicar.
 
 ## Módulo Subagentes
 
@@ -177,7 +177,7 @@
 - [x] Usar uma analogia corporativa, sem a metáfora da cozinha.
 - [x] Criar um diagrama de agente principal, especialistas e retorno resumido.
 - [x] Mostrar em destaque a combinação Subagentes + Skills no exemplo DevOps.
-- [ ] Validar, publicar e entregar o novo módulo.
+- [x] Validar, publicar e entregar o novo módulo.
 
 ## Página Resumo
 
@@ -185,14 +185,14 @@
 - [x] Criar uma página que sintetize Skills, MCPs e Subagentes.
 - [x] Explicar os três conceitos por uma analogia profissional de operação.
 - [x] Criar um diagrama que mostre como os três se complementam.
-- [ ] Validar, publicar e entregar a página Resumo.
+- [x] Validar, publicar e entregar a página Resumo.
 
 ## Simplificação da página Resumo
 
 - [x] Trocar a imagem atual pela nova imagem fornecida.
 - [x] Remover o diagrama nativo, cartões e a régua de progresso.
 - [x] Manter apenas as três definições e um texto curto sem cores decorativas.
-- [ ] Validar, publicar e entregar a página simplificada.
+- [x] Validar, publicar e entregar a página simplificada.
 
 ## Padronização SubAgentes
 
@@ -213,14 +213,14 @@
 - [x] Apresentar os pipelines de ingestão e de consulta em linguagem simples.
 - [x] Integrar os dois novos diagramas com ampliação ao clicar na página RAG.
 - [x] Atualizar a página Resumo com a definição de RAG e a distinção essencial.
-- [ ] Validar, publicar e entregar o complemento.
+- [x] Validar, publicar e entregar o complemento.
 
 ## Ajuste do Resumo — formato simples
 
 - [x] Restaurar o layout simples aprovado anteriormente.
 - [x] Manter a imagem original e as três definições existentes.
 - [x] Inserir apenas uma informação curta sobre RAG abaixo das definições.
-- [ ] Validar, publicar e entregar o ajuste.
+- [x] Validar, publicar e entregar o ajuste.
 
 ## Quiz de conhecimentos
 
