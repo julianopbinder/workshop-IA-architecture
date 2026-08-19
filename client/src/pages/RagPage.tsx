@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ArrowRight, Bot, CheckCircle2, Database, FileSearch, FileText, MessageSquareText, Search, ShieldCheck, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
+import { RagPipelines } from "@/components/RagPipelines";
 import "./RagPage.css";
 import "./RagMission.css";
 
@@ -50,7 +51,7 @@ export default function RagPage() {
           </div>
         </div>
         <nav className="page-width rag-deck-progress" aria-label="Rota de aprendizado do módulo RAG">
-          <a href="#conceito"><b>01</b><span>Consultar</span></a><i /><a href="#cenario"><b>02</b><span>Rastrear</span></a><i /><a href="#roteiro"><b>03</b><span>Preparar</span></a><i /><a href="#posicionamento"><b>04</b><span>Decidir</span></a>
+          <a href="#conceito"><b>01</b><span>Consultar</span></a><i /><a href="#cenario"><b>02</b><span>Rastrear</span></a><i /><a href="#relacao"><b>03</b><span>Diferenciar</span></a><i /><a href="#pipelines"><b>04</b><span>Preparar</span></a><i /><a href="#roteiro"><b>05</b><span>Praticar</span></a><i /><a href="#posicionamento"><b>06</b><span>Decidir</span></a>
         </nav>
       </section>
 
@@ -123,9 +124,11 @@ export default function RagPage() {
         </div>
       </section>
 
+      <RagPipelines />
+
       <section id="roteiro" className="java-section rag-practice">
         <div className="page-width">
-          <div className="identificador"><span>03</span><i /><p>Roteiro guiado · sem código</p></div>
+          <div className="identificador"><span>05</span><i /><p>Roteiro guiado · sem código</p></div>
           <div className="chapter-heading">
             <h2>Como montar o raciocínio de um RAG <em>em cinco passos.</em></h2>
             <p>Antes de escolher ferramentas ou escrever código, use este roteiro. Ele transforma uma ideia vaga em um caso de uso que a equipe consegue validar.</p>
@@ -196,7 +199,7 @@ Pergunta: Qual é o prazo para pedir reembolso?`}</pre></div>
 
       <section id="posicionamento" className="chapter rag-positioning">
         <div className="page-width">
-          <div className="identificador"><span>04</span><i /><p>Onde RAG se encaixa</p></div>
+          <div className="identificador"><span>06</span><i /><p>Onde RAG se encaixa</p></div>
           <div className="chapter-heading">
             <h2>RAG entrega <em>conhecimento.</em> Agentes executam trabalho.</h2>
             <p>As duas coisas podem trabalhar juntas, mas não são iguais. Saber a diferença evita prometer que uma simples busca vai automatizar toda uma operação.</p>

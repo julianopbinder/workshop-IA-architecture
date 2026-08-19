@@ -205,7 +205,15 @@
 - [x] Escrever uma explicação autoral e direta: busca, contexto e resposta.
 - [x] Integrar o diagrama enviado como apoio visual com visualização ampliada.
 - [x] Criar um exemplo passo a passo de RAG que um público leigo consiga acompanhar.
-- [ ] Validar, publicar e entregar a nova página RAG.
+- [x] Validar, publicar e entregar a nova página RAG.
+
+## Complemento RAG — agentes e pipelines
+
+- [x] Explicar que RAG não é um agente de IA e pode ser usado por agentes.
+- [x] Apresentar os pipelines de ingestão e de consulta em linguagem simples.
+- [x] Integrar os dois novos diagramas com ampliação ao clicar na página RAG.
+- [x] Atualizar a página Resumo com a definição de RAG e a distinção essencial.
+- [ ] Validar, publicar e entregar o complemento.
 
 ## Simplificação urgente — Skill no IntelliJ
 

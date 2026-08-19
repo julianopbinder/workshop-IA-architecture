@@ -109,3 +109,9 @@ O novo menu, **Central de Prática**, funciona como uma pequena sala de treiname
 - O módulo RAG é organizado como uma sequência de **estações de consulta**: pergunta, fonte, contexto e resposta verificável.
 - A linha coral é uma rota operacional visível. Ela sempre mostra direção, decisão ou validação; nunca é apenas sublinhado decorativo.
 - Diagramas externos entram como **evidência de estação**: moldura azul-noite, rótulo curto, legenda e conexão visual com a geometria Nexo.
+
+## Style Decisions — fechamento Resumo
+
+- O Resumo encerra a apresentação como uma **última sala de comando**, em três atos: padrão, acesso e execução, seguidos da estação de consulta verificável do RAG.
+- Os nomes de síntese são fixos: **Skill = playbook**, **MCP = ponte de acesso**, **SubAgente = frente especializada** e **RAG = estação de consulta verificável**.
+- A página não usa imagens externas, metáforas de cozinha, receitas ou sous-chefs. O diagrama é nativo do Nexo: quatro rotas convergem em um resultado operacional, com o coral indicando o caminho ativo.
