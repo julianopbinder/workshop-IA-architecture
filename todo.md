@@ -273,3 +273,12 @@
 - [x] Validar a experiência completa, publicar e entregar as instruções de condução.
 - [x] Salvar um checkpoint final da versão com rodadas cronometradas e publicar a atualização.
 - [x] Entregar ao organizador as instruções de condução da rodada de 10 minutos.
+
+## Simplificação dos controles de rodada
+
+- [x] Substituir os controles atuais por um botão COMEÇAR QUIZ e um botão FINALIZAR QUIZ.
+- [x] Iniciar a contagem regressiva de 10 minutos somente ao clicar em COMEÇAR QUIZ.
+- [x] Manter o Quiz aberto para todos os participantes enquanto houver tempo na rodada.
+- [x] Encerrar a rodada ao chegar em zero ou ao clicar em FINALIZAR QUIZ, bloqueando novos envios.
+- [x] Atualizar os testes e validar a interface da dinâmica simplificada.
+- [ ] Salvar o checkpoint e publicar a dinâmica simplificada.

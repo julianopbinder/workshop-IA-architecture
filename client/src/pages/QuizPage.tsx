@@ -110,6 +110,13 @@ export default function QuizPage() {
     },
     onError: () => setSubmissionMessage("Não foi possível abrir uma nova rodada. Entre como organizador e tente novamente."),
   });
+  const finishRound = trpc.quiz.finishRound.useMutation({
+    onSuccess: async () => {
+      setSubmissionMessage("Quiz finalizado. O placar desta rodada permanece disponível para consulta.");
+      await trpcUtils.quiz.leaderboard.invalidate();
+    },
+    onError: () => setSubmissionMessage("Não foi possível finalizar o Quiz agora. Entre como organizador e tente novamente."),
+  });
 
   function confirmarParticipante(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -132,20 +139,23 @@ export default function QuizPage() {
     setSubmissionMessage("");
     submitScore.mutate({ participantName, participantKey, totalScore, skillScore: pointsByTheme.skill, mcpScore: pointsByTheme.mcps, subagentsScore: pointsByTheme.subagentes, ragScore: pointsByTheme.rag });
   }
-  function abrirNovaRodada() {
-    const message = roundOpen ? "Finalizar esta rodada e iniciar uma nova rodada de 10 minutos?" : "Iniciar uma nova rodada de 10 minutos para a equipe?";
-    if (!window.confirm(message)) return;
+  function comecarQuiz() {
+    if (!window.confirm("Começar o Quiz para a equipe? O relógio terá 10 minutos.")) return;
     startNextRound.mutate();
+  }
+  function finalizarQuiz() {
+    if (!window.confirm("Finalizar o Quiz agora? Nenhuma nova resposta poderá entrar no placar desta rodada.")) return;
+    finishRound.mutate();
   }
 
   return <main className="skill-reference quiz-page">
     <LibraryNav ativo="quiz" />
     <section className="quiz-hero"><div className="page-width quiz-hero-grid">
-      <div><p className="quiz-kicker"><CircleHelp size={15} />CENTRAL DE VERIFICAÇÃO</p><h1>Teste o que você <em>entendeu.</em></h1><p>Uma rodada tem dez minutos. Informe seu primeiro nome, responda as quatro frentes e acompanhe a classificação compartilhada da equipe.</p></div>
-      <div className={`quiz-round-clock ${roundOpen ? "" : "is-closed"}`}><Clock3 size={19} /><div><small>RODADA {round ? String(round.id).padStart(2, "0") : "--"} · {roundOpen ? "TEMPO RESTANTE" : "RODADA ENCERRADA"}</small><strong>{leaderboardQuery.isLoading ? "--:--" : formatClock(remainingMilliseconds)}</strong></div></div>
+      <div><p className="quiz-kicker"><CircleHelp size={15} />CENTRAL DE VERIFICAÇÃO</p><h1>Teste o que você <em>entendeu.</em></h1><p>O organizador começa o Quiz. A equipe tem dez minutos para responder as quatro frentes e entrar no placar compartilhado.</p></div>
+      <div className="quiz-round-control"><div className={`quiz-round-clock ${roundOpen ? "" : "is-closed"}`}><Clock3 size={19} /><div><small>{roundOpen ? "QUIZ EM ANDAMENTO · TEMPO RESTANTE" : "QUIZ AGUARDANDO INÍCIO"}</small><strong>{leaderboardQuery.isLoading ? "--:--" : formatClock(remainingMilliseconds)}</strong></div></div><div className="quiz-round-buttons">{!user && !authLoading && <button type="button" className="quiz-organizer-login" onClick={startLogin}><LogIn size={14} />ENTRAR COMO ORGANIZADOR</button>}{user?.role === "admin" && <><button type="button" onClick={comecarQuiz} disabled={roundOpen || startNextRound.isPending}>{startNextRound.isPending ? <><Loader2 size={14} className="quiz-spin" />COMEÇANDO…</> : "COMEÇAR QUIZ"}</button><button type="button" className="quiz-finish-button" onClick={finalizarQuiz} disabled={!roundOpen || finishRound.isPending}>{finishRound.isPending ? <><Loader2 size={14} className="quiz-spin" />FINALIZANDO…</> : "FINALIZAR QUIZ"}</button></>}{user && user.role !== "admin" && <small>Esta conta não possui permissão de organizador.</small>}</div></div>
     </div></section>
     <section className="quiz-workspace"><div className="page-width">
-      {!leaderboardQuery.isLoading && !roundOpen && <aside className="quiz-round-closed"><Clock3 size={22} /><div><p>RODADA ENCERRADA</p><strong>O tempo desta rodada terminou.</strong><span>O placar permanece visível. Aguarde o organizador iniciar a próxima rodada para responder novamente.</span></div></aside>}
+      {!leaderboardQuery.isLoading && !roundOpen && <aside className="quiz-round-closed"><Clock3 size={22} /><div><p>QUIZ AGUARDANDO INÍCIO</p><strong>O Quiz ainda não começou ou já foi finalizado.</strong><span>O organizador deve usar o botão COMEÇAR QUIZ acima. Quando iniciar, todos terão dez minutos para responder.</span></div></aside>}
       {roundOpen && (!participantReady ? <form className="quiz-identity" onSubmit={confirmarParticipante}>
         <div className="quiz-identity-icon"><UserRound size={22} /></div><div><p>ANTES DE COMEÇAR</p><h2>Como você quer aparecer no placar?</h2><small>Pedimos somente o primeiro nome. Não é necessário criar conta.</small></div>
         <label><span>SEU NOME</span><input value={participantName} onChange={(event) => setParticipantName(event.target.value)} placeholder="Ex.: Ana" maxLength={60} autoComplete="given-name" /></label><button type="submit">ENTRAR NO QUIZ <ChevronRight size={16} /></button>{nameError && <strong className="quiz-identity-error" role="alert">{nameError}</strong>}
@@ -162,7 +172,7 @@ export default function QuizPage() {
       <section className="quiz-leaderboard-section" aria-live="polite">
         {roundOpen && quizComplete && participantReady && <div className="quiz-final-score"><div><p>MISSÃO CONCLUÍDA</p><h2>{participantName}, você acertou <em>{totalScore}/20</em>.</h2><span>Skill {pointsByTheme.skill}/5 · MCPs {pointsByTheme.mcps}/5 · SubAgentes {pointsByTheme.subagentes}/5 · RAG {pointsByTheme.rag}/5</span></div><button type="button" onClick={enviarPontuacao} disabled={submitScore.isPending}>{submitScore.isPending ? <><Loader2 size={16} className="quiz-spin" />REGISTRANDO</> : <><Send size={15} />ENVIAR AO PLACAR</>}</button></div>}
         {submissionMessage && <p className={`quiz-submission-message ${submitScore.isError ? "error" : ""}`}>{submissionMessage}</p>}
-        <div className="leaderboard-heading"><div><p><Trophy size={15} />PLACAR COMPARTILHADO</p><h2>Classificação da <em>equipe.</em></h2></div><div className="leaderboard-heading-actions"><span>ATUALIZAÇÃO AUTOMÁTICA</span>{!user && !authLoading && <button type="button" className="leaderboard-login" onClick={startLogin}><LogIn size={13} />ENTRAR COMO ORGANIZADOR</button>}{user?.role === "admin" && <button type="button" className="leaderboard-new-round" onClick={abrirNovaRodada} disabled={startNextRound.isPending}>{startNextRound.isPending ? <><Loader2 size={13} className="quiz-spin" />ABRINDO…</> : roundOpen ? "FINALIZAR E NOVA RODADA" : "INICIAR NOVA RODADA"}</button>}{user && user.role !== "admin" && <small className="leaderboard-access-note">Esta conta não possui permissão de organizador.</small>}</div></div>
+        <div className="leaderboard-heading"><div><p><Trophy size={15} />PLACAR COMPARTILHADO</p><h2>Classificação da <em>equipe.</em></h2></div><span>ATUALIZAÇÃO AUTOMÁTICA</span></div>
         <div className="leaderboard-panel">{leaderboardQuery.isLoading && <p className="leaderboard-status"><Loader2 size={17} className="quiz-spin" />Carregando o placar da equipe...</p>}{leaderboardQuery.isError && <p className="leaderboard-status leaderboard-error">O placar ficará disponível assim que a conexão com a base for restabelecida.</p>}{!leaderboardQuery.isLoading && !leaderboardQuery.isError && leaderboardQuery.data?.scores.length === 0 && <p className="leaderboard-status">Ainda não há resultados nesta rodada. O primeiro participante a concluir aparece aqui.</p>}{leaderboardQuery.data?.scores.map((score, index) => <div className={`leaderboard-row ${score.participantKey === participantKey ? "is-current" : ""}`} key={score.id}><RankingMedal position={index + 1} /><strong>{score.participantName}{score.participantKey === participantKey && <small>VOCÊ</small>}</strong><span>{score.totalScore}<i>/20</i></span></div>)}</div>
         <p className="leaderboard-note">Ouro, prata e bronze representam as três primeiras posições. Em caso de empate, vale quem concluiu primeiro.</p>
       </section>
