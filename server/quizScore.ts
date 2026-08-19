@@ -40,12 +40,12 @@ export function formatParticipantName(name: string) {
 
 /**
  * Separa os campos usados na inserção e na atualização. A chave do navegador
- * entra apenas na inserção: por ser única no banco, ela identifica a mesma
- * linha quando uma pessoa envia novamente sua pontuação.
+ * identifica a mesma pessoa apenas dentro da rodada recebida, permitindo que
+ * ela participe novamente em uma nova rodada da apresentação.
  */
-export function buildQuizScoreUpsert(score: QuizScoreInput, completedAt: Date) {
+export function buildQuizScoreUpsert(score: QuizScoreInput, roundId: number, completedAt: Date) {
   return {
-    insert: { ...score, completedAt },
+    insert: { ...score, roundId, completedAt },
     update: {
       participantName: score.participantName,
       totalScore: score.totalScore,

@@ -260,3 +260,16 @@
 - [x] Implementar exemplos reais de uso com prompts e resultados esperados.
 - [x] Revisar navegação, clareza didática e responsividade.
 - [x] Validar, salvar checkpoint e entregar a versão atualizada.
+
+## Rodadas cronometradas do Quiz
+
+- [x] Diagnosticar por que o controle de reinício administrativo não aparece no acesso do organizador.
+- [x] Criar o conceito de rodada para separar os resultados de apresentações diferentes.
+- [x] Exibir um relógio regressivo de 10 minutos durante cada rodada.
+- [x] Encerrar automaticamente a rodada quando o tempo chegar a zero.
+- [x] Permitir que o organizador finalize a rodada antes do prazo e abra uma nova rodada.
+- [x] Impedir novos envios quando a rodada estiver encerrada e explicar o próximo passo aos participantes.
+- [x] Cobrir a abertura e o encerramento de rodada com testes automatizados.
+- [x] Validar a experiência completa, publicar e entregar as instruções de condução.
+- [ ] Salvar um checkpoint final da versão com rodadas cronometradas e publicar a atualização.
+- [ ] Entregar ao organizador as instruções de condução da rodada de 10 minutos.

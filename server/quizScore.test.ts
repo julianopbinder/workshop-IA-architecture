@@ -45,7 +45,7 @@ describe("quizScoreInputSchema", () => {
     expect(formatParticipantName("  Ana  ")).toBe("Ana");
   });
 
-  it("mantém a chave do navegador na inserção e atualiza a mesma linha no reenvio", () => {
+  it("mantém a chave do navegador na inserção e atualiza a mesma linha no reenvio da mesma rodada", () => {
     const participantKey = "c3563eef-0ca0-4731-b4f0-24de58c14dce";
     const primeiraTentativa = quizScoreInputSchema.parse({
       participantName: "Ana",
@@ -63,12 +63,30 @@ describe("quizScoreInputSchema", () => {
       mcpScore: 5,
     });
 
-    const primeiroUpsert = buildQuizScoreUpsert(primeiraTentativa, new Date("2026-08-19T10:00:00Z"));
-    const segundoUpsert = buildQuizScoreUpsert(reenvio, new Date("2026-08-19T10:01:00Z"));
+    const primeiroUpsert = buildQuizScoreUpsert(primeiraTentativa, 7, new Date("2026-08-19T10:00:00Z"));
+    const segundoUpsert = buildQuizScoreUpsert(reenvio, 7, new Date("2026-08-19T10:01:00Z"));
 
     expect(primeiroUpsert.insert.participantKey).toBe(participantKey);
     expect(segundoUpsert.insert.participantKey).toBe(participantKey);
     expect(segundoUpsert.update).not.toHaveProperty("participantKey");
     expect(segundoUpsert.update.totalScore).toBe(17);
+  });
+
+  it("prepara uma nova linha quando a mesma pessoa participa de outra rodada", () => {
+    const score = quizScoreInputSchema.parse({
+      participantName: "Ana",
+      participantKey: "c3563eef-0ca0-4731-b4f0-24de58c14dce",
+      totalScore: 20,
+      skillScore: 5,
+      mcpScore: 5,
+      subagentsScore: 5,
+      ragScore: 5,
+    });
+
+    const primeiraRodada = buildQuizScoreUpsert(score, 7, new Date("2026-08-19T10:00:00Z"));
+    const segundaRodada = buildQuizScoreUpsert(score, 8, new Date("2026-08-19T10:15:00Z"));
+
+    expect(primeiraRodada.insert.roundId).toBe(7);
+    expect(segundaRodada.insert.roundId).toBe(8);
   });
 });

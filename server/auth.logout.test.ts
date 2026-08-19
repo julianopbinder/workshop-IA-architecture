@@ -60,11 +60,11 @@ describe("auth.logout", () => {
     });
   });
 
-  it("bloqueia participantes comuns de limpar o placar", async () => {
+  it("bloqueia participantes comuns de iniciar uma nova rodada", async () => {
     const { ctx } = createAuthContext();
     const caller = appRouter.createCaller(ctx);
 
-    await expect(caller.quiz.clearLeaderboard()).rejects.toMatchObject({
+    await expect(caller.quiz.startNextRound()).rejects.toMatchObject({
       code: "FORBIDDEN",
     });
   });

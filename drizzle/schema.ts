@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { index, int, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -26,6 +26,29 @@ export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
 /**
+ * Controla cada rodada da apresentação. Uma rodada dura dez minutos e mantém
+ * seu próprio placar, sem apagar o histórico das rodadas anteriores.
+ */
+export const quizRounds = mysqlTable("quiz_rounds", {
+  /** Identificador interno da rodada. */
+  id: int("id").autoincrement().primaryKey(),
+  /** Estado atual: aberta para respostas ou encerrada. */
+  status: mysqlEnum("status", ["active", "closed"]).default("active").notNull(),
+  /** Início da janela de participação em UTC. */
+  startedAt: timestamp("startedAt").notNull(),
+  /** Fim da janela de participação em UTC. */
+  endsAt: timestamp("endsAt").notNull(),
+  /** Momento de encerramento manual ou automático, quando aplicável. */
+  endedAt: timestamp("endedAt"),
+  /** Momento de criação do registro. */
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  /** Momento da última atualização do registro. */
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type QuizRound = typeof quizRounds.$inferSelect;
+
+/**
  * Registra a pontuação consolidada de cada participante do Quiz.
  * A chave do participante é criada no navegador e permite atualizar o próprio resultado
  * sem exigir conta ou armazenar dados pessoais além do nome informado.
@@ -33,10 +56,12 @@ export type InsertUser = typeof users.$inferInsert;
 export const quizScores = mysqlTable("quiz_scores", {
   /** Identificador interno do resultado. */
   id: int("id").autoincrement().primaryKey(),
+  /** Rodada em que este resultado foi registrado. */
+  roundId: int("roundId").notNull().references(() => quizRounds.id),
   /** Nome escolhido pelo participante para aparecer no placar. */
   participantName: varchar("participantName", { length: 60 }).notNull(),
   /** Chave anônima persistida somente no navegador do participante. */
-  participantKey: varchar("participantKey", { length: 64 }).notNull().unique(),
+  participantKey: varchar("participantKey", { length: 64 }).notNull(),
   /** Pontuação total de zero a vinte. */
   totalScore: int("totalScore").notNull(),
   /** Pontuação na frente Skill, de zero a cinco. */
@@ -53,7 +78,12 @@ export const quizScores = mysqlTable("quiz_scores", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   /** Momento da última atualização do registro. */
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-});
+}, (table) => [
+  /** O mesmo navegador pode ter uma pontuação em cada rodada, mas não duas na mesma rodada. */
+  uniqueIndex("quiz_scores_round_participant_key_unique").on(table.roundId, table.participantKey),
+  /** A busca do placar sempre filtra a rodada ativa ou a última encerrada. */
+  index("quiz_scores_round_id_idx").on(table.roundId),
+]);
 
 export type QuizScore = typeof quizScores.$inferSelect;
 export type InsertQuizScore = typeof quizScores.$inferInsert;
