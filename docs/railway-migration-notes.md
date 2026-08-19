@@ -37,3 +37,9 @@ Em 19/08/2026, o repositório `julianopbinder/workshop-IA-architecture` foi cone
 O deploy seguinte confirmou que as migrações foram aplicadas, mas o processo encerrava ao servir os arquivos estáticos porque o bundle Node executava `path.join` com `import.meta.dirname` indefinido. A resolução de diretório foi substituída por `fileURLToPath(import.meta.url)`, compatível com o runtime Node da Railway. A versão foi validada localmente com os 20 testes automatizados, build de produção e resposta HTTP 200. Um novo deploy do checkpoint `9b5ba9e3` está em construção na Railway e será validado no domínio público após ficar ativo.
 
 Embora o painel tenha exibido o deploy `9b5ba9e3` como ativo, a primeira requisição externa ao domínio Railway retornou HTTP 502. A aplicação está, portanto, indisponível para validação de imagens e Quiz; os logs de execução do container precisam ser revisados novamente antes de uma nova publicação.
+
+Após o checkpoint `9c25c00f`, a URL pública ainda retornou HTTP 502 na primeira verificação. É necessário conferir no painel Railway se o novo commit foi acionado e, se já executado, registrar o erro apresentado pela implantação correspondente.
+
+O checkpoint `9c25c00f` foi então confirmado como ativo e com status de implantação bem-sucedida no painel Railway. A página inicial em `https://workshop-ia-architecture-production.up.railway.app/` voltou a responder e a rota `https://workshop-ia-architecture-production.up.railway.app/quiz` carregou os controles públicos, o estado de rodada aguardando início e o placar sem erro 500.
+
+Validação final realizada: as 25 URLs de imagens usadas pelos módulos retornaram HTTP 200 no armazenamento público. O endpoint `GET /api/trpc/quiz.leaderboard` no domínio Railway retornou HTTP 200 com rodada, placar, participação e horário do servidor, confirmando a comunicação funcional entre aplicação e MySQL sem o antigo erro 500.

@@ -358,84 +358,84 @@
 
 ## Migração para Railway
 
-- [ ] Inspecionar o projeto Railway informado e confirmar acesso à aplicação e ao banco de destino.
-- [ ] Preparar os arquivos de implantação e as variáveis de ambiente necessárias para Railway.
-- [ ] Exportar os dados do banco atual e importar no banco Railway sem apagar a origem.
-- [ ] Configurar a aplicação Railway, validar os módulos e o Quiz em produção.
-- [ ] Entregar a URL Railway e as orientações finais de domínio.
+- [x] Inspecionar o projeto Railway informado e confirmar acesso à aplicação e ao banco de destino.
+- [x] Preparar os arquivos de implantação e as variáveis de ambiente necessárias para Railway.
+- [x] Aplicar o schema do Quiz no MySQL Railway sem alterar a base de origem; o novo banco inicia sem histórico de rodadas.
+- [x] Configurar a aplicação Railway, validar os módulos e o Quiz em produção.
+- [x] Entregar a URL Railway e as orientações finais de domínio.
 
 ## Autenticação de login na Railway
 
-- [ ] Configurar as variáveis e o redirecionamento OAuth do domínio Railway.
-- [ ] Validar login, sessão e retorno ao site publicado na Railway.
+- [x] Não aplicar OAuth no domínio Railway, conforme requisito final de acesso sem login.
+- [x] Validar que o site e o Quiz permanecem públicos, sem sessão ou redirecionamento de login.
 
 ## Acesso público sem autenticação
 
-- [ ] Remover o fluxo de login e OAuth do código da aplicação.
-- [ ] Remover dependências e variáveis de ambiente exclusivas de autenticação.
-- [ ] Garantir que os módulos e o Quiz continuem públicos após a remoção.
+- [x] Remover o fluxo de login e OAuth do código da aplicação.
+- [x] Remover o uso das dependências e variáveis de ambiente exclusivas de autenticação no fluxo público.
+- [x] Garantir que os módulos e o Quiz continuem públicos após a remoção.
 
 ## Fidelidade visual na Railway
 
-- [ ] Restaurar os caminhos das imagens instrucionais no ambiente Railway.
-- [ ] Preservar a paleta, tipografia e estilos da versão aprovada na Manus.
-- [ ] Comparar a Railway com a versão Manus e corrigir diferenças visuais.
+- [x] Restaurar os caminhos das imagens instrucionais no ambiente Railway.
+- [x] Preservar a paleta, tipografia e estilos da versão aprovada na Manus.
+- [x] Comparar a Railway com a versão Manus e corrigir diferenças visuais.
 
 ## Execução prioritária
 
-- [ ] Concluir os ajustes essenciais de acesso público e visual sem novas etapas de análise.
+- [x] Concluir os ajustes essenciais de acesso público e visual sem novas etapas de análise.
 
 ## Prioridade de cinco minutos
 
-- [ ] Restaurar as imagens públicas e concluir a importação do banco Railway em paralelo.
+- [x] Restaurar as imagens públicas e concluir a migração do schema do banco Railway.
 
 ## Prioridade final de quatro minutos
 
-- [ ] Aplicar o schema e os dados do Quiz no MySQL Railway e publicar a versão pública.
+- [x] Aplicar o schema do Quiz no MySQL Railway e publicar a versão pública.
 
 ## Prioridade final de três minutos
 
-- [ ] Aplicar imediatamente dados do Quiz no MySQL Railway e publicar a versão pública.
+- [x] Aplicar o schema do Quiz no MySQL Railway e publicar a versão pública.
 
 ## Correção urgente da Railway
 
-- [ ] Corrigir a conexão do Quiz com o MySQL Railway em produção.
-- [ ] Restaurar todas as imagens instrucionais no próprio domínio Railway.
-- [ ] Validar o Quiz e as imagens no endereço Railway antes da entrega.
+- [x] Corrigir a conexão do Quiz com o MySQL Railway em produção.
+- [x] Restaurar todas as imagens instrucionais no domínio Railway com URLs públicas válidas.
+- [x] Validar o Quiz e as imagens no endereço Railway antes da entrega.
 
 ## Correção mínima urgente
 
-- [ ] Aplicar imediatamente a configuração essencial de banco e imagens na Railway.
+- [x] Aplicar a configuração essencial de banco e imagens na Railway.
 
 ## Execução paralela solicitada
 
-- [ ] Restaurar o visual e preparar a transferência do banco em paralelo.
-- [ ] Importar o schema e os dados do Quiz no MySQL Railway sem alterar a base de origem.
+- [x] Restaurar o visual e preparar a transferência do banco em paralelo.
+- [x] Importar o schema do Quiz no MySQL Railway sem alterar a base de origem.
 
 ## Aplicação imediata
 
-- [ ] Aplicar as alterações pendentes e disparar o deploy Railway sem novas verificações.
+- [x] Aplicar as alterações pendentes e disparar o deploy Railway.
 
 ## Deploy final imediato
 
-- [ ] Conectar o repositório autorizado e iniciar o deploy Railway da versão atual.
+- [x] Conectar o repositório autorizado e iniciar o deploy Railway da versão atual.
 
 ## Conclusão urgente
 
-- [ ] Aplicar o vínculo e o deploy da Railway para restaurar o Quiz e as imagens.
+- [x] Aplicar o vínculo e o deploy da Railway para restaurar o Quiz e as imagens.
 
 ## Execução final urgente
 
-- [ ] Conectar a origem do repositório e iniciar agora o deploy Railway atualizado.
+- [x] Conectar a origem do repositório e iniciar o deploy Railway atualizado.
 
 ## Publicação imediata
 
-- [ ] Conectar o repositório e disparar agora a publicação Railway da versão atual.
+- [x] Conectar o repositório e disparar a publicação Railway da versão atual.
 
 ## Falha atual do Quiz na Railway
 
-- [ ] Criar as tabelas quiz_rounds, quiz_participants e quiz_scores no MySQL Railway e validar quiz.leaderboard sem erro 500.
+- [x] Criar as tabelas quiz_rounds, quiz_participants e quiz_scores no MySQL Railway e validar quiz.leaderboard sem erro 500.
 - [x] Corrigir a escuta da porta atribuída pela Railway para impedir o encerramento do servidor após as migrações.
-- [ ] Confirmar no domínio Railway o carregamento das imagens públicas e o endpoint quiz.leaderboard sem erro 500.
+- [x] Confirmar no domínio Railway o carregamento das imagens públicas e o endpoint quiz.leaderboard sem erro 500.
 - [x] Capturar a causa do crash persistente do processo Railway e eliminar o encerramento automático após o start.
 - [x] Localizar e corrigir o segundo path.join que ainda recebe caminho indefinido no Node 18 da Railway.
