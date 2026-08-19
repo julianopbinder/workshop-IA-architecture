@@ -7,7 +7,7 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
   const itens = [
     { id: "skill" as const, label: "Skill", href: "/skill" },
     { id: "mcps" as const, label: "MCPs", href: "/mcps" },
-    { id: "subagentes" as const, label: "Subagentes", href: "/subagentes" },
+    { id: "subagentes" as const, label: "SubAgentes", href: "/subagentes" },
     { id: "rag" as const, label: "RAG", href: "/rag" },
   ];
 

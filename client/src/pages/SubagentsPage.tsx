@@ -28,7 +28,7 @@ export default function SubagentsPage() {
           <div>
             <div className="subagent-mission-kicker"><i /><p>MÓDULO 03 · SUBAGENTES</p></div>
             <h1>Uma missão complexa.<br />Especialistas <em>em paralelo.</em></h1>
-            <p className="hero-text">Subagentes são assistentes de IA especializados. O agente principal coordena a missão, distribui partes do trabalho e recebe apenas os resultados necessários para compor a entrega final.</p>
+            <p className="hero-text">SubAgentes são assistentes de IA especializados. O agente principal coordena a missão, distribui partes do trabalho e recebe apenas os resultados necessários para compor a entrega final.</p>
             <a className="button-link" href="#o-que-sao">Entender o fluxo <ArrowRight size={16} /></a>
           </div>
 
@@ -43,7 +43,7 @@ export default function SubagentsPage() {
         </div>
       </section>
 
-      <nav className="subagent-mission-rail page-width" aria-label="Etapas do módulo Subagentes">
+      <nav className="subagent-mission-rail page-width" aria-label="Etapas do módulo SubAgentes">
         <p>MISSÃO GUIADA</p>
         <ol>
           <li><span>01</span><b>Delegar</b></li>
@@ -71,7 +71,7 @@ export default function SubagentsPage() {
             </article>
             <article>
               <div className="subagent-role-top"><span>ESPECIALISTA</span><Workflow size={21} /></div>
-              <h3>Subagente</h3>
+              <h3>SubAgente</h3>
               <p>Recebe um objetivo específico, as ferramentas permitidas e um contexto próprio para executar seu recorte da tarefa.</p>
               <div className="subagent-role-tags"><b>foco</b><b>ferramentas</b><b>resultado</b></div>
             </article>
@@ -86,7 +86,7 @@ export default function SubagentsPage() {
           </div>
 
           <div className="concept-cards subagent-concepts">
-            <article><LockKeyhole size={22} /><h3>Contexto isolado</h3><p>O subagente começa com a informação necessária para sua missão. Ele não precisa carregar todo o histórico da conversa principal.</p></article>
+            <article><LockKeyhole size={22} /><h3>Contexto isolado</h3><p>O SubAgente começa com a informação necessária para sua missão. Ele não precisa carregar todo o histórico da conversa principal.</p></article>
             <article><ShieldCheck size={22} /><h3>Permissões definidas</h3><p>Você escolhe o que cada especialista pode fazer: só ler arquivos, pesquisar, executar testes ou atuar em uma infraestrutura.</p></article>
             <article><ClipboardCheck size={22} /><h3>Retorno resumido</h3><p>Ao terminar, ele devolve conclusões, riscos e evidências. O principal usa esse resultado para decidir o próximo passo.</p></article>
           </div>
@@ -101,7 +101,7 @@ export default function SubagentsPage() {
             <p>Este é o caminho visual de uma operação: a missão sai da coordenação, especialistas trabalham em paralelo e os resultados voltam de forma objetiva.</p>
           </div>
 
-          <div className="subagent-operation-map" aria-label="Fluxo de delegação entre agente principal e subagentes especializados">
+          <div className="subagent-operation-map" aria-label="Fluxo de delegação entre agente principal e SubAgentes especializados">
             <div className="subagent-operation-head">
               <p>ROTA ATIVA · DELEGAÇÃO E RETORNO</p>
               <span><b>coral</b> missão enviada <i>·</i> <b>verde</b> resultado resumido</span>
@@ -138,7 +138,7 @@ export default function SubagentsPage() {
           <div className="identificador"><span>03</span><i /><p>CAPACIDADE DESBLOQUEADA · DELIMITAR</p></div>
           <div className="chapter-heading">
             <h2>Um papel claro,<br /><em>limites claros.</em></h2>
-            <p>Em ferramentas que oferecem Subagentes configuráveis, a definição costuma declarar nome, missão, ferramentas e permissões. O formato exato muda conforme a ferramenta.</p>
+            <p>Em ferramentas que oferecem SubAgentes configuráveis, a definição costuma declarar nome, missão, ferramentas e permissões. O formato exato muda conforme a ferramenta.</p>
           </div>
           <div className="subagent-definition-grid">
             <div className="skill-code subagent-definition-code">
@@ -168,8 +168,8 @@ retorne um resumo objetivo para o agente principal.`}</pre>
         <div className="page-width">
           <div className="identificador"><span>04</span><i /><p>CAPACIDADE DESBLOQUEADA · PADRONIZAR</p></div>
           <div className="chapter-heading">
-            <h2><em>Subagentes + Skills</em><br />especialistas com um padrão de trabalho.</h2>
-            <p>O Subagente define <strong>quem executa a frente</strong>. A Skill define <strong>como esse trabalho deve seguir o padrão do time</strong>.</p>
+            <h2><em>SubAgentes + Skills</em><br />especialistas com um padrão de trabalho.</h2>
+            <p>O SubAgente define <strong>quem executa a frente</strong>. A Skill define <strong>como esse trabalho deve seguir o padrão do time</strong>.</p>
           </div>
 
           <div className="subagent-skill-map">

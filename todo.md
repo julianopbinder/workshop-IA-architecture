@@ -194,6 +194,11 @@
 - [x] Manter apenas as três definições e um texto curto sem cores decorativas.
 - [ ] Validar, publicar e entregar a página simplificada.
 
+## Padronização SubAgentes
+
+- [ ] Trocar todas as referências visíveis de Subagentes para SubAgentes.
+- [ ] Validar e publicar a atualização de nomenclatura.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
