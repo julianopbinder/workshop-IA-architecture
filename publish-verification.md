@@ -4,3 +4,9 @@
 - URL consultada: `https://skillspres-gxq6mono.manus.space/quiz`.
 - Resultado: o domínio publicado respondeu com a página do Quiz e seus elementos públicos de identificação do participante, confirmando que a rota está ativa no ambiente publicado.
 - Observação: a sessão de navegador foi reiniciada antes de uma segunda inspeção visual; a checagem local, a checagem de tipos e os 10 testes automatizados foram concluídos com sucesso antes do checkpoint `f80f18c3`.
+
+## Verificação da simplificação dos controles
+
+Em 19 de agosto de 2026, a rota publicada `https://skillspres-gxq6mono.manus.space/quiz` respondeu normalmente, mas ainda exibiu a versão anterior: o relógio mostrou a rodada encerrada e o controle **ENTRAR COMO ORGANIZADOR** permaneceu no placar. A nova versão local do Quiz já mostra **COMEÇAR QUIZ** e **FINALIZAR QUIZ** no topo; é necessária uma nova confirmação no domínio após a propagação do checkpoint `85ed984a`.
+
+Uma segunda consulta, com o parâmetro `?release=85ed984a` para evitar cache do navegador, confirmou o mesmo conteúdo anterior. Portanto, a atualização ainda não havia propagado para o domínio no momento da verificação.

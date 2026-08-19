@@ -281,4 +281,6 @@
 - [x] Manter o Quiz aberto para todos os participantes enquanto houver tempo na rodada.
 - [x] Encerrar a rodada ao chegar em zero ou ao clicar em FINALIZAR QUIZ, bloqueando novos envios.
 - [x] Atualizar os testes e validar a interface da dinâmica simplificada.
-- [ ] Salvar o checkpoint e publicar a dinâmica simplificada.
+- [x] Salvar o checkpoint e publicar a dinâmica simplificada.
+- [ ] Confirmar no domínio publicado a presença dos botões COMEÇAR QUIZ e FINALIZAR QUIZ.
+- [ ] Validar no domínio publicado que o relógio inicia apenas ao começar e que finalizar bloqueia novos envios.
