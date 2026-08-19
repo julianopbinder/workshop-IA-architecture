@@ -37,6 +37,7 @@ const activeRound = {
   id: 2,
   status: "active" as const,
   startedAt: new Date("2026-08-19T10:00:00Z"),
+  startedByParticipantKey: "a55db342-5c91-4d37-93cc-c87aec58b6b2",
   endsAt: new Date("2026-08-19T10:10:00Z"),
   endedAt: null,
   createdAt: new Date("2026-08-19T10:00:00Z"),
@@ -47,18 +48,28 @@ describe("quiz rounds", () => {
   it("permite que um visitante comece uma nova rodada de dez minutos sem login", async () => {
     startNextQuizRoundMock.mockResolvedValueOnce(activeRound);
     const caller = appRouter.createCaller(createPublicContext());
+    const participantKey = "a55db342-5c91-4d37-93cc-c87aec58b6b2";
 
-    await expect(caller.quiz.startNextRound()).resolves.toEqual({ round: activeRound });
-    expect(startNextQuizRoundMock).toHaveBeenCalledTimes(1);
+    await expect(caller.quiz.startNextRound({ participantKey })).resolves.toEqual({ round: activeRound });
+    expect(startNextQuizRoundMock).toHaveBeenCalledWith(participantKey);
   });
 
-  it("permite que um visitante finalize a rodada antes do prazo sem login", async () => {
+  it("permite que quem iniciou a rodada a finalize antes do prazo sem login", async () => {
     const closedRound = { ...activeRound, status: "closed" as const, endedAt: new Date("2026-08-19T10:04:00Z") };
+    getCurrentQuizRoundMock.mockResolvedValueOnce(activeRound);
     finishCurrentQuizRoundMock.mockResolvedValueOnce(closedRound);
     const caller = appRouter.createCaller(createPublicContext());
 
-    await expect(caller.quiz.finishRound()).resolves.toEqual({ round: closedRound });
-    expect(finishCurrentQuizRoundMock).toHaveBeenCalledTimes(1);
+    await expect(caller.quiz.finishRound({ participantKey: activeRound.startedByParticipantKey })).resolves.toEqual({ round: closedRound });
+    expect(finishCurrentQuizRoundMock).toHaveBeenCalledWith(activeRound.startedByParticipantKey);
+  });
+
+  it("impede que outro navegador finalize a rodada iniciada por outra pessoa", async () => {
+    getCurrentQuizRoundMock.mockResolvedValueOnce(activeRound);
+    const caller = appRouter.createCaller(createPublicContext());
+
+    await expect(caller.quiz.finishRound({ participantKey: "995db342-5c91-4d37-93cc-c87aec58b6b2" })).rejects.toMatchObject({ code: "FORBIDDEN" });
+    expect(finishCurrentQuizRoundMock).not.toHaveBeenCalledWith("995db342-5c91-4d37-93cc-c87aec58b6b2");
   });
 
   it("permite a entrada de uma pessoa pelo primeiro nome durante a rodada pública", async () => {

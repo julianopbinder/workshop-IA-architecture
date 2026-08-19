@@ -11,6 +11,11 @@ export const quizParticipantInputSchema = z.object({
   participantKey: z.string().uuid("Não foi possível identificar este navegador."),
 });
 
+/** Valida a chave anônima que identifica o navegador que controla a rodada. */
+export const quizRoundStarterInputSchema = z.object({
+  participantKey: z.string().uuid("Não foi possível identificar este navegador."),
+});
+
 /**
  * Valida o resultado consolidado enviado pelo navegador ao terminar o Quiz.
  * A soma das quatro frentes precisa corresponder à pontuação total.

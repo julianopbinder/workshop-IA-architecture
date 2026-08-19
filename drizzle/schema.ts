@@ -36,6 +36,8 @@ export const quizRounds = mysqlTable("quiz_rounds", {
   status: mysqlEnum("status", ["active", "closed"]).default("active").notNull(),
   /** Início da janela de participação em UTC. */
   startedAt: timestamp("startedAt").notNull(),
+  /** Chave técnica do navegador que abriu a rodada e pode encerrá-la. */
+  startedByParticipantKey: varchar("startedByParticipantKey", { length: 64 }),
   /** Fim da janela de participação em UTC. */
   endsAt: timestamp("endsAt").notNull(),
   /** Momento de encerramento manual ou automático, quando aplicável. */

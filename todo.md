@@ -342,3 +342,11 @@
 - [x] Ocultar a faixa imediatamente ao finalizar o Quiz ou ao acabar o tempo.
 - [x] Validar o ajuste de visibilidade no estado encerrado.
 - [x] Salvar checkpoint e publicar o ajuste de visibilidade.
+
+## Controle do iniciador e relógio sincronizado
+
+- [x] Registrar qual navegador iniciou cada rodada pública do Quiz.
+- [x] Permitir finalizar a rodada somente no navegador que a iniciou.
+- [x] Sincronizar o relógio pelo prazo persistido da rodada, compensando a diferença entre o horário local e o servidor.
+- [x] Criar testes para autorização do encerramento e para o cálculo de tempo compartilhado.
+- [ ] Validar em navegadores independentes, publicar e entregar a correção.

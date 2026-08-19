@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Check, ChevronRight, CircleHelp, Clock3, Crown, Loader2, Medal, RotateCcw, Send, Trophy, UserRound, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
 import { trpc } from "@/lib/trpc";
-import { getQuizRoundRemainingMilliseconds, isQuizRoundOpen } from "@shared/quizRound";
+import { getQuizRoundRemainingMilliseconds, getQuizServerClockOffset, getSynchronizedQuizNow, isQuizRoundOpen } from "@shared/quizRound";
 import "./QuizPage.css";
 
 type Tema = "skill" | "mcps" | "subagentes" | "rag";
@@ -75,18 +75,26 @@ export default function QuizPage() {
   const [nameError, setNameError] = useState("");
   const [submissionMessage, setSubmissionMessage] = useState("");
   const [now, setNow] = useState(() => Date.now());
+  const [serverClockOffset, setServerClockOffset] = useState(0);
   const atual = quiz[tema];
   const trpcUtils = trpc.useUtils();
   const leaderboardQuery = trpc.quiz.leaderboard.useQuery(undefined, { refetchInterval: 5_000 });
   const round = leaderboardQuery.data?.round;
   const participation = leaderboardQuery.data?.participation ?? { started: 0, completed: 0 };
-  const remainingMilliseconds = getQuizRoundRemainingMilliseconds(round, now);
-  const roundOpen = isQuizRoundOpen(round, now);
+  const synchronizedNow = getSynchronizedQuizNow(serverClockOffset, now);
+  const remainingMilliseconds = getQuizRoundRemainingMilliseconds(round, synchronizedNow);
+  const roundOpen = isQuizRoundOpen(round, synchronizedNow);
+  const canFinishRound = Boolean(roundOpen && round?.startedByParticipantKey === participantKey);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1_000);
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!leaderboardQuery.data?.serverNow) return;
+    setServerClockOffset(getQuizServerClockOffset(leaderboardQuery.data.serverNow));
+  }, [leaderboardQuery.data?.serverNow]);
 
   useEffect(() => {
     if (!round?.id) {
@@ -129,14 +137,14 @@ export default function QuizPage() {
       setRespostas({}); setTema("skill"); setParticipantReady(false); setSubmissionMessage("Nova rodada aberta. O relógio foi reiniciado em 10:00.");
       await trpcUtils.quiz.leaderboard.invalidate();
     },
-    onError: () => setSubmissionMessage("Não foi possível começar uma nova rodada agora. Tente novamente em instantes."),
+    onError: (error) => setSubmissionMessage(error.message || "Não foi possível começar uma nova rodada agora. Tente novamente em instantes."),
   });
   const finishRound = trpc.quiz.finishRound.useMutation({
     onSuccess: async () => {
       setSubmissionMessage("Quiz finalizado. O placar desta rodada permanece disponível para consulta.");
       await trpcUtils.quiz.leaderboard.invalidate();
     },
-    onError: () => setSubmissionMessage("Não foi possível finalizar o Quiz agora. Tente novamente em instantes."),
+    onError: (error) => setSubmissionMessage(error.message || "Não foi possível finalizar o Quiz agora. Tente novamente em instantes."),
   });
 
   function confirmarParticipante(event: React.FormEvent<HTMLFormElement>) {
@@ -162,18 +170,18 @@ export default function QuizPage() {
   }
   function comecarQuiz() {
     if (!window.confirm("Começar o Quiz para a equipe? O relógio terá 10 minutos.")) return;
-    startNextRound.mutate();
+    startNextRound.mutate({ participantKey });
   }
   function finalizarQuiz() {
     if (!window.confirm("Finalizar o Quiz agora? Nenhuma nova resposta poderá entrar no placar desta rodada.")) return;
-    finishRound.mutate();
+    finishRound.mutate({ participantKey });
   }
 
   return <main className="skill-reference quiz-page">
     <LibraryNav ativo="quiz" />
     <section className="quiz-hero"><div className="page-width quiz-hero-grid">
       <div><p className="quiz-kicker"><CircleHelp size={15} />CENTRAL DE VERIFICAÇÃO</p><h1>Teste o que você <em>entendeu.</em></h1><p>Clique em COMEÇAR QUIZ na sua máquina. Durante dez minutos, toda a equipe entra pelo primeiro nome e responde as quatro frentes.</p></div>
-      <div className="quiz-round-control"><div className={`quiz-round-clock ${roundOpen ? "" : "is-closed"}`}><Clock3 size={19} /><div><small>{roundOpen ? "QUIZ EM ANDAMENTO · TEMPO RESTANTE" : "QUIZ AGUARDANDO INÍCIO"}</small><strong>{leaderboardQuery.isLoading ? "--:--" : formatClock(remainingMilliseconds)}</strong></div></div><div className="quiz-round-buttons"><button type="button" onClick={comecarQuiz} disabled={roundOpen || startNextRound.isPending}>{startNextRound.isPending ? <><Loader2 size={14} className="quiz-spin" />COMEÇANDO…</> : "COMEÇAR QUIZ"}</button><button type="button" className="quiz-finish-button" onClick={finalizarQuiz} disabled={!roundOpen || finishRound.isPending}>{finishRound.isPending ? <><Loader2 size={14} className="quiz-spin" />FINALIZANDO…</> : "FINALIZAR QUIZ"}</button></div></div>
+      <div className="quiz-round-control"><div className={`quiz-round-clock ${roundOpen ? "" : "is-closed"}`}><Clock3 size={19} /><div><small>{roundOpen ? "QUIZ EM ANDAMENTO · TEMPO RESTANTE" : "QUIZ AGUARDANDO INÍCIO"}</small><strong>{leaderboardQuery.isLoading ? "--:--" : formatClock(remainingMilliseconds)}</strong></div></div><div className="quiz-round-buttons"><button type="button" onClick={comecarQuiz} disabled={roundOpen || startNextRound.isPending}>{startNextRound.isPending ? <><Loader2 size={14} className="quiz-spin" />COMEÇANDO…</> : "COMEÇAR QUIZ"}</button><button type="button" className="quiz-finish-button" onClick={finalizarQuiz} disabled={!canFinishRound || finishRound.isPending} title={roundOpen && !canFinishRound ? "Somente quem iniciou esta rodada pode finalizá-la." : undefined}>{finishRound.isPending ? <><Loader2 size={14} className="quiz-spin" />FINALIZANDO…</> : "FINALIZAR QUIZ"}</button></div></div>
     </div></section>
     <section className="quiz-workspace"><div className="page-width">
       {!leaderboardQuery.isLoading && !roundOpen && <aside className="quiz-round-closed"><Clock3 size={22} /><div><p>QUIZ AGUARDANDO INÍCIO</p><strong>O Quiz ainda não começou ou já foi finalizado.</strong><span>Clique em COMEÇAR QUIZ acima. Quando iniciar, todos terão dez minutos para responder.</span></div></aside>}

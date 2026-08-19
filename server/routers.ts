@@ -4,7 +4,7 @@ import { finishCurrentQuizRound, getCurrentQuizRound, getQuizParticipationSummar
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
-import { formatParticipantName, quizParticipantInputSchema, quizScoreInputSchema } from "./quizScore";
+import { formatParticipantName, quizParticipantInputSchema, quizRoundStarterInputSchema, quizScoreInputSchema } from "./quizScore";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -22,12 +22,13 @@ export const appRouter = router({
   quiz: router({
     /** Retorna a rodada atual e seu ranking público para a apresentação. */
     leaderboard: publicProcedure.query(async () => {
+      const serverNow = new Date();
       const round = await getCurrentQuizRound();
       if (!round) {
-        return { round: null, scores: [], participation: { started: 0, completed: 0 } };
+        return { round: null, scores: [], participation: { started: 0, completed: 0 }, serverNow };
       }
 
-      return { round, scores: await listQuizScores(round.id), participation: await getQuizParticipationSummary(round.id) };
+      return { round, scores: await listQuizScores(round.id), participation: await getQuizParticipationSummary(round.id), serverNow };
     }),
     /** Registra a entrada pelo primeiro nome enquanto a rodada pública estiver aberta. */
     joinRound: publicProcedure.input(quizParticipantInputSchema).mutation(async ({ input }) => {
@@ -63,16 +64,24 @@ export const appRouter = router({
 
       return { success: true } as const;
     }),
-    /** Fecha publicamente a rodada antes do prazo solicitado pela equipe. */
-    finishRound: publicProcedure.mutation(async () => {
-      const round = await finishCurrentQuizRound();
+    /** Fecha a rodada antes do prazo somente no navegador que a iniciou. */
+    finishRound: publicProcedure.input(quizRoundStarterInputSchema).mutation(async ({ input }) => {
+      const currentRound = await getCurrentQuizRound();
+      if (!currentRound || currentRound.status !== "active") {
+        throw new TRPCError({ code: "CONFLICT", message: "Não há uma rodada ativa para finalizar." });
+      }
+      if (currentRound.startedByParticipantKey !== input.participantKey) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Somente o navegador que iniciou esta rodada pode finalizá-la." });
+      }
+
+      const round = await finishCurrentQuizRound(input.participantKey);
       if (!round) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Não foi possível encerrar a rodada agora." });
       return { round };
     }),
-    /** Inicia publicamente uma nova rodada de dez minutos e preserva os resultados anteriores. */
-    startNextRound: publicProcedure.mutation(async () => {
-      const round = await startNextQuizRound();
-      if (!round) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Não foi possível iniciar uma nova rodada agora." });
+    /** Inicia uma nova rodada de dez minutos e grava o navegador que poderá encerrá-la. */
+    startNextRound: publicProcedure.input(quizRoundStarterInputSchema).mutation(async ({ input }) => {
+      const round = await startNextQuizRound(input.participantKey);
+      if (!round) throw new TRPCError({ code: "CONFLICT", message: "Já existe uma rodada ativa. Aguarde o encerramento antes de iniciar outra." });
       return { round };
     }),
   }),

@@ -12,6 +12,16 @@ export function getQuizRoundEndAt(startedAt: Date): Date {
   return new Date(startedAt.getTime() + QUIZ_ROUND_DURATION_MS);
 }
 
+/** Calcula a diferença entre o relógio local e o horário informado pelo servidor. */
+export function getQuizServerClockOffset(serverNow: Date | string, clientReceivedAt = Date.now()): number {
+  return new Date(serverNow).getTime() - clientReceivedAt;
+}
+
+/** Converte o horário local para a referência do servidor usada pela rodada. */
+export function getSynchronizedQuizNow(serverClockOffset: number, localNow = Date.now()): number {
+  return localNow + serverClockOffset;
+}
+
 /** Retorna zero para rodadas encerradas e o tempo restante para rodadas abertas. */
 export function getQuizRoundRemainingMilliseconds(round: QuizRoundClock | null | undefined, now = Date.now()): number {
   if (!round || round.status !== "active") return 0;

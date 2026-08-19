@@ -1,0 +1,1 @@
+ALTER TABLE `quiz_rounds` ADD `startedByParticipantKey` varchar(64);
