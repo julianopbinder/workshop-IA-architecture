@@ -1,5 +1,34 @@
 import { describe, expect, it } from "vitest";
-import { buildQuizScoreUpsert, formatParticipantName, quizScoreInputSchema } from "./quizScore";
+import { buildQuizParticipantJoin, buildQuizScoreUpsert, formatParticipantName, quizParticipantInputSchema, quizScoreInputSchema } from "./quizScore";
+
+describe("quizParticipantInputSchema", () => {
+  it("aceita a entrada em uma rodada somente com primeiro nome e chave do navegador", () => {
+    const resultado = quizParticipantInputSchema.safeParse({
+      participantName: "Maria",
+      participantKey: "a55db342-5c91-4d37-93cc-c87aec58b6b2",
+    });
+
+    expect(resultado.success).toBe(true);
+  });
+
+  it("rejeita nome composto na entrada da rodada", () => {
+    const resultado = quizParticipantInputSchema.safeParse({
+      participantName: "Maria Silva",
+      participantKey: "a55db342-5c91-4d37-93cc-c87aec58b6b2",
+    });
+
+    expect(resultado.success).toBe(false);
+  });
+
+  it("registra o momento exato em que a pessoa entrou na rodada", () => {
+    const joinedAt = new Date("2026-08-19T12:03:45.000Z");
+    const entry = buildQuizParticipantJoin(18, "Maria", "a55db342-5c91-4d37-93cc-c87aec58b6b2", joinedAt);
+
+    expect(entry.roundId).toBe(18);
+    expect(entry.participantName).toBe("Maria");
+    expect(entry.joinedAt).toEqual(joinedAt);
+  });
+});
 
 describe("quizScoreInputSchema", () => {
   it("aceita uma pontuação cuja soma das frentes corresponde ao total", () => {

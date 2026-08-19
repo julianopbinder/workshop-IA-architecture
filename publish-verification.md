@@ -16,3 +16,7 @@ Após a republicação no checkpoint `54463c16`, uma terceira consulta com `?rel
 Após a implantação confirmada do checkpoint `4f3bc9ab`, a consulta pública retornou a interface atualizada. Os dois botões **COMEÇAR QUIZ** e **FINALIZAR QUIZ** aparecem juntos ao lado do relógio no estado inicial `00:00`; visitantes não autenticados veem a orientação para entrar como organizador ao usá-los.
 
 Na primeira consulta ao checkpoint `f046a65f`, o domínio ainda exibiu a ajuda anterior de login ao lado dos dois botões. A versão local já remove essa dependência; a confirmação final aguarda a propagação do novo pacote público.
+
+## Confirmação final — Quiz público sem login
+
+Após a implantação do checkpoint `86a652f5`, a página pública passou a mostrar apenas instruções diretas: **Clique em COMEÇAR QUIZ** e os botões **COMEÇAR QUIZ** e **FINALIZAR QUIZ**. Não há mais textos sobre login ou organizador. Uma chamada pública, sem cookie, iniciou uma rodada de dez minutos, retornou o estado `active` com o prazo correto e a encerrou em seguida pelo comando público de finalização; nenhum resultado foi incluído durante o teste.

@@ -1,7 +1,8 @@
 import { drizzle } from "drizzle-orm/mysql2";
-import { asc, desc, eq } from "drizzle-orm";
-import { InsertUser, quizRounds, quizScores, users } from "../drizzle/schema";
-import { buildQuizScoreUpsert, type QuizScoreInput } from "./quizScore";
+import { and, asc, count, desc, eq } from "drizzle-orm";
+import { InsertUser, quizParticipants, quizRounds, quizScores, users } from "../drizzle/schema";
+import { getQuizRoundEndAt } from "../shared/quizRound";
+import { buildQuizParticipantJoin, buildQuizScoreUpsert, type QuizScoreInput } from "./quizScore";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -95,7 +96,7 @@ async function createQuizRound(startedAt = new Date()) {
   const db = await getDb();
   if (!db) return undefined;
 
-  const endsAt = new Date(startedAt.getTime() + 10 * 60 * 1000);
+  const endsAt = getQuizRoundEndAt(startedAt);
   const result = await db.insert(quizRounds).values({
     status: "active",
     startedAt,
@@ -116,7 +117,7 @@ export async function getCurrentQuizRound() {
 
   const rounds = await db.select().from(quizRounds).orderBy(desc(quizRounds.startedAt), desc(quizRounds.id)).limit(1);
   const currentRound = rounds[0];
-  if (!currentRound) return createQuizRound();
+  if (!currentRound) return undefined;
 
   if (currentRound.status === "active" && new Date() >= currentRound.endsAt) {
     await db.update(quizRounds).set({ status: "closed", endedAt: currentRound.endsAt }).where(eq(quizRounds.id, currentRound.id));
@@ -150,6 +151,57 @@ export async function startNextQuizRound() {
   }
 
   return createQuizRound();
+}
+
+/** Registra a entrada de uma pessoa na rodada ativa sem exigir conta ou senha. */
+export async function registerQuizParticipant(
+  roundId: number,
+  participantName: string,
+  participantKey: string,
+  database?: { insert: (...args: any[]) => any; select: (...args: any[]) => any },
+) {
+  const db = database ?? await getDb();
+  if (!db) return false;
+
+  const participantJoin = buildQuizParticipantJoin(roundId, participantName, participantKey, new Date());
+  await db
+    .insert(quizParticipants)
+    .values(participantJoin)
+    .onDuplicateKeyUpdate({ set: { participantName } });
+
+  const [participant] = await db
+    .select({ participantName: quizParticipants.participantName, joinedAt: quizParticipants.joinedAt })
+    .from(quizParticipants)
+    .where(and(eq(quizParticipants.roundId, roundId), eq(quizParticipants.participantKey, participantKey)))
+    .limit(1);
+
+  return participant ?? false;
+}
+
+/** Marca a conclusão depois que a pontuação das vinte perguntas foi persistida. */
+export async function markQuizParticipantCompleted(roundId: number, participantKey: string) {
+  const db = await getDb();
+  if (!db) return false;
+
+  await db
+    .update(quizParticipants)
+    .set({ completedAt: new Date() })
+    .where(and(eq(quizParticipants.roundId, roundId), eq(quizParticipants.participantKey, participantKey)));
+
+  return true;
+}
+
+/** Retorna quantas pessoas entraram e quantas concluíram a rodada atual. */
+export async function getQuizParticipationSummary(roundId: number) {
+  const db = await getDb();
+  if (!db) return { started: 0, completed: 0 };
+
+  const result = await db
+    .select({ started: count(quizParticipants.id), completed: count(quizParticipants.completedAt) })
+    .from(quizParticipants)
+    .where(eq(quizParticipants.roundId, roundId));
+
+  return { started: Number(result[0]?.started ?? 0), completed: Number(result[0]?.completed ?? 0) };
 }
 
 /** Salva ou atualiza a tentativa do navegador na rodada recebida. */

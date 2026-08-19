@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Check, ChevronRight, CircleHelp, Clock3, Crown, Loader2, Medal, RotateCcw, Send, Trophy, UserRound, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
 import { trpc } from "@/lib/trpc";
+import { getQuizRoundRemainingMilliseconds, isQuizRoundOpen } from "@shared/quizRound";
 import "./QuizPage.css";
 
 type Tema = "skill" | "mcps" | "subagentes" | "rag";
@@ -70,7 +71,7 @@ export default function QuizPage() {
   const [respostas, setRespostas] = useState<Record<string, number>>({});
   const [participantName, setParticipantName] = useState(getStoredName);
   const [participantKey] = useState(getParticipantKey);
-  const [participantReady, setParticipantReady] = useState(() => Boolean(getStoredName()));
+  const [participantReady, setParticipantReady] = useState(false);
   const [nameError, setNameError] = useState("");
   const [submissionMessage, setSubmissionMessage] = useState("");
   const [now, setNow] = useState(() => Date.now());
@@ -78,13 +79,24 @@ export default function QuizPage() {
   const trpcUtils = trpc.useUtils();
   const leaderboardQuery = trpc.quiz.leaderboard.useQuery(undefined, { refetchInterval: 5_000 });
   const round = leaderboardQuery.data?.round;
-  const remainingMilliseconds = round ? Math.max(0, new Date(round.endsAt).getTime() - now) : 0;
-  const roundOpen = Boolean(round && round.status === "active" && remainingMilliseconds > 0);
+  const participation = leaderboardQuery.data?.participation ?? { started: 0, completed: 0 };
+  const remainingMilliseconds = getQuizRoundRemainingMilliseconds(round, now);
+  const roundOpen = isQuizRoundOpen(round, now);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1_000);
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!round?.id) {
+      setParticipantReady(false);
+      return;
+    }
+
+    const joinedRoundId = Number(window.localStorage.getItem("quiz-participant-round-id"));
+    setParticipantReady(Boolean(participantName && joinedRoundId === round.id));
+  }, [round?.id]);
 
   const pointsByTheme = useMemo(() => temas.reduce((accumulator, currentTheme) => {
     accumulator[currentTheme] = quiz[currentTheme].perguntas.filter((pergunta) => respostas[pergunta.id] === pergunta.correta).length;
@@ -100,9 +112,21 @@ export default function QuizPage() {
     onSuccess: async () => { setSubmissionMessage("Sua pontuação entrou no placar desta rodada."); await trpcUtils.quiz.leaderboard.invalidate(); },
     onError: (error) => setSubmissionMessage(error.message || "Não foi possível registrar agora. Verifique a conexão e tente novamente."),
   });
+  const joinRound = trpc.quiz.joinRound.useMutation({
+    onSuccess: async ({ round: joinedRound, joinedAt }, input) => {
+      window.localStorage.setItem(participantNameStorageKey, input.participantName);
+      window.localStorage.setItem("quiz-participant-round-id", String(joinedRound.id));
+      setParticipantName(input.participantName);
+      setParticipantReady(true);
+      setNameError("");
+      setSubmissionMessage(`Entrada registrada às ${new Date(joinedAt).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}.`);
+      await trpcUtils.quiz.leaderboard.invalidate();
+    },
+    onError: (error) => setNameError(error.message || "Não foi possível registrar sua entrada agora."),
+  });
   const startNextRound = trpc.quiz.startNextRound.useMutation({
     onSuccess: async () => {
-      setRespostas({}); setTema("skill"); setSubmissionMessage("Nova rodada aberta. O relógio foi reiniciado em 10:00.");
+      setRespostas({}); setTema("skill"); setParticipantReady(false); setSubmissionMessage("Nova rodada aberta. O relógio foi reiniciado em 10:00.");
       await trpcUtils.quiz.leaderboard.invalidate();
     },
     onError: () => setSubmissionMessage("Não foi possível começar uma nova rodada agora. Tente novamente em instantes."),
@@ -120,8 +144,8 @@ export default function QuizPage() {
     const normalizedName = participantName.replace(/\s+/g, " ").trim();
     if (normalizedName.length < 2) { setNameError("Digite pelo menos dois caracteres para entrar no placar."); return; }
     if (normalizedName.includes(" ")) { setNameError("Use somente seu primeiro nome no placar."); return; }
-    window.localStorage.setItem(participantNameStorageKey, normalizedName);
-    setParticipantName(normalizedName); setParticipantReady(true); setNameError("");
+    setParticipantName(normalizedName); setNameError("");
+    joinRound.mutate({ participantName: normalizedName, participantKey });
   }
   function selecionar(questionId: string, alternative: number) { if (roundOpen) setRespostas((previousAnswers) => ({ ...previousAnswers, [questionId]: alternative })); }
   function reiniciarTema() {
@@ -131,7 +155,7 @@ export default function QuizPage() {
     setSubmissionMessage("");
   }
   function enviarPontuacao() {
-    if (!roundOpen) { setSubmissionMessage("O tempo desta rodada terminou. Aguarde o organizador abrir a próxima."); return; }
+    if (!roundOpen) { setSubmissionMessage("O tempo desta rodada terminou. Aguarde o próximo COMEÇAR QUIZ."); return; }
     if (!quizComplete || !participantReady || submitScore.isPending) return;
     setSubmissionMessage("");
     submitScore.mutate({ participantName, participantKey, totalScore, skillScore: pointsByTheme.skill, mcpScore: pointsByTheme.mcps, subagentsScore: pointsByTheme.subagentes, ragScore: pointsByTheme.rag });
@@ -148,14 +172,15 @@ export default function QuizPage() {
   return <main className="skill-reference quiz-page">
     <LibraryNav ativo="quiz" />
     <section className="quiz-hero"><div className="page-width quiz-hero-grid">
-      <div><p className="quiz-kicker"><CircleHelp size={15} />CENTRAL DE VERIFICAÇÃO</p><h1>Teste o que você <em>entendeu.</em></h1><p>Clique em COMEÇAR QUIZ. A equipe tem dez minutos para responder as quatro frentes e entrar no placar compartilhado.</p></div>
+      <div><p className="quiz-kicker"><CircleHelp size={15} />CENTRAL DE VERIFICAÇÃO</p><h1>Teste o que você <em>entendeu.</em></h1><p>Clique em COMEÇAR QUIZ na sua máquina. Durante dez minutos, toda a equipe entra pelo primeiro nome e responde as quatro frentes.</p></div>
       <div className="quiz-round-control"><div className={`quiz-round-clock ${roundOpen ? "" : "is-closed"}`}><Clock3 size={19} /><div><small>{roundOpen ? "QUIZ EM ANDAMENTO · TEMPO RESTANTE" : "QUIZ AGUARDANDO INÍCIO"}</small><strong>{leaderboardQuery.isLoading ? "--:--" : formatClock(remainingMilliseconds)}</strong></div></div><div className="quiz-round-buttons"><button type="button" onClick={comecarQuiz} disabled={roundOpen || startNextRound.isPending}>{startNextRound.isPending ? <><Loader2 size={14} className="quiz-spin" />COMEÇANDO…</> : "COMEÇAR QUIZ"}</button><button type="button" className="quiz-finish-button" onClick={finalizarQuiz} disabled={!roundOpen || finishRound.isPending}>{finishRound.isPending ? <><Loader2 size={14} className="quiz-spin" />FINALIZANDO…</> : "FINALIZAR QUIZ"}</button></div></div>
     </div></section>
     <section className="quiz-workspace"><div className="page-width">
       {!leaderboardQuery.isLoading && !roundOpen && <aside className="quiz-round-closed"><Clock3 size={22} /><div><p>QUIZ AGUARDANDO INÍCIO</p><strong>O Quiz ainda não começou ou já foi finalizado.</strong><span>Clique em COMEÇAR QUIZ acima. Quando iniciar, todos terão dez minutos para responder.</span></div></aside>}
+      {round && <div className="quiz-participation-summary"><span>PARTICIPAÇÃO DA RODADA</span><strong>{participation.started} entrou{participation.started === 1 ? "" : "aram"} · {participation.completed} concluiu{participation.completed === 1 ? "" : "íram"}</strong></div>}
       {roundOpen && (!participantReady ? <form className="quiz-identity" onSubmit={confirmarParticipante}>
-        <div className="quiz-identity-icon"><UserRound size={22} /></div><div><p>ANTES DE COMEÇAR</p><h2>Como você quer aparecer no placar?</h2><small>Pedimos somente o primeiro nome. Não é necessário criar conta.</small></div>
-        <label><span>SEU NOME</span><input value={participantName} onChange={(event) => setParticipantName(event.target.value)} placeholder="Ex.: Ana" maxLength={60} autoComplete="given-name" /></label><button type="submit">ENTRAR NO QUIZ <ChevronRight size={16} /></button>{nameError && <strong className="quiz-identity-error" role="alert">{nameError}</strong>}
+        <div className="quiz-identity-icon"><UserRound size={22} /></div><div><p>ENTRAR NA RODADA</p><h2>Informe somente seu primeiro nome.</h2><small>Assim registramos que você entrou e, ao final, que concluiu o Quiz.</small></div>
+        <label><span>SEU NOME</span><input value={participantName} onChange={(event) => setParticipantName(event.target.value)} placeholder="Ex.: Ana" maxLength={60} autoComplete="given-name" /></label><button type="submit" disabled={joinRound.isPending}>{joinRound.isPending ? "ENTRANDO…" : <><span>ENTRAR NO QUIZ</span><ChevronRight size={16} /></>}</button>{nameError && <strong className="quiz-identity-error" role="alert">{nameError}</strong>}
       </form> : <div className="quiz-participant-bar"><span><UserRound size={15} />PARTICIPANTE</span><strong>{participantName}</strong><small>Seu resultado será atualizado no placar ao concluir as 20 perguntas.</small></div>)}
       {roundOpen && participantReady && <>
         <nav className="quiz-topic-tabs" aria-label="Assuntos do quiz">{temas.map((id, index) => <button key={id} type="button" className={tema === id ? "active" : ""} onClick={() => setTema(id)}><b>0{index + 1}</b>{quiz[id].nome}</button>)}</nav>

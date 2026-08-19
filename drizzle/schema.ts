@@ -49,6 +49,36 @@ export const quizRounds = mysqlTable("quiz_rounds", {
 export type QuizRound = typeof quizRounds.$inferSelect;
 
 /**
+ * Registra quem entrou em cada rodada, mesmo antes de concluir as perguntas.
+ * O primeiro nome é apenas uma identificação de apresentação, não uma conta.
+ */
+export const quizParticipants = mysqlTable("quiz_participants", {
+  /** Identificador interno do registro de participação. */
+  id: int("id").autoincrement().primaryKey(),
+  /** Rodada pública em que a pessoa entrou. */
+  roundId: int("roundId").notNull().references(() => quizRounds.id),
+  /** Primeiro nome informado pela pessoa na entrada. */
+  participantName: varchar("participantName", { length: 60 }).notNull(),
+  /** Chave técnica persistida no navegador para evitar duas entradas da mesma máquina na rodada. */
+  participantKey: varchar("participantKey", { length: 64 }).notNull(),
+  /** Momento em que a pessoa entrou no Quiz. */
+  joinedAt: timestamp("joinedAt").defaultNow().notNull(),
+  /** Momento em que a pessoa concluiu as vinte perguntas, quando aplicável. */
+  completedAt: timestamp("completedAt"),
+  /** Momento de criação do registro. */
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  /** Momento da última atualização do registro. */
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, (table) => [
+  /** Uma máquina pode entrar apenas uma vez em cada rodada. */
+  uniqueIndex("quiz_participants_round_participant_key_unique").on(table.roundId, table.participantKey),
+  /** A contagem da apresentação sempre considera a rodada atual. */
+  index("quiz_participants_round_id_idx").on(table.roundId),
+]);
+
+export type QuizParticipant = typeof quizParticipants.$inferSelect;
+
+/**
  * Registra a pontuação consolidada de cada participante do Quiz.
  * A chave do participante é criada no navegador e permite atualizar o próprio resultado
  * sem exigir conta ou armazenar dados pessoais além do nome informado.

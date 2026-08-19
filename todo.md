@@ -293,8 +293,32 @@
 - [x] Remover mensagens, botões e dependências de login da área de controle da rodada.
 - [x] Preservar o relógio regressivo de 10 minutos e o bloqueio automático no fim da rodada.
 - [x] Atualizar testes para cobrir o início e o encerramento públicos.
-- [ ] Validar no domínio publicado o começo, a contagem e a finalização sem login.
-- [ ] Publicar e entregar o fluxo público simplificado.
+- [x] Validar no domínio publicado o começo, a contagem e a finalização sem login.
+- [x] Publicar e entregar o fluxo público simplificado.
 - [x] Remover referências visíveis ao organizador da tela pública do Quiz.
-- [ ] Republicar a versão após remover as referências ao organizador da interface.
-- [ ] Confirmar no domínio publicado que não há mais textos visíveis de login ou organizador.
+- [x] Republicar a versão após remover as referências ao organizador da interface.
+- [x] Confirmar no domínio publicado que não há mais textos visíveis de login ou organizador.
+- [x] Confirmar na interface pública que COMEÇAR QUIZ inicia o relógio em 10:00 e ele passa a decrescer.
+- [x] Confirmar na interface pública que FINALIZAR QUIZ mostra a rodada encerrada e bloqueia novas respostas.
+- [x] Ao finalizar uma rodada, retornar visualmente o relógio para 00:00 e eliminar qualquer indicação ambígua de tempo restante.
+- [x] Garantir que COMEÇAR QUIZ e FINALIZAR QUIZ permaneçam claramente visíveis nos estados ativo e inativo.
+
+## Rodada pública com identificação por nome
+
+- [x] Permitir que o apresentador inicie uma única rodada pública pelo botão COMEÇAR QUIZ.
+- [x] Permitir que qualquer participante ativo informe apenas o primeiro nome e entre no Quiz durante a rodada.
+- [x] Registrar o primeiro nome e o momento em que cada participante entrou na rodada.
+- [x] Registrar se cada participante concluiu as 20 perguntas dentro do tempo da rodada.
+- [x] Exibir o total de participantes e de conclusões da rodada ao apresentador.
+- [x] Garantir que o relógio de dez minutos seja compartilhado entre todas as máquinas.
+- [x] Encerrar o acesso para todos ao chegar a zero ou quando o apresentador usar FINALIZAR QUIZ.
+- [x] Cobrir o fluxo público com testes e validar em mais de uma sessão.
+- [ ] Salvar checkpoint e publicar a rodada pública com identificação por primeiro nome.
+- [x] Adicionar teste verificável para início em 10:00 e tempo restante calculado a partir do fim persistido da rodada.
+- [x] Validar visualmente o estado de rodada encerrada após FINALIZAR QUIZ, incluindo relógio em 00:00 e bloqueio de entrada.
+- [x] Confirmar em teste o timestamp de entrada registrado para cada participante.
+- [x] Validar em duas sessões que ambas consultam a mesma rodada pública e o mesmo prazo compartilhado.
+- [x] Remover referências residuais ao organizador das mensagens públicas de encerramento.
+- [x] Adicionar teste de integração do fluxo de entrada que comprove a persistência de joinedAt no registro do participante.
+- [x] Executar e registrar duas consultas públicas independentes que retornem a mesma rodada e o mesmo prazo final.
+- [ ] Validar a publicação final após registrar as evidências de persistência e prazo compartilhado.
