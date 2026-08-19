@@ -40,7 +40,10 @@ export default function SummaryPage() {
             <p><strong>SubAgentes</strong><span>Agentes com contextos isolados que podem ser executados em paralelo.</span></p>
           </div>
 
-          <p className="summary-simple-conclusion"><strong>Sobre RAG:</strong> ele busca trechos em documentos confiáveis e entrega esse contexto ao modelo antes da resposta. <strong>RAG não é um agente</strong>, mas um agente pode usar RAG para se informar antes de agir.</p>
+          <section className="summary-simple-conclusion summary-rag-summary" aria-label="Resumo sobre RAG">
+            <h2>Sobre RAG</h2>
+            <p>RAG busca trechos em documentos confiáveis e entrega esse contexto ao modelo antes da resposta. <strong>RAG não é um agente</strong>, mas um agente pode usar RAG para se informar antes de agir.</p>
+          </section>
         </div>
       </section>
 

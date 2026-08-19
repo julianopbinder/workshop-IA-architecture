@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import McpPage from "./pages/McpPage";
+import QuizPage from "./pages/QuizPage";
 import RagPage from "./pages/RagPage";
 import SubagentsPage from "./pages/SubagentsPage";
 import SummaryPage from "./pages/SummaryPage";
@@ -19,6 +20,7 @@ function Router() {
       <Route path={"/mcps"} component={McpPage} />
       <Route path={"/subagentes"} component={SubagentsPage} />
       <Route path={"/resumo"} component={SummaryPage} />
+      <Route path={"/quiz"} component={QuizPage} />
       <Route path={"/rag"} component={RagPage} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />

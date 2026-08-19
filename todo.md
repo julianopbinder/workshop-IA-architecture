@@ -222,6 +222,17 @@
 - [x] Inserir apenas uma informação curta sobre RAG abaixo das definições.
 - [ ] Validar, publicar e entregar o ajuste.
 
+## Quiz de conhecimentos
+
+- [x] Confirmar a exibição da observação curta sobre RAG abaixo do Resumo.
+- [x] Criar cinco perguntas de Skill, cada uma com três alternativas.
+- [x] Criar cinco perguntas de MCPs, cada uma com três alternativas.
+- [x] Criar cinco perguntas de SubAgentes, cada uma com três alternativas.
+- [x] Criar cinco perguntas de RAG, cada uma com três alternativas.
+- [x] Criar uma página Quiz e inserir o acesso ao lado de Resumo na navegação.
+- [x] Implementar feedback de resposta e resultado por assunto.
+- [ ] Validar, publicar e entregar a atualização.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.

@@ -1,6 +1,6 @@
 // Design: navegação editorial mineral com o símbolo Nexo como marca visual de três rotas que convergem.
 
-type ModuloAtivo = "skill" | "mcps" | "subagentes" | "rag" | "resumo";
+type ModuloAtivo = "skill" | "mcps" | "subagentes" | "rag" | "resumo" | "quiz";
 
 // Cabeçalho preparado para crescer com módulos adicionais, mantendo o item atual em destaque.
 export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
@@ -20,7 +20,10 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
         <nav className="nav-modulos" aria-label="Módulos da biblioteca">
           {itens.map((item) => <a key={item.id} className={ativo === item.id ? "active" : ""} href={item.href}>{item.label}</a>)}
         </nav>
-        <a className={`header-tag ${ativo === "resumo" ? "active" : ""}`} href="/resumo">Resumo</a>
+        <div className="header-actions">
+          <a className={`header-tag ${ativo === "resumo" ? "active" : ""}`} href="/resumo">Resumo</a>
+          <a className={`header-tag ${ativo === "quiz" ? "active" : ""}`} href="/quiz">Quiz</a>
+        </div>
       </div>
     </header>
   );

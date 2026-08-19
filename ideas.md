@@ -115,3 +115,8 @@ O novo menu, **Central de Prática**, funciona como uma pequena sala de treiname
 - O Resumo encerra a apresentação como uma **última sala de comando**, em três atos: padrão, acesso e execução, seguidos da estação de consulta verificável do RAG.
 - Os nomes de síntese são fixos: **Skill = playbook**, **MCP = ponte de acesso**, **SubAgente = frente especializada** e **RAG = estação de consulta verificável**.
 - A página não usa imagens externas, metáforas de cozinha, receitas ou sous-chefs. O diagrama é nativo do Nexo: quatro rotas convergem em um resultado operacional, com o coral indicando o caminho ativo.
+
+## Style Decisions — Quiz e exceção do Resumo
+
+- O **Quiz** é uma Central de Verificação: cada pergunta é uma estação de decisão ligada pela rota coral, e cada resposta correta comunica uma capacidade desbloqueada.
+- Por decisão explícita do usuário, o **Resumo** permanece em sua composição mínima aprovada: imagem original, três definições e uma explicação curta de RAG abaixo delas. Essa exceção prevalece sobre propostas posteriores de reconstrução visual do Resumo.
