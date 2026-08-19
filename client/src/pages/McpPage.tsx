@@ -213,6 +213,48 @@ Olá, João! Sua ferramenta MCP está funcionando.`}</pre></div>
           </div>
 
           <div className="mcp-stop-card"><Ban size={20} /><p><strong>Para este exemplo, pare aqui.</strong> Não digite <code>mcp.exe</code>, <code>mcp dev</code> ou <code>fastmcp dev</code>. Eles são alternativas mais avançadas e não fazem parte deste primeiro teste.</p></div>
+
+          <section className="mcp-execution-map" aria-labelledby="execucao-exemplo">
+            <div className="mcp-execution-head">
+              <div>
+                <p className="eyebrow">ESTAÇÃO FINAL · O QUE ACONTECEU NOS BASTIDORES</p>
+                <h2 id="execucao-exemplo">Do comando até a <em>resposta.</em></h2>
+              </div>
+              <div className="mcp-execution-context">
+                <p>Você não precisou abrir dois terminais. Ao executar <code>testar_mcp.py</code>, ele usa a ferramenta que está guardada em <code>server.py</code> e mostra o resultado na mesma tela.</p>
+                <div className="mcp-execution-nexo" aria-label="Três rotas convergem para o resultado"><i /><i /><i /><b /><span>COMANDO · MCP · RESPOSTA</span></div>
+              </div>
+            </div>
+
+            <div className="mcp-execution-flow" aria-label="Fluxo de execução do teste FastMCP">
+              <article className="exec-node exec-terminal">
+                <span>01 · VOCÊ</span><Terminal size={22} /><h3>PowerShell</h3><p>Você digita o comando final.</p>
+                <pre>{`python testar_mcp.py`}</pre>
+              </article>
+              <i className="exec-arrow" aria-hidden="true" />
+              <article className="exec-node exec-test">
+                <span>02 · ARQUIVO EXECUTADO</span><FileText size={22} /><h3>testar_mcp.py</h3><p>É o arquivo que começa o teste.</p>
+                <code>from server import mcp</code>
+              </article>
+              <i className="exec-arrow" aria-hidden="true" />
+              <article className="exec-node exec-server">
+                <span>03 · MCP CRIADO</span><Server size={22} /><h3>server.py</h3><p>Guarda a ferramenta disponível.</p>
+                <code>mcp = FastMCP(...)</code>
+              </article>
+              <i className="exec-arrow" aria-hidden="true" />
+              <article className="exec-node exec-tool">
+                <span>04 · AÇÃO</span><Wrench size={22} /><h3>cumprimentar</h3><p>Recebe o nome João e prepara a frase.</p>
+                <code>cumprimentar("João")</code>
+              </article>
+              <i className="exec-arrow" aria-hidden="true" />
+              <article className="exec-node exec-response">
+                <span>05 · RESULTADO</span><CheckCircle2 size={22} /><h3>Terminal</h3><p>O arquivo de teste imprime a resposta.</p>
+                <strong>Olá, João!</strong>
+              </article>
+            </div>
+
+            <div className="mcp-execution-note"><b>O ponto mais importante:</b><span>neste primeiro teste, <code>testar_mcp.py</code> importa o MCP de <code>server.py</code>. Por isso, você executa apenas o arquivo de teste; o servidor não é iniciado em outra janela.</span></div>
+          </section>
         </div>
       </section>
 

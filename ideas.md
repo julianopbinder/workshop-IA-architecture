@@ -89,3 +89,4 @@ O novo menu, **Central de Prática**, funciona como uma pequena sala de treiname
 - O símbolo **Nexo** reaparece como três rotas que convergem para um nó: agente, servidor MCP e ferramenta. O fundo mineral permanece dominante, pois é uma exigência explícita deste material para iniciantes.
 - A imagem técnica de arquitetura MCP entra em uma moldura editorial azul-noite, com rótulo de estação e legenda explicativa; assim, ela é apresentada como parte da missão, não como uma captura solta.
 - As capacidades Tools, Prompts e Resources recebem marcadores sequenciais de capacidade para reforçar que o coral indica um desbloqueio ou rota ativa.
+- A prática em Windows é uma sequência de estações: cada passo começa na linha coral, apresenta uma ação dominante e termina em uma confirmação visual. O Nexo reaparece no fluxo final como comando, MCP e resposta convergindo no mesmo resultado.

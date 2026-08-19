@@ -163,6 +163,13 @@
 - [x] Escrever uma explicação simples dos blocos: agente, servidor, tools, prompts e resources.
 - [ ] Validar e publicar a atualização visual.
 
+## Diagrama do exemplo FastMCP
+
+- [x] Mostrar onde o comando é digitado e qual arquivo é executado.
+- [x] Visualizar como testar_mcp.py importa o MCP criado em server.py.
+- [x] Mostrar a chamada da ferramenta cumprimentar e a resposta no terminal.
+- [ ] Inserir o diagrama após o exemplo prático, validar e publicar.
+
 ## Simplificação urgente — Skill no IntelliJ
 
 - [x] Reduzir o site a uma explicação única e direta sobre Skills.
