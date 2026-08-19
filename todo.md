@@ -354,4 +354,4 @@
 ## Placar após encerramento
 
 - [x] Ocultar o rótulo “você” do placar ao finalizar a rodada.
-- [ ] Testar o placar nos estados ativo e encerrado, publicar e entregar o ajuste.
+- [x] Testar o placar nos estados ativo e encerrado, publicar e entregar o ajuste.
