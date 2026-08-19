@@ -1,9 +1,9 @@
 import { COOKIE_NAME } from "@shared/const";
 import { TRPCError } from "@trpc/server";
-import { listQuizScores, saveQuizScore } from "./db";
+import { clearQuizScores, listQuizScores, saveQuizScore } from "./db";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, router } from "./_core/trpc";
+import { adminProcedure, publicProcedure, router } from "./_core/trpc";
 import { formatParticipantName, quizScoreInputSchema } from "./quizScore";
 
 export const appRouter = router({
@@ -33,6 +33,19 @@ export const appRouter = router({
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "O placar não está disponível neste momento. Tente novamente em instantes.",
+        });
+      }
+
+      return { success: true } as const;
+    }),
+    /** Reinicia a classificação; disponível somente para o organizador autenticado. */
+    clearLeaderboard: adminProcedure.mutation(async () => {
+      const cleared = await clearQuizScores();
+
+      if (!cleared) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Não foi possível reiniciar o placar neste momento.",
         });
       }
 

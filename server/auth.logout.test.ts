@@ -59,4 +59,13 @@ describe("auth.logout", () => {
       path: "/",
     });
   });
+
+  it("bloqueia participantes comuns de limpar o placar", async () => {
+    const { ctx } = createAuthContext();
+    const caller = appRouter.createCaller(ctx);
+
+    await expect(caller.quiz.clearLeaderboard()).rejects.toMatchObject({
+      code: "FORBIDDEN",
+    });
+  });
 });

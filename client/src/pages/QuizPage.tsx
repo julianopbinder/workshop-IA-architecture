@@ -1,6 +1,7 @@
 // Central de Verificação: perguntas, identificação simples e placar compartilhado para a apresentação.
 import { useMemo, useState } from "react";
 import { Check, ChevronRight, CircleHelp, Crown, Loader2, Medal, RotateCcw, Send, Trophy, UserRound, X } from "lucide-react";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { LibraryNav } from "@/components/LibraryNav";
 import { trpc } from "@/lib/trpc";
 import "./QuizPage.css";
@@ -103,6 +104,7 @@ export default function QuizPage() {
   const [submissionMessage, setSubmissionMessage] = useState("");
   const atual = quiz[tema];
   const trpcUtils = trpc.useUtils();
+  const { user } = useAuth();
   const leaderboardQuery = trpc.quiz.leaderboard.useQuery(undefined, { refetchInterval: 15_000 });
 
   const pointsByTheme = useMemo(() => {
@@ -124,6 +126,14 @@ export default function QuizPage() {
       await trpcUtils.quiz.leaderboard.invalidate();
     },
     onError: () => setSubmissionMessage("Não foi possível registrar agora. Verifique a conexão e tente novamente."),
+  });
+
+  const clearLeaderboard = trpc.quiz.clearLeaderboard.useMutation({
+    onSuccess: async () => {
+      setSubmissionMessage("O placar foi reiniciado para uma nova rodada.");
+      await trpcUtils.quiz.leaderboard.invalidate();
+    },
+    onError: () => setSubmissionMessage("Não foi possível reiniciar o placar. Tente novamente como organizador."),
   });
 
   function confirmarParticipante(event: React.FormEvent<HTMLFormElement>) {
@@ -170,6 +180,11 @@ export default function QuizPage() {
     });
   }
 
+  function reiniciarPlacar() {
+    if (!window.confirm("Deseja apagar todas as pontuações e iniciar uma nova rodada?")) return;
+    clearLeaderboard.mutate();
+  }
+
   return (
     <main className="skill-reference quiz-page">
       <LibraryNav ativo="quiz" />
@@ -212,7 +227,7 @@ export default function QuizPage() {
           <section className="quiz-leaderboard-section" aria-live="polite">
             {quizComplete && participantReady && <div className="quiz-final-score"><div><p>MISSÃO CONCLUÍDA</p><h2>{participantName}, você acertou <em>{totalScore}/20</em>.</h2><span>Skill {pointsByTheme.skill}/5 · MCPs {pointsByTheme.mcps}/5 · SubAgentes {pointsByTheme.subagentes}/5 · RAG {pointsByTheme.rag}/5</span></div><button type="button" onClick={enviarPontuacao} disabled={submitScore.isPending}>{submitScore.isPending ? <><Loader2 size={16} className="quiz-spin" />REGISTRANDO</> : <><Send size={15} />ENVIAR AO PLACAR</>}</button></div>}
             {submissionMessage && <p className={`quiz-submission-message ${submitScore.isError ? "error" : ""}`}>{submissionMessage}</p>}
-            <div className="leaderboard-heading"><div><p><Trophy size={15} />PLACAR COMPARTILHADO</p><h2>Classificação da <em>equipe.</em></h2></div><span>ATUALIZAÇÃO AUTOMÁTICA</span></div>
+            <div className="leaderboard-heading"><div><p><Trophy size={15} />PLACAR COMPARTILHADO</p><h2>Classificação da <em>equipe.</em></h2></div><div className="leaderboard-heading-actions"><span>ATUALIZAÇÃO AUTOMÁTICA</span>{user?.role === "admin" && <button type="button" onClick={reiniciarPlacar} disabled={clearLeaderboard.isPending}>{clearLeaderboard.isPending ? "LIMPANDO…" : "LIMPAR PLACAR"}</button>}</div></div>
             <div className="leaderboard-panel">
               {leaderboardQuery.isLoading && <p className="leaderboard-status"><Loader2 size={17} className="quiz-spin" />Carregando o placar da equipe...</p>}
               {leaderboardQuery.isError && <p className="leaderboard-status leaderboard-error">O placar ficará disponível assim que a conexão com a base for restabelecida.</p>}

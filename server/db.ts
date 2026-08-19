@@ -122,3 +122,14 @@ export async function listQuizScores() {
     .orderBy(desc(quizScores.totalScore), asc(quizScores.completedAt), asc(quizScores.participantName))
     .limit(50);
 }
+
+/** Remove todos os resultados ao iniciar uma nova rodada da apresentação. */
+export async function clearQuizScores() {
+  const db = await getDb();
+  if (!db) {
+    return false;
+  }
+
+  await db.delete(quizScores);
+  return true;
+}

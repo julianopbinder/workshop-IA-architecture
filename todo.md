@@ -232,7 +232,7 @@
 - [x] Criar uma página Quiz e inserir o acesso ao lado de Resumo na navegação.
 - [x] Implementar feedback de resposta e resultado por assunto.
 - [x] Distribuir as respostas corretas entre as alternativas A, B e C sem padrão previsível.
-- [ ] Validar, publicar e entregar a atualização.
+- [x] Validar, publicar e entregar a atualização.
 
 ## Placar compartilhado do Quiz
 
@@ -240,10 +240,10 @@
 - [x] Criar identificação simples por primeiro nome antes de iniciar o Quiz.
 - [x] Salvar uma única pontuação consolidada por participante.
 - [x] Exibir ranking compartilhado com posições, ouro, prata e bronze.
-- [ ] Preparar uma ação administrativa simples para limpar o placar antes de nova apresentação.
+- [x] Preparar uma ação administrativa simples para limpar o placar antes de nova apresentação.
 - [x] Aplicar validação de primeiro nome, bloqueando nomes compostos no placar.
 - [x] Cobrir em teste o reenvio que atualiza a mesma linha pelo identificador do navegador.
-- [ ] Validar o fluxo de participação e publicar o placar.
+- [x] Validar o fluxo de participação e publicar o placar.
 
 ## Simplificação urgente — Skill no IntelliJ
 
