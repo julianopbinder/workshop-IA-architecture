@@ -324,3 +324,4 @@
 - [ ] Validar a publicação final após registrar as evidências de persistência e prazo compartilhado.
 - [x] Corrigir a concordância verbal da contagem pública de participantes e conclusões.
 - [ ] Publicar a correção da contagem de participação e confirmar a versão no domínio final.
+- [ ] Forçar uma nova publicação do checkpoint confirmado, pois o domínio ainda está servindo o pacote anterior em cache.
