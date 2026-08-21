@@ -553,6 +553,13 @@
   white-space: normal;
 }
 
+/* Mantém “Da adoção ao valor” onde está e desloca apenas o painel humano para a coluna esquerda abaixo dele. */
+.pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .trust-circle-panel {
+  grid-column: 1;
+  grid-row: 2;
+  width: 100%;
+}
+
 /* A rota de aprendizado permanece legível mesmo com o hero em fundo claro. */
 .rag-deck-progress {
   margin-top: 42px;

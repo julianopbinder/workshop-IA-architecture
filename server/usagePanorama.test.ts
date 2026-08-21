@@ -52,6 +52,12 @@ describe("dashboard executivo Panorama", () => {
     expect(refinements).toContain("white-space: normal");
   });
 
+  it("recuar apenas o quadro de controle humano sem reposicionar o quadro de adoção", () => {
+    expect(refinements).toContain(".trust-circle-panel {");
+    expect(refinements).toContain("grid-column: 1");
+    expect(refinements).toContain("grid-row: 2");
+  });
+
   it("mantém as quatro abas internas para trocar somente o tipo de gráfico", () => {
     expect(page).toContain("<PainelCircular />");
     expect(page).toContain("panorama-view-tabs");

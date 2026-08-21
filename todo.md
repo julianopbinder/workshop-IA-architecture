@@ -594,3 +594,7 @@
 ## Correção de visibilidade — faixa de etapas
 
 - [x] Restaurar o fundo claro sólido e o contraste escuro da faixa de etapas, removendo a transparência e qualquer área preta.
+
+## Ajuste isolado — controle humano
+
+- [x] Recuar somente o quadro “O controle continua humano” para a esquerda, sem alterar o quadro “Da adoção ao valor”.
