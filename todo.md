@@ -478,3 +478,10 @@
 - [x] Manter o botão X e os links do menu funcionais após o ajuste.
 - [x] Validar abertura e fechamento em viewport de celular.
 - [x] Publicar a correção do painel móvel na Railway.
+
+## Correção definitiva do painel móvel
+
+- [x] Garantir que o painel aberto cubra integralmente o conteúdo com fundo branco opaco.
+- [x] Corrigir o evento de toque/clique na área externa para fechar o painel de forma confiável.
+- [x] Validar visualmente o painel aberto e o fechamento externo em viewport de celular.
+- [x] Publicar a correção definitiva do painel móvel na Railway.

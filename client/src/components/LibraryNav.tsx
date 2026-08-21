@@ -1,5 +1,6 @@
 // Design: navegação editorial mineral com o símbolo Nexo como marca visual de três rotas que convergem.
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 type ModuloAtivo = "skill" | "mcps" | "subagentes" | "rag" | "resumo" | "quiz";
 
@@ -38,6 +39,37 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
 
   const classeAtiva = (id: ModuloAtivo) => (ativo === id ? "active" : "");
 
+  // O portal impede que o backdrop-filter do cabeçalho limite a camada fixa do menu no celular.
+  const painelMovel = (
+    <>
+      {/* A área externa cobre a viewport inteira e fecha o menu antes de qualquer clique atingir o conteúdo. */}
+      <div
+        className={`mobile-nav-scrim ${menuMovelAberto ? "is-open" : ""}`}
+        aria-hidden="true"
+        onPointerDown={() => setMenuMovelAberto(false)}
+      />
+      {/* O painel é irmão da área externa: um toque nele não dispara o fechamento do menu. */}
+      <aside id="menu-navegacao-movel" className={`mobile-side-nav ${menuMovelAberto ? "is-open" : ""}`} aria-label="Navegação móvel">
+        {/* O cabeçalho simples mantém o contraste pedido: fundo branco e tipografia preta. */}
+        <div className="mobile-side-nav-top">
+          <span>Menu</span>
+          <button type="button" className="mobile-menu-close" aria-label="Fechar menu de navegação" onClick={() => setMenuMovelAberto(false)}>×</button>
+        </div>
+        {/* Cada módulo permanece visível no painel e fecha a navegação ao ser selecionado. */}
+        <nav className="mobile-nav-links" aria-label="Módulos da biblioteca no celular">
+          {itens.map((item) => (
+            <a key={item.id} className={classeAtiva(item.id)} href={item.href} onClick={() => setMenuMovelAberto(false)}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </aside>
+    </>
+  );
+
+  // Na página real, o painel é anexado ao body; na renderização estática, preserva a marcação para os testes.
+  const navegacaoMovel = typeof document === "undefined" ? painelMovel : createPortal(painelMovel, document.body);
+
   return (
     <header className="site-header">
       <div className="header-inner">
@@ -64,23 +96,7 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
         </div>
       </div>
 
-      {/* A camada externa fecha o menu ao tocar fora dele, sem alterar o conteúdo da página. */}
-      <div className={`mobile-nav-scrim ${menuMovelAberto ? "is-open" : ""}`} aria-hidden="true" onClick={() => setMenuMovelAberto(false)} />
-      <aside id="menu-navegacao-movel" className={`mobile-side-nav ${menuMovelAberto ? "is-open" : ""}`} aria-label="Navegação móvel">
-        {/* O cabeçalho simples mantém o contraste pedido: fundo branco e tipografia preta. */}
-        <div className="mobile-side-nav-top">
-          <span>Menu</span>
-          <button type="button" className="mobile-menu-close" aria-label="Fechar menu de navegação" onClick={() => setMenuMovelAberto(false)}>×</button>
-        </div>
-        {/* Cada módulo permanece visível no painel e fecha a navegação ao ser selecionado. */}
-        <nav className="mobile-nav-links" aria-label="Módulos da biblioteca no celular">
-          {itens.map((item) => (
-            <a key={item.id} className={classeAtiva(item.id)} href={item.href} onClick={() => setMenuMovelAberto(false)}>
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      </aside>
+      {navegacaoMovel}
     </header>
   );
 }

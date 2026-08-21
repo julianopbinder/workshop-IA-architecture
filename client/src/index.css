@@ -656,11 +656,11 @@ pre { overflow: auto; margin: 0; white-space: pre-wrap; }
   .mobile-menu-trigger { display: inline-grid; place-items: center; margin-left: -10px; }
   .nav-modulos { display: none; }
   .header-actions { display: none; }
-  /* A área externa também é branca: o conteúdo nunca fica visível por trás do menu aberto. */
-  .mobile-nav-scrim { position: fixed; inset: 0; z-index: 900; display: block; visibility: hidden; opacity: 0; background: #fff; transition: opacity 180ms var(--ease), visibility 180ms var(--ease); }
-  .mobile-nav-scrim.is-open { visibility: visible; opacity: 1; }
-  /* O painel fica acima da camada branca, opaco e separado apenas por uma borda sutil. */
-  .mobile-side-nav { position: fixed; top: 0; bottom: 0; left: 0; z-index: 901; display: flex; width: min(320px, 88vw); flex-direction: column; border-right: 1px solid #d7d7d2; padding: 18px 20px 28px; background: #fff; box-shadow: 18px 0 36px rgb(26 42 56 / 10%); isolation: isolate; opacity: 1; transform: translateX(-104%); transition: transform 220ms var(--ease); }
+  /* A área externa é transparente: cobre a viewport inteira e captura o toque fora do painel. */
+  .mobile-nav-scrim { position: fixed; inset: 0; z-index: 9990; display: block; width: 100dvw; height: 100dvh; visibility: hidden; pointer-events: none; background: transparent; }
+  .mobile-nav-scrim.is-open { visibility: visible; pointer-events: auto; }
+  /* O painel é renderizado no body e recebe branco sólido explícito, acima da área externa. */
+  .mobile-side-nav { position: fixed; top: 0; bottom: 0; left: 0; z-index: 9991; display: flex; width: min(320px, 88vw); min-height: 100dvh; flex-direction: column; border-right: 1px solid #d7d7d2; padding: 18px 20px 28px; background-color: #ffffff !important; background-image: none !important; box-shadow: 18px 0 36px rgb(26 42 56 / 10%); isolation: isolate; opacity: 1 !important; transform: translateX(-104%); transition: transform 220ms var(--ease); }
   .mobile-side-nav.is-open { transform: translateX(0); }
   /* O topo do painel é curto para dar espaço aos seis módulos e não empurrar a lista. */
   .mobile-side-nav-top { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #dfdfda; padding-bottom: 14px; color: #101820; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
