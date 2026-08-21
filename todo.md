@@ -446,4 +446,4 @@
 - [x] Permitir informar a duração da rodada em minutos ou no formato HH:MM ao clicar em COMEÇAR QUIZ.
 - [x] Persistir a duração escolhida no servidor e sincronizar o relógio em todos os navegadores.
 - [x] Cobrir entradas válidas e inválidas com testes automatizados e preservar o padrão de 10 minutos.
-- [ ] Publicar e validar a duração configurável no domínio Railway.
+- [x] Publicar e validar a duração configurável no domínio Railway.
