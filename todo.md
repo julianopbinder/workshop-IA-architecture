@@ -532,3 +532,7 @@
 ## Ajuste de encaixe — Indicadores circulares
 
 - [x] Reduzir os quatro indicadores superiores para que caibam integralmente na tela sem corte.
+
+## Submenus visíveis — Panorama
+
+- [x] Exibir Painel Circular, Barras Comparativas, Linha de Indicadores e Colunas de Adoção como submenus diretamente vinculados ao item PANORAMA da navegação superior.

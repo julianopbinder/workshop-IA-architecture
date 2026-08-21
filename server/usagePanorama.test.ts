@@ -5,6 +5,7 @@ import { resolve } from "node:path";
 describe("dashboard executivo Panorama", () => {
   const page = readFileSync(resolve(process.cwd(), "client/src/pages/UsagePanoramaPage.tsx"), "utf8");
   const styles = readFileSync(resolve(process.cwd(), "client/src/index.css"), "utf8");
+  const navigation = readFileSync(resolve(process.cwd(), "client/src/components/LibraryNav.tsx"), "utf8");
 
   it("mantém os indicadores corporativos e suas fontes explícitas", () => {
     expect(page).toContain("78");
@@ -51,5 +52,14 @@ describe("dashboard executivo Panorama", () => {
     expect(page).toContain("Mesmos dados, outra leitura");
     expect(page).toContain('get("visao")');
     expect(page).toContain("selecionarVisao");
+  });
+
+  it("expõe as quatro visualizações como submenus clicáveis de Panorama", () => {
+    expect(navigation).toContain("Painel Circular");
+    expect(navigation).toContain("/panorama?visao=barras");
+    expect(navigation).toContain("/panorama?visao=linha");
+    expect(navigation).toContain("/panorama?visao=colunas");
+    expect(navigation).toContain("panorama-submenu");
+    expect(navigation).toContain("mobile-panorama-submenu");
   });
 });
