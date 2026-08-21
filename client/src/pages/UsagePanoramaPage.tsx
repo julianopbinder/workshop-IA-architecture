@@ -67,7 +67,7 @@ function EscoreCircular({ value, label, color }: { value: number; label: string;
 
 export default function UsagePanoramaPage() {
   return (
-    <main className="skill-reference usage-panorama-page executive-panorama circular-panorama">
+    <main className="skill-reference usage-panorama-page executive-panorama circular-panorama pie-scale-expanded">
       <LibraryNav ativo="panorama" />
 
       <section className="executive-hero">

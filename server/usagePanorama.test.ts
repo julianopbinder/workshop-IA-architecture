@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 
 describe("dashboard executivo Panorama", () => {
   const page = readFileSync(resolve(process.cwd(), "client/src/pages/UsagePanoramaPage.tsx"), "utf8");
+  const styles = readFileSync(resolve(process.cwd(), "client/src/index.css"), "utf8");
 
   it("mantém os indicadores corporativos e suas fontes explícitas", () => {
     expect(page).toContain("78");
@@ -27,5 +28,12 @@ describe("dashboard executivo Panorama", () => {
     expect(page).toContain("GraficoRosca");
     expect(page).toContain("architecture-pie-card");
     expect(page).toContain("não representa percentual de adoção");
+  });
+
+  it("mantém a escala ampliada dos gráficos e tipografia para leitura sem zoom", () => {
+    expect(page).toContain("pie-scale-expanded");
+    expect(styles).toContain(".pie-scale-expanded .trust-large-pie");
+    expect(styles).toContain("width: 255px");
+    expect(styles).toContain("grid-template-columns: repeat(2, 1fr)");
   });
 });

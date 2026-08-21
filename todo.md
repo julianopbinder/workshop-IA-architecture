@@ -510,3 +510,9 @@
 - [x] Converter a matriz escura em quatro painéis circulares de esforço e complexidade para Skills, MCPs, RAG e SubAgentes.
 - [x] Manter explícita a diferença entre dados de pesquisa e avaliação orientativa de arquitetura.
 - [x] Atualizar testes, validar a visualização em desktop e celular e publicar a versão na Railway.
+
+## Escala e legibilidade — Dashboard em pizza
+
+- [x] Aumentar o diâmetro de todos os gráficos de pizza e rosca do Panorama.
+- [x] Ampliar títulos, números centrais, legendas, textos explicativos e fontes de referência.
+- [x] Validar o novo tamanho em desktop e celular e publicar a melhoria na Railway.
