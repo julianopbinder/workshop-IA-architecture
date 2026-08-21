@@ -439,3 +439,11 @@
 - [x] Confirmar no domínio Railway o carregamento das imagens públicas e o endpoint quiz.leaderboard sem erro 500.
 - [x] Capturar a causa do crash persistente do processo Railway e eliminar o encerramento automático após o start.
 - [x] Localizar e corrigir o segundo path.join que ainda recebe caminho indefinido no Node 18 da Railway.
+
+## Duração configurável da rodada
+
+- [ ] Salvar um checkpoint de backup da versão Railway atualmente funcional antes de qualquer alteração.
+- [ ] Permitir informar a duração da rodada em minutos ou no formato HH:MM ao clicar em COMEÇAR QUIZ.
+- [ ] Persistir a duração escolhida no servidor e sincronizar o relógio em todos os navegadores.
+- [ ] Cobrir entradas válidas e inválidas com testes automatizados e preservar o padrão de 10 minutos.
+- [ ] Publicar e validar a duração configurável no domínio Railway.
