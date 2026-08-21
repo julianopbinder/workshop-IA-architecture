@@ -18,7 +18,9 @@ describe("LibraryNav", () => {
     expect(html).toContain('href="/mcps"');
     expect(html).toContain('href="/subagentes"');
     expect(html).toContain('href="/rag"');
+    expect(html).toContain('href="/pratica"');
     expect(html).toContain('href="/resumo"');
+    expect(html).toContain('href="/panorama"');
     expect(html).toContain('href="/quiz"');
   });
 });

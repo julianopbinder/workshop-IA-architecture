@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-type ModuloAtivo = "skill" | "mcps" | "subagentes" | "rag" | "resumo" | "quiz";
+type ModuloAtivo = "skill" | "mcps" | "subagentes" | "rag" | "pratica" | "resumo" | "panorama" | "quiz";
 
 // Todos os módulos usam a mesma fonte de dados nos menus desktop e móvel.
 const itens = [
@@ -10,7 +10,9 @@ const itens = [
   { id: "mcps" as const, label: "MCPs", href: "/mcps" },
   { id: "subagentes" as const, label: "SubAgentes", href: "/subagentes" },
   { id: "rag" as const, label: "RAG", href: "/rag" },
+  { id: "pratica" as const, label: "IA na Prática", href: "/pratica" },
   { id: "resumo" as const, label: "Resumo", href: "/resumo" },
+  { id: "panorama" as const, label: "Panorama", href: "/panorama" },
   { id: "quiz" as const, label: "Quiz", href: "/quiz" },
 ];
 
@@ -89,10 +91,10 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
           </a>
         </div>
         <nav className="nav-modulos" aria-label="Módulos da biblioteca">
-          {itens.slice(0, 4).map((item) => <a key={item.id} className={classeAtiva(item.id)} href={item.href}>{item.label}</a>)}
+          {itens.slice(0, 5).map((item) => <a key={item.id} className={classeAtiva(item.id)} href={item.href}>{item.label}</a>)}
         </nav>
         <div className="header-actions">
-          {itens.slice(4).map((item) => <a key={item.id} className={`header-tag ${classeAtiva(item.id)}`} href={item.href}>{item.label}</a>)}
+          {itens.slice(5).map((item) => <a key={item.id} className={`header-tag ${classeAtiva(item.id)}`} href={item.href}>{item.label}</a>)}
         </div>
       </div>
 

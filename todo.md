@@ -485,3 +485,12 @@
 - [x] Corrigir o evento de toque/clique na área externa para fechar o painel de forma confiável.
 - [x] Validar visualmente o painel aberto e o fechamento externo em viewport de celular.
 - [x] Publicar a correção definitiva do painel móvel na Railway.
+
+## Novos módulos — IA na Prática Hoje e Panorama de Uso
+
+- [x] Pesquisar fontes atuais e confiáveis para os gráficos de adoção e uso de IA no desenvolvimento.
+- [x] Criar o menu e a página IA na Prática Hoje com mapa de decisão, comparação antes/depois, fluxo de projeto e régua de maturidade.
+- [x] Criar o menu e a página Panorama de Uso com gráficos e fontes explícitas.
+- [x] Atualizar a navegação desktop e móvel com os dois novos módulos.
+- [x] Cobrir a nova navegação e os conteúdos essenciais com teste de regressão.
+- [x] Validar as páginas em desktop e celular, publicar na Railway e entregar a atualização.
