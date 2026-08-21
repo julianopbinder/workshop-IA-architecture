@@ -503,3 +503,10 @@
 - [x] Destacar os padrões arquiteturais mais simples e os mais complexos sem apresentar a avaliação como estatística externa.
 - [x] Refinar a navegação, responsividade e acessibilidade do novo dashboard em desktop e celular.
 - [x] Atualizar testes, validar a produção e publicar a versão final na Railway.
+
+## Dashboard em pizza — Panorama de Uso
+
+- [x] Substituir os indicadores de barras por gráficos de pizza e rosca com legenda e fonte visível.
+- [x] Converter a matriz escura em quatro painéis circulares de esforço e complexidade para Skills, MCPs, RAG e SubAgentes.
+- [x] Manter explícita a diferença entre dados de pesquisa e avaliação orientativa de arquitetura.
+- [x] Atualizar testes, validar a visualização em desktop e celular e publicar a versão na Railway.

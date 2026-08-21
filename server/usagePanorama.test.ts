@@ -21,4 +21,11 @@ describe("dashboard executivo Panorama", () => {
     expect(page).toContain("RAG");
     expect(page).toContain("SubAgentes");
   });
+
+  it("usa gráficos de pizza e rosca também na comparação arquitetural", () => {
+    expect(page).toContain("PieChart");
+    expect(page).toContain("GraficoRosca");
+    expect(page).toContain("architecture-pie-card");
+    expect(page).toContain("não representa percentual de adoção");
+  });
 });
