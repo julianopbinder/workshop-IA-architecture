@@ -402,3 +402,151 @@
     margin-top: 64px;
   }
 }
+
+/* Remove somente os três adornos convergentes apontados nos banners principais. */
+.mcp-nexo,
+.subagent-nexo,
+.rag-memory-mark {
+  display: none;
+}
+
+/* Afasta o fluxo comparativo RAG dos cartões para separar visualmente os conceitos. */
+.rag-role-connection,
+.rag-agent-visual {
+  margin-top: 112px;
+}
+
+/* Os indicadores de topo passam a usar duas colunas: cada rosca e legenda recebe espaço suficiente. */
+.pie-scale-expanded .pie-kpi-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.pie-scale-expanded .pie-kpi-card {
+  grid-template-columns: 184px minmax(0, 1fr);
+  min-height: 286px;
+  padding: 25px;
+  gap: 24px;
+}
+
+.pie-scale-expanded .pie-kpi-card .pie-widget {
+  width: 184px;
+  height: 184px;
+  align-self: center;
+}
+
+.pie-scale-expanded .pie-kpi-card .pie-widget-center strong {
+  font-size: 39px;
+}
+
+.pie-scale-expanded .pie-kpi-card .pie-widget-center span {
+  font-size: 10px;
+}
+
+/* A terceira coluna reserva o percentual: o número nunca invade o texto da legenda. */
+.pie-scale-expanded .pie-kpi-card p span {
+  grid-template-columns: 10px minmax(0, 1fr) 52px;
+  gap: 10px;
+  align-items: start;
+  font-size: 13px;
+}
+
+.pie-scale-expanded .pie-kpi-card p span b,
+.pie-scale-expanded .pie-legend p b {
+  min-width: 52px;
+  text-align: right;
+}
+
+.pie-scale-expanded .pie-kpi-card h2 {
+  margin: 8px 0 16px;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.pie-scale-expanded .pie-kpi-card footer {
+  margin-top: 16px;
+  font-size: 11px;
+}
+
+/* A mesma regra de coluna fixa protege todas as legendas maiores do painel. */
+.pie-scale-expanded .pie-legend {
+  min-width: 255px;
+}
+
+.pie-scale-expanded .pie-legend p,
+.pie-scale-expanded .usage-legend p {
+  grid-template-columns: 12px minmax(0, 1fr) 72px;
+  gap: 12px;
+}
+
+/* O gráfico de esforço e complexidade adota o mesmo lightbox dos diagramas didáticos. */
+.architecture-chart-expandable {
+  margin-top: 26px;
+}
+
+.architecture-chart-expandable .architecture-comparison-chart {
+  margin-top: 0;
+}
+
+.diagram-lightbox-content .architecture-comparison-chart {
+  width: min(1080px, 88vw);
+  height: min(610px, 70vh);
+}
+
+@media (max-width: 720px) {
+  .rag-role-connection,
+  .rag-agent-visual {
+    margin-top: 84px;
+  }
+
+  .pie-scale-expanded .pie-kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .pie-scale-expanded .pie-kpi-card {
+    grid-template-columns: 144px minmax(0, 1fr);
+    min-height: 208px;
+    padding: 18px;
+    gap: 15px;
+  }
+
+  .pie-scale-expanded .pie-kpi-card .pie-widget {
+    width: 144px;
+    height: 144px;
+  }
+
+  .pie-scale-expanded .pie-kpi-card .pie-widget-center strong {
+    font-size: 30px;
+  }
+
+  .pie-scale-expanded .pie-kpi-card p span {
+    grid-template-columns: 9px minmax(0, 1fr) 44px;
+    gap: 7px;
+    font-size: 11px;
+  }
+
+  .pie-scale-expanded .pie-kpi-card p span b {
+    min-width: 44px;
+  }
+
+  .pie-scale-expanded .pie-kpi-card h2 {
+    margin: 3px 0 11px;
+    font-size: 14px;
+  }
+
+  .pie-scale-expanded .pie-kpi-card footer {
+    margin-top: 10px;
+    font-size: 9px;
+  }
+
+  .pie-scale-expanded .pie-legend {
+    min-width: 0;
+  }
+
+  .pie-scale-expanded .pie-legend p,
+  .pie-scale-expanded .usage-legend p {
+    grid-template-columns: 9px minmax(0, 1fr) 52px;
+    gap: 8px;
+  }
+}

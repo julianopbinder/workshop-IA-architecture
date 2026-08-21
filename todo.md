@@ -567,3 +567,12 @@
 - [x] Revisar e ampliar todos os gráficos de pizza/rosca em Panorama para que rótulos internos, especialmente “DO RECORTE”, não sejam cortados.
 - [x] Separar percentuais e rótulos nas legendas dos gráficos de pizza para impedir sobreposição visual.
 - [x] Converter o banner de abertura escuro de Panorama para fundo branco, preservando a hierarquia tipográfica e os acentos em laranja.
+
+## Correção de elementos decorativos e fluxo RAG
+
+- [x] Remover as três setas decorativas convergentes nos banners de MCPs, SubAgentes e RAG, sem remover os conectores funcionais dos diagramas.
+- [x] Afastar mais para baixo o fluxo “o agente pode consultar → RAG → contexto confiável” na página RAG.
+- [x] Confirmar que os diagramas de MCPs e RAG continuam ampliando ao clique.
+- [x] Redimensionar todos os gráficos circulares de Panorama e reorganizar todas as legendas para eliminar sobreposição de percentuais e cortes de rótulos.
+- [x] Permitir ampliar ao clique o gráfico de comparação de arquitetura nas visualizações de barras, linha e colunas.
+- [x] Redimensionar os cartões e gráficos superiores de Panorama e reorganizar as legendas para impedir qualquer número sobreposto ao texto.

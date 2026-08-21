@@ -9,6 +9,7 @@ import {
   PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import { LibraryNav } from "@/components/LibraryNav";
+import { ExpandableDiagram } from "@/components/ExpandableDiagram";
 import { useState } from "react";
 import "./panorama-views.css";
 
@@ -138,9 +139,11 @@ function BlocoAlternativo({ indice, titulo, descricao, Icon, data, visao, fonteU
 
 function GraficoArquitetura({ visao }: { visao: Exclude<Visao, "circular"> }) {
   const legenda = <Legend verticalAlign="top" height={30} formatter={(value: string) => <span className="architecture-chart-legend">{value}</span>} />;
-  return <div className="alternative-chart-stage architecture-comparison-chart"><ResponsiveContainer width="100%" height="100%">
+  return <ExpandableDiagram className="architecture-chart-expandable" label="Gráfico de comparação de esforço e complexidade das arquiteturas">
+    <div className="alternative-chart-stage architecture-comparison-chart"><ResponsiveContainer width="100%" height="100%">
     {visao === "barras" ? <BarChart data={arquiteturas} layout="vertical" margin={{ top: 20, right: 38, bottom: 12, left: 25 }}><CartesianGrid stroke="#d6dfda" strokeDasharray="3 4" horizontal={false} />{legenda}<XAxis type="number" domain={[0, 5]} allowDecimals={false} /><YAxis dataKey="name" type="category" width={95} tick={{ fill: "#1a2a38", fontSize: 13, fontWeight: 700 }} /><Tooltip /><Bar dataKey="effort" name="Esforço" fill="#cf6235" radius={[0, 6, 6, 0]} /><Bar dataKey="complexity" name="Complexidade" fill="#4b829f" radius={[0, 6, 6, 0]} /></BarChart> : visao === "linha" ? <LineChart data={arquiteturas} margin={{ top: 45, right: 28, bottom: 30, left: 4 }}><CartesianGrid stroke="#d6dfda" strokeDasharray="3 4" />{legenda}<XAxis dataKey="name" tick={{ fill: "#445661", fontSize: 12, fontWeight: 700 }} /><YAxis domain={[0, 5]} allowDecimals={false} /><Tooltip /><Line type="monotone" dataKey="effort" name="Esforço" stroke="#cf6235" strokeWidth={4} dot={{ r: 6 }} /><Line type="monotone" dataKey="complexity" name="Complexidade" stroke="#4b829f" strokeWidth={4} dot={{ r: 6 }} /></LineChart> : <BarChart data={arquiteturas} margin={{ top: 38, right: 18, bottom: 26, left: 4 }}><CartesianGrid stroke="#d6dfda" strokeDasharray="3 4" vertical={false} />{legenda}<XAxis dataKey="name" tick={{ fill: "#445661", fontSize: 12, fontWeight: 700 }} /><YAxis domain={[0, 5]} allowDecimals={false} /><Tooltip /><Bar dataKey="effort" name="Esforço" fill="#cf6235" radius={[6, 6, 0, 0]} /><Bar dataKey="complexity" name="Complexidade" fill="#4b829f" radius={[6, 6, 0, 0]} /></BarChart>}
-  </ResponsiveContainer></div>;
+    </ResponsiveContainer></div>
+  </ExpandableDiagram>;
 }
 
 function ArquiteturaAlternativa({ visao }: { visao: Exclude<Visao, "circular"> }) {

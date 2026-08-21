@@ -5,6 +5,7 @@ import { resolve } from "node:path";
 describe("dashboard executivo Panorama", () => {
   const page = readFileSync(resolve(process.cwd(), "client/src/pages/UsagePanoramaPage.tsx"), "utf8");
   const styles = readFileSync(resolve(process.cwd(), "client/src/index.css"), "utf8");
+  const refinements = readFileSync(resolve(process.cwd(), "client/src/visual-refinements.css"), "utf8");
   const navigation = readFileSync(resolve(process.cwd(), "client/src/components/LibraryNav.tsx"), "utf8");
 
   it("mantém os indicadores corporativos e suas fontes explícitas", () => {
@@ -38,9 +39,11 @@ describe("dashboard executivo Panorama", () => {
     expect(styles).toContain("grid-template-columns: repeat(2, 1fr)");
   });
 
-  it("mantém os quatro indicadores superiores contidos no espaço disponível", () => {
-    expect(styles).toContain("grid-template-columns: 132px minmax(0, 1fr)");
-    expect(styles).toContain("min-height: 228px");
+  it("amplia todos os indicadores superiores e reserva espaço fixo para os percentuais", () => {
+    expect(refinements).toContain("grid-template-columns: repeat(2, minmax(0, 1fr))");
+    expect(refinements).toContain("grid-template-columns: 184px minmax(0, 1fr)");
+    expect(refinements).toContain("grid-template-columns: 10px minmax(0, 1fr) 52px");
+    expect(refinements).toContain("min-width: 52px");
   });
 
   it("mantém as quatro abas internas para trocar somente o tipo de gráfico", () => {
@@ -75,5 +78,11 @@ describe("dashboard executivo Panorama", () => {
     expect(styles).toContain(".architecture-pie-card { display: flex");
     expect(styles).toContain("background: #ffffff");
     expect(styles).toContain(".architecture-pie-card h3 { margin: 4px 0 0; color: #1a2a38");
+  });
+
+  it("permite ampliar o gráfico de comparação de arquitetura", () => {
+    expect(page).toContain('import { ExpandableDiagram } from "@/components/ExpandableDiagram"');
+    expect(page).toContain("architecture-chart-expandable");
+    expect(refinements).toContain(".diagram-lightbox-content .architecture-comparison-chart");
   });
 });
