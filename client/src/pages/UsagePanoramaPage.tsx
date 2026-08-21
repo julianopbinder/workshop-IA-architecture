@@ -1,5 +1,4 @@
-// Dashboard executivo: os quatro modos exibem o mesmo conteúdo, mudando exclusivamente o tipo de gráfico.
-import { useState } from "react";
+// Dashboard executivo com os indicadores corporativos, as fontes e a leitura arquitetural da equipe.
 import {
   Activity, ArrowRight, BarChart3, Building2, CheckCircle2, CircleAlert,
   Database, FileText, GitBranch, LineChart as LineChartIcon, Plug,
@@ -10,7 +9,6 @@ import {
   PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import { LibraryNav } from "@/components/LibraryNav";
-import "./panorama-views.css";
 
 type Fatia = { label: string; value: number; color: string };
 type Visao = "circular" | "barras" | "linha" | "colunas";
@@ -69,13 +67,6 @@ const arquiteturas = [
   { name: "MCPs", icon: Plug, step: "CONECTE", effort: 2, complexity: 3, color: "#8fc2d5", best: "Ferramentas e sistemas externos", why: "Exige credenciais, permissões e contratos de integração." },
   { name: "RAG", icon: Database, step: "DÊ CONTEXTO", effort: 3, complexity: 4, color: "#a5d2b3", best: "Base interna de documentos", why: "Inclui ingestão, busca, qualidade dos dados e avaliação." },
   { name: "SubAgentes", icon: GitBranch, step: "ORQUESTRE", effort: 4, complexity: 5, color: "#d8b2e4", best: "Trabalho especializado em paralelo", why: "Exige desenho de papéis, supervisão, custo e coordenação." },
-];
-
-const visoes: { id: Visao; nome: string; descricao: string; icon: typeof Activity }[] = [
-  { id: "circular", nome: "Painel Circular", descricao: "Leitura por participação", icon: Activity },
-  { id: "barras", nome: "Barras Comparativas", descricao: "Leitura lado a lado", icon: BarChart3 },
-  { id: "linha", nome: "Linha de Indicadores", descricao: "Leitura em sequência", icon: LineChartIcon },
-  { id: "colunas", nome: "Colunas de Adoção", descricao: "Leitura por altura", icon: Building2 },
 ];
 
 function GraficoRosca({ data, value, caption, className = "" }: { data: Fatia[]; value: string; caption: string; className?: string }) {
@@ -159,16 +150,5 @@ function PainelCircular() {
 }
 
 export default function UsagePanoramaPage() {
-  const [visaoAtiva, setVisaoAtiva] = useState<Visao>(() => {
-    const visualizacao = new URLSearchParams(window.location.search).get("visao");
-    return visoes.some((visao) => visao.id === visualizacao) ? visualizacao as Visao : "circular";
-  });
-  const selecionarVisao = (visao: Visao) => {
-    setVisaoAtiva(visao);
-    const url = new URL(window.location.href);
-    if (visao === "circular") url.searchParams.delete("visao");
-    else url.searchParams.set("visao", visao);
-    window.history.replaceState({}, "", `${url.pathname}${url.search}`);
-  };
-  return <main className="skill-reference usage-panorama-page executive-panorama circular-panorama pie-scale-expanded"><LibraryNav ativo="panorama" /><section className="executive-hero"><div className="page-width executive-hero-grid"><div><p className="eyebrow">DASHBOARD EXECUTIVO · IA CORPORATIVA</p><h1>A questão deixou de ser <em>“usar IA?”</em><br />Agora é: onde ela gera valor com segurança?</h1><p>Um retrato visual da adoção corporativa e um caminho simples para a equipe avançar sem começar pela arquitetura mais complexa.</p></div><aside className="executive-brief-card"><div><Sparkles aria-hidden="true" /><span>LEITURA RÁPIDA</span></div><strong>Uso cresce rápido.<br />Maturidade cresce <em>mais devagar.</em></strong><p>Os gráficos mostram a distância entre experimentar IA e integrá-la de verdade ao trabalho.</p></aside></div></section><section className="panorama-view-menu"><div className="page-width"><div className="panorama-view-copy"><p className="eyebrow">ESCOLHA A LEITURA</p><h2>O mesmo panorama, quatro formas de enxergar.</h2><p>Troque somente o tipo de gráfico: os dados, fontes e percentuais permanecem iguais.</p></div><div className="panorama-view-tabs" role="tablist" aria-label="Visualizações do Panorama">{visoes.map((visao) => { const Icon = visao.icon; const active = visaoAtiva === visao.id; return <button key={visao.id} type="button" role="tab" aria-selected={active} className={active ? "active" : ""} onClick={() => selecionarVisao(visao.id)}><Icon aria-hidden="true" /><span><b>{visao.nome}</b><small>{visao.descricao}</small></span></button>; })}</div></div></section>{visaoAtiva === "circular" ? <PainelCircular /> : <GraficoAlternativo visao={visaoAtiva} />}<section className="executive-closing"><div className="page-width executive-closing-grid"><div><p className="eyebrow">FECHAMENTO</p><h2>O melhor uso de IA não é o mais complexo.<br /><em>É o que melhora o trabalho real.</em></h2></div><div><Users aria-hidden="true" /><p>Comece pequeno, meça o efeito, mantenha revisão humana e evolua a arquitetura à medida que o time ganha maturidade.</p><div className="executive-references"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value" target="_blank" rel="noreferrer">McKinsey 2025</a><a href="https://dora.dev/insights/balancing-ai-tensions/" target="_blank" rel="noreferrer">DORA 2025</a><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noreferrer">Stack Overflow 2025</a></div></div></div></section></main>;
+  return <main className="skill-reference usage-panorama-page executive-panorama circular-panorama pie-scale-expanded"><LibraryNav ativo="panorama" /><section className="executive-hero"><div className="page-width executive-hero-grid"><div><p className="eyebrow">DASHBOARD EXECUTIVO · IA CORPORATIVA</p><h1>A questão deixou de ser <em>“usar IA?”</em><br />Agora é: onde ela gera valor com segurança?</h1><p>Um retrato visual da adoção corporativa e um caminho simples para a equipe avançar sem começar pela arquitetura mais complexa.</p></div><aside className="executive-brief-card"><div><Sparkles aria-hidden="true" /><span>LEITURA RÁPIDA</span></div><strong>Uso cresce rápido.<br />Maturidade cresce <em>mais devagar.</em></strong><p>Os gráficos mostram a distância entre experimentar IA e integrá-la de verdade ao trabalho.</p></aside></div></section><PainelCircular /><section className="executive-closing"><div className="page-width executive-closing-grid"><div><p className="eyebrow">FECHAMENTO</p><h2>O melhor uso de IA não é o mais complexo.<br /><em>É o que melhora o trabalho real.</em></h2></div><div><Users aria-hidden="true" /><p>Comece pequeno, meça o efeito, mantenha revisão humana e evolua a arquitetura à medida que o time ganha maturidade.</p><div className="executive-references"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value" target="_blank" rel="noreferrer">McKinsey 2025</a><a href="https://dora.dev/insights/balancing-ai-tensions/" target="_blank" rel="noreferrer">DORA 2025</a><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noreferrer">Stack Overflow 2025</a></div></div></div></section></main>;
 }

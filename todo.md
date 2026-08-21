@@ -544,3 +544,7 @@
 ## Cartões de arquitetura — Fundo claro
 
 - [x] Trocar o fundo escuro dos quatro cartões de Skills, MCPs, RAG e SubAgentes por branco, preservando contraste e legibilidade dos gráficos.
+
+## Navegação simplificada — Panorama
+
+- [x] Remover o menu suspenso de visualizações e as quatro abas de gráfico, deixando somente o botão PANORAMA no cabeçalho e preservando todo o conteúdo do painel principal.

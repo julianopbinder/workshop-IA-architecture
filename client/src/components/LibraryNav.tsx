@@ -16,20 +16,10 @@ const itens = [
   { id: "quiz" as const, label: "Quiz", href: "/quiz" },
 ];
 
-// As quatro leituras apresentam os mesmos indicadores do Panorama em formatos diferentes.
-const visoesPanorama = [
-  { label: "Painel Circular", href: "/panorama" },
-  { label: "Barras Comparativas", href: "/panorama?visao=barras" },
-  { label: "Linha de Indicadores", href: "/panorama?visao=linha" },
-  { label: "Colunas de Adoção", href: "/panorama?visao=colunas" },
-];
-
 // Cabeçalho preparado para crescer com módulos adicionais, mantendo o item atual em destaque.
 export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
   // O painel existe apenas para a navegação em telas pequenas.
   const [menuMovelAberto, setMenuMovelAberto] = useState(false);
-  // Panorama revela quatro visualizações sem retirar o usuário da navegação principal.
-  const [panoramaSubmenuAberto, setPanoramaSubmenuAberto] = useState(false);
 
   // Fecha com Escape e impede a rolagem da página enquanto o painel está aberto.
   useEffect(() => {
@@ -69,32 +59,7 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
         </div>
         {/* Cada módulo permanece visível no painel e fecha a navegação ao ser selecionado. */}
         <nav className="mobile-nav-links" aria-label="Módulos da biblioteca no celular">
-          {itens.map((item) => item.id === "panorama" ? (
-            <div key={item.id} className={`mobile-panorama-menu ${classeAtiva(item.id)}`}>
-              <button
-                type="button"
-                className="mobile-panorama-trigger"
-                aria-expanded={panoramaSubmenuAberto}
-                aria-controls="submenu-panorama-movel"
-                onClick={() => setPanoramaSubmenuAberto((aberto) => !aberto)}
-              >
-                <span>Panorama</span>
-                <b aria-hidden="true">{panoramaSubmenuAberto ? "−" : "+"}</b>
-              </button>
-              <div
-                id="submenu-panorama-movel"
-                className={`mobile-panorama-submenu ${panoramaSubmenuAberto ? "is-open" : ""}`}
-                aria-label="Visualizações do Panorama"
-                aria-hidden={!panoramaSubmenuAberto}
-              >
-                {visoesPanorama.map((visao) => (
-                  <a key={visao.href} href={visao.href} tabIndex={panoramaSubmenuAberto ? 0 : -1} onClick={() => { setMenuMovelAberto(false); setPanoramaSubmenuAberto(false); }}>
-                    {visao.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          ) : (
+          {itens.map((item) => (
             <a key={item.id} className={classeAtiva(item.id)} href={item.href} onClick={() => setMenuMovelAberto(false)}>
               {item.label}
             </a>
@@ -130,28 +95,7 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
         </nav>
         <div className="header-actions">
           <a className={`header-tag ${classeAtiva("resumo")}`} href="/resumo">Resumo</a>
-          <div className={`panorama-menu ${classeAtiva("panorama")}`}>
-            <button
-              type="button"
-              className="header-tag panorama-menu-trigger"
-              aria-expanded={panoramaSubmenuAberto}
-              aria-controls="submenu-panorama-desktop"
-              onClick={() => setPanoramaSubmenuAberto((aberto) => !aberto)}
-            >
-              Panorama <span aria-hidden="true">⌄</span>
-            </button>
-            <div
-              id="submenu-panorama-desktop"
-              className={`panorama-submenu ${panoramaSubmenuAberto ? "is-open" : ""}`}
-              aria-label="Visualizações do Panorama"
-              aria-hidden={!panoramaSubmenuAberto}
-            >
-              <p>Visualizações do Panorama</p>
-              {visoesPanorama.map((visao) => (
-                <a key={visao.href} href={visao.href} tabIndex={panoramaSubmenuAberto ? 0 : -1} onClick={() => setPanoramaSubmenuAberto(false)}>{visao.label}</a>
-              ))}
-            </div>
-          </div>
+          <a className={`header-tag ${classeAtiva("panorama")}`} href="/panorama">Panorama</a>
           <a className={`header-tag ${classeAtiva("quiz")}`} href="/quiz">Quiz</a>
         </div>
       </div>

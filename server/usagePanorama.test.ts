@@ -43,24 +43,17 @@ describe("dashboard executivo Panorama", () => {
     expect(styles).toContain("min-height: 228px");
   });
 
-  it("oferece quatro visualizações internas que reutilizam os mesmos indicadores", () => {
-    expect(page).toContain("Painel Circular");
-    expect(page).toContain("Barras Comparativas");
-    expect(page).toContain("Linha de Indicadores");
-    expect(page).toContain("Colunas de Adoção");
-    expect(page).toContain("indicadoresComparacao");
-    expect(page).toContain("Mesmos dados, outra leitura");
-    expect(page).toContain('get("visao")');
-    expect(page).toContain("selecionarVisao");
+  it("abre diretamente o painel principal sem abas de escolha de gráfico", () => {
+    expect(page).toContain("<PainelCircular />");
+    expect(page).not.toContain("panorama-view-tabs");
+    expect(page).not.toContain("selecionarVisao");
+    expect(page).not.toContain('get("visao")');
   });
 
-  it("expõe as quatro visualizações como submenus clicáveis de Panorama", () => {
-    expect(navigation).toContain("Painel Circular");
-    expect(navigation).toContain("/panorama?visao=barras");
-    expect(navigation).toContain("/panorama?visao=linha");
-    expect(navigation).toContain("/panorama?visao=colunas");
-    expect(navigation).toContain("panorama-submenu");
-    expect(navigation).toContain("mobile-panorama-submenu");
+  it("mantém somente o link principal de Panorama na navegação", () => {
+    expect(navigation).toContain('href="/panorama"');
+    expect(navigation).not.toContain("panorama-submenu");
+    expect(navigation).not.toContain("mobile-panorama-submenu");
   });
 
   it("repete todos os blocos analíticos e fontes nas três leituras alternativas", () => {
