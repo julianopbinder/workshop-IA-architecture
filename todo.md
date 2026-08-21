@@ -447,3 +447,18 @@
 - [x] Persistir a duração escolhida no servidor e sincronizar o relógio em todos os navegadores.
 - [x] Cobrir entradas válidas e inválidas com testes automatizados e preservar o padrão de 10 minutos.
 - [x] Publicar e validar a duração configurável no domínio Railway.
+
+## Navegação móvel
+
+- [x] Substituir a navegação horizontal oculta no celular por um botão de menu no canto esquerdo.
+- [x] Abrir um painel lateral com acesso a Skill, MCPs, SubAgentes, RAG, Resumo e Quiz.
+- [x] Preservar o cabeçalho horizontal atual para telas desktop.
+- [x] Validar abertura, fechamento, acessibilidade e navegação em celular e desktop.
+- [ ] Publicar a correção de navegação móvel na Railway.
+
+## Encerramento do questionário RAG
+
+- [x] Substituir “PRÓXIMO ASSUNTO” por “FIM DO QUESTIONÁRIO” na navegação final do RAG.
+- [x] Remover a seta do controle final e apresentar um botão azul desabilitado com acabamento visual consistente.
+- [x] Testar o estado final do RAG em desktop e celular.
+- [ ] Publicar o encerramento visual do questionário na Railway.

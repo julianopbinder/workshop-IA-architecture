@@ -46,6 +46,9 @@ const temas = Object.keys(quiz) as Tema[];
 const participantNameStorageKey = "nexo-quiz-participant-name";
 const participantIdStorageKey = "nexo-quiz-participant-id";
 
+// Identifica o último assunto para impedir que o questionário volte ao início após RAG.
+export function isFinalQuizTheme(theme: Tema) { return temas.indexOf(theme) === temas.length - 1; }
+
 function getStoredName() { return typeof window === "undefined" ? "" : window.localStorage.getItem(participantNameStorageKey) ?? ""; }
 function getParticipantKey() {
   if (typeof window === "undefined") return "00000000-0000-4000-8000-000000000000";
@@ -220,7 +223,7 @@ export default function QuizPage() {
           const answer = respostas[question.id]; const wasAnswered = answer !== undefined;
           return <article className="quiz-question" key={question.id}><header><span>EST. 0{index + 1}</span><h3>{question.enunciado}</h3></header><div className="quiz-options">{question.alternativas.map((alternative, alternativeIndex) => { const selected = answer === alternativeIndex; const correct = alternativeIndex === question.correta; return <button key={`${question.id}-${alternativeIndex}`} type="button" disabled={wasAnswered} onClick={() => selecionar(question.id, alternativeIndex)} className={wasAnswered ? (correct ? "correct" : selected ? "wrong" : "") : ""}><i>{String.fromCharCode(65 + alternativeIndex)}</i><span>{alternative}</span>{wasAnswered && correct && <Check size={18} />}{wasAnswered && selected && !correct && <X size={18} />}</button>; })}</div>{wasAnswered && <p className={`quiz-feedback ${answer === question.correta ? "correct" : "wrong"}`}><b>{answer === question.correta ? "Capacidade desbloqueada." : "Rota a revisar."}</b>{question.explicacao}</p>}</article>;
         })}</div>
-        {answered === atual.perguntas.length && <aside className="quiz-complete"><Check size={21} /><div><p>FRENTE CONCLUÍDA</p><strong>Você acertou {points} de {atual.perguntas.length} perguntas.</strong></div><button type="button" onClick={() => setTema(temas[(temas.indexOf(tema) + 1) % temas.length])}>PRÓXIMO ASSUNTO <ChevronRight size={16} /></button></aside>}
+        {answered === atual.perguntas.length && <aside className="quiz-complete"><Check size={21} /><div><p>FRENTE CONCLUÍDA</p><strong>Você acertou {points} de {atual.perguntas.length} perguntas.</strong></div>{isFinalQuizTheme(tema) ? <button type="button" className="quiz-questionnaire-end" disabled aria-label="Fim do questionário">FIM DO QUESTIONÁRIO</button> : <button type="button" onClick={() => setTema(temas[temas.indexOf(tema) + 1])}>PRÓXIMO ASSUNTO <ChevronRight size={16} /></button>}</aside>}
       </>}
       <section className="quiz-leaderboard-section" aria-live="polite">
         {roundOpen && quizComplete && participantReady && <div className="quiz-final-score"><div><p>MISSÃO CONCLUÍDA</p><h2>{participantName}, você acertou <em>{totalScore}/20</em>.</h2><span>Skill {pointsByTheme.skill}/5 · MCPs {pointsByTheme.mcps}/5 · SubAgentes {pointsByTheme.subagentes}/5 · RAG {pointsByTheme.rag}/5</span></div><button type="button" onClick={enviarPontuacao} disabled={submitScore.isPending}>{submitScore.isPending ? <><Loader2 size={16} className="quiz-spin" />REGISTRANDO</> : <><Send size={15} />ENVIAR AO PLACAR</>}</button></div>}
