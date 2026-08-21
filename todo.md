@@ -454,11 +454,11 @@
 - [x] Abrir um painel lateral com acesso a Skill, MCPs, SubAgentes, RAG, Resumo e Quiz.
 - [x] Preservar o cabeçalho horizontal atual para telas desktop.
 - [x] Validar abertura, fechamento, acessibilidade e navegação em celular e desktop.
-- [ ] Publicar a correção de navegação móvel na Railway.
+- [x] Publicar a correção de navegação móvel na Railway.
 
 ## Encerramento do questionário RAG
 
 - [x] Substituir “PRÓXIMO ASSUNTO” por “FIM DO QUESTIONÁRIO” na navegação final do RAG.
 - [x] Remover a seta do controle final e apresentar um botão azul desabilitado com acabamento visual consistente.
 - [x] Testar o estado final do RAG em desktop e celular.
-- [ ] Publicar o encerramento visual do questionário na Railway.
+- [x] Publicar o encerramento visual do questionário na Railway.
