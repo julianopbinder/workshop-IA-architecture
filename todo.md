@@ -494,3 +494,12 @@
 - [x] Atualizar a navegação desktop e móvel com os dois novos módulos.
 - [x] Cobrir a nova navegação e os conteúdos essenciais com teste de regressão.
 - [x] Validar as páginas em desktop e celular, publicar na Railway e entregar a atualização.
+
+## Dashboard executivo — Panorama de Uso
+
+- [x] Pesquisar fontes corporativas atuais e separadas para indicadores de adoção, produtividade e governança de IA.
+- [x] Substituir os gráficos atuais por um dashboard executivo com indicadores, barras, matriz de adoção e painel de risco.
+- [x] Criar uma comparação didática de facilidade inicial e complexidade arquitetural entre Skills, MCPs, SubAgentes e RAG, identificada como avaliação orientativa.
+- [x] Destacar os padrões arquiteturais mais simples e os mais complexos sem apresentar a avaliação como estatística externa.
+- [x] Refinar a navegação, responsividade e acessibilidade do novo dashboard em desktop e celular.
+- [x] Atualizar testes, validar a produção e publicar a versão final na Railway.
