@@ -527,7 +527,7 @@
 
 ## Domínio Railway solicitado
 
-- [ ] Após publicar os quatro painéis do Panorama, configurar e validar `workshop-ia-architecture-juliano-binder.up.railway.app`.
+- [x] Após publicar os quatro painéis do Panorama, configurar e validar `workshop-ia-architecture-juliano-binder.up.railway.app`.
 
 ## Ajuste de encaixe — Indicadores circulares
 
