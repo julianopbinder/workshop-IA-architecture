@@ -477,4 +477,4 @@
 - [x] Criar uma área externa que fecha o painel ao tocar ou clicar fora do menu.
 - [x] Manter o botão X e os links do menu funcionais após o ajuste.
 - [x] Validar abertura e fechamento em viewport de celular.
-- [ ] Publicar a correção do painel móvel na Railway.
+- [x] Publicar a correção do painel móvel na Railway.
