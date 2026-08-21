@@ -41,4 +41,15 @@ describe("dashboard executivo Panorama", () => {
     expect(styles).toContain("grid-template-columns: 132px minmax(0, 1fr)");
     expect(styles).toContain("min-height: 228px");
   });
+
+  it("oferece quatro visualizações internas que reutilizam os mesmos indicadores", () => {
+    expect(page).toContain("Painel Circular");
+    expect(page).toContain("Barras Comparativas");
+    expect(page).toContain("Linha de Indicadores");
+    expect(page).toContain("Colunas de Adoção");
+    expect(page).toContain("indicadoresComparacao");
+    expect(page).toContain("Mesmos dados, outra leitura");
+    expect(page).toContain('get("visao")');
+    expect(page).toContain("selecionarVisao");
+  });
 });

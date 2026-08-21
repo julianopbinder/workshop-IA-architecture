@@ -519,11 +519,15 @@
 
 ## Visualizações internas — Panorama
 
-- [ ] Criar a navegação interna com Painel Circular, Barras Comparativas, Linha de Evolução e Colunas de Adoção.
-- [ ] Criar a visualização de barras comparativas com os mesmos indicadores corporativos do painel circular.
-- [ ] Criar a visualização de linha usando a escala de maturidade e adoção como leitura didática claramente identificada.
-- [ ] Criar a visualização de colunas de adoção com os mesmos dados e fontes explícitas.
-- [ ] Atualizar testes, validar os quatro painéis em desktop e celular e publicar na Railway.
+- [x] Criar a navegação interna com Painel Circular, Barras Comparativas, Linha de Evolução e Colunas de Adoção.
+- [x] Criar a visualização de barras comparativas com os mesmos indicadores corporativos do painel circular.
+- [x] Criar a visualização de linha usando a escala de maturidade e adoção como leitura didática claramente identificada.
+- [x] Criar a visualização de colunas de adoção com os mesmos dados e fontes explícitas.
+- [x] Atualizar testes, validar os quatro painéis em desktop e celular e publicar na Railway.
+
+## Domínio Railway solicitado
+
+- [ ] Após publicar os quatro painéis do Panorama, configurar e validar `workshop-ia-architecture-juliano-binder.up.railway.app`.
 
 ## Ajuste de encaixe — Indicadores circulares
 
