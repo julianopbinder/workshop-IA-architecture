@@ -462,3 +462,11 @@
 - [x] Remover a seta do controle final e apresentar um botão azul desabilitado com acabamento visual consistente.
 - [x] Testar o estado final do RAG em desktop e celular.
 - [x] Publicar o encerramento visual do questionário na Railway.
+
+## Correção do menu móvel
+
+- [x] Remover o painel lateral móvel que deixou a navegação confusa.
+- [x] Exibir em celular um menu branco de fundo, com texto preto para Skill, MCPs, SubAgentes, RAG, Resumo e Quiz.
+- [x] Corrigir o espaçamento do cabeçalho para não sobrepor o conteúdo da página em telas estreitas.
+- [x] Validar o menu e o conteúdo em um viewport de celular antes de publicar.
+- [ ] Publicar a correção do menu móvel na Railway.

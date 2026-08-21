@@ -64,12 +64,15 @@ export function LibraryNav({ ativo }: { ativo: ModuloAtivo }) {
         </div>
       </div>
 
+      {/* A camada externa fecha o menu ao tocar fora dele, sem alterar o conteúdo da página. */}
       <div className={`mobile-nav-scrim ${menuMovelAberto ? "is-open" : ""}`} aria-hidden="true" onClick={() => setMenuMovelAberto(false)} />
       <aside id="menu-navegacao-movel" className={`mobile-side-nav ${menuMovelAberto ? "is-open" : ""}`} aria-label="Navegação móvel">
+        {/* O cabeçalho simples mantém o contraste pedido: fundo branco e tipografia preta. */}
         <div className="mobile-side-nav-top">
-          <span>Biblioteca</span>
-          <button type="button" className="mobile-menu-close" onClick={() => setMenuMovelAberto(false)}>Fechar</button>
+          <span>Menu</span>
+          <button type="button" className="mobile-menu-close" aria-label="Fechar menu de navegação" onClick={() => setMenuMovelAberto(false)}>×</button>
         </div>
+        {/* Cada módulo permanece visível no painel e fecha a navegação ao ser selecionado. */}
         <nav className="mobile-nav-links" aria-label="Módulos da biblioteca no celular">
           {itens.map((item) => (
             <a key={item.id} className={classeAtiva(item.id)} href={item.href} onClick={() => setMenuMovelAberto(false)}>
