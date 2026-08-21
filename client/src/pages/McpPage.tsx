@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ArrowRight, Ban, Boxes, CheckCircle2, ExternalLink, FileText, FolderPlus, PlugZap, Server, Terminal, Wrench, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
+import { ExpandableDiagram } from "@/components/ExpandableDiagram";
 
 const arquiteturaMcp = "https://skillspres-gxq6mono.manus.space/manus-storage/arquitetura-mcp-explicada_ead4e8f7.png";
 
@@ -214,6 +215,7 @@ Olá, João! Sua ferramenta MCP está funcionando.`}</pre></div>
 
           <div className="mcp-stop-card"><Ban size={20} /><p><strong>Para este exemplo, pare aqui.</strong> Não digite <code>mcp.exe</code>, <code>mcp dev</code> ou <code>fastmcp dev</code>. Eles são alternativas mais avançadas e não fazem parte deste primeiro teste.</p></div>
 
+          <ExpandableDiagram label="Ampliar o fluxo de bastidores do MCP">
           <section className="mcp-execution-map" aria-labelledby="execucao-exemplo">
             <div className="mcp-execution-head">
               <div>
@@ -255,6 +257,7 @@ Olá, João! Sua ferramenta MCP está funcionando.`}</pre></div>
 
             <div className="mcp-execution-note"><b>O ponto mais importante:</b><span>neste primeiro teste, <code>testar_mcp.py</code> importa o MCP de <code>server.py</code>. Por isso, você executa apenas o arquivo de teste; o servidor não é iniciado em outra janela.</span></div>
           </section>
+          </ExpandableDiagram>
         </div>
       </section>
 

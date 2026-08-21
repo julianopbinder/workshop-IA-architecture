@@ -16,6 +16,7 @@ import {
   Workflow,
 } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
+import { ExpandableDiagram } from "@/components/ExpandableDiagram";
 
 // Apresenta o módulo completo de Subagentes, com conceitos, fluxo visual e combinação prática com Skills.
 export default function SubagentsPage() {
@@ -101,6 +102,7 @@ export default function SubagentsPage() {
             <p>Este é o caminho visual de uma operação: a missão sai da coordenação, especialistas trabalham em paralelo e os resultados voltam de forma objetiva.</p>
           </div>
 
+          <ExpandableDiagram label="Ampliar o diagrama de delegação e retorno dos SubAgentes">
           <div className="subagent-operation-map" aria-label="Fluxo de delegação entre agente principal e SubAgentes especializados">
             <div className="subagent-operation-head">
               <p>ROTA ATIVA · DELEGAÇÃO E RETORNO</p>
@@ -125,6 +127,7 @@ export default function SubagentsPage() {
             </div>
             <div className="subagent-return-lane"><span>RETORNO AO PRINCIPAL</span><p>“Plano pronto: riscos mapeados, configuração revisada e testes aprovados.”</p><CheckCircle2 size={19} /></div>
           </div>
+          </ExpandableDiagram>
 
           <div className="subagent-plain-reading">
             <b>LEITURA PARA QUEM ESTÁ COMEÇANDO</b>

@@ -1,6 +1,7 @@
 // Sala de Controle Editorial: estações que separam RAG, agente, ingestão e consulta com linguagem direta para iniciantes.
 import { useState } from "react";
 import { Archive, Bot, Database, FileInput, FileSearch, FileText, Search, ShieldCheck, Sparkles, Tags, X } from "lucide-react";
+import { ExpandableDiagram } from "@/components/ExpandableDiagram";
 import "./RagPipelines.css";
 
 const diagramaAgenteRag = "https://skillspres-gxq6mono.manus.space/manus-storage/rag-agente-consulta_7bc87d64.png";
@@ -66,18 +67,22 @@ export function RagPipelines() {
         </div>
 
         <div className="rag-pipeline-cards">
+          <ExpandableDiagram className="rag-pipeline-expandable" label="Ampliar o Pipeline 01 de ingestão RAG">
           <article className="rag-pipeline-card rag-ingestion">
             <header><span>PIPELINE 01</span><Archive size={22} /><p>INGESTÃO · ACONTECE ANTES DA PERGUNTA</p></header>
             <h3>Prepare a base de conhecimento.</h3>
             <p>É a rota de bastidor. Ela roda quando um documento entra ou muda, para deixar a informação pronta para ser encontrada depois.</p>
             <ol><li><FileInput size={16} /><span><b>Ler o documento</b> · PDF, Markdown, FAQ ou regra interna.</span></li><li><Tags size={16} /><span><b>Registrar metadados</b> · fonte, data, área e versão.</span></li><li><FileText size={16} /><span><b>Separar em trechos</b> · pedaços menores, fáceis de localizar.</span></li><li><Sparkles size={16} /><span><b>Gerar embeddings</b> · um “localizador numérico” do significado.</span></li><li><Database size={16} /><span><b>Salvar na base</b> · com o trecho e sua origem.</span></li></ol>
           </article>
+          </ExpandableDiagram>
+          <ExpandableDiagram className="rag-pipeline-expandable" label="Ampliar o Pipeline 02 de consulta RAG">
           <article className="rag-pipeline-card rag-query">
             <header><span>PIPELINE 02</span><Search size={22} /><p>CONSULTA · ACONTECE A CADA PERGUNTA</p></header>
             <h3>Encontre, contextualize e responda.</h3>
             <p>É a rota em tempo real. Ela começa quando alguém pergunta e termina com uma resposta que pode citar a fonte usada.</p>
             <ol><li><Bot size={16} /><span><b>Receber a pergunta</b> · “Qual é o prazo de reembolso?”</span></li><li><Sparkles size={16} /><span><b>Representar a pergunta</b> · para comparar significados.</span></li><li><FileSearch size={16} /><span><b>Buscar trechos relevantes</b> · na base preparada.</span></li><li><FileText size={16} /><span><b>Montar o contexto</b> · pergunta mais os trechos encontrados.</span></li><li><Bot size={16} /><span><b>Chamar o modelo</b> · para redigir usando o contexto.</span></li><li><ShieldCheck size={16} /><span><b>Responder com fonte</b> · e reconhecer quando não encontrou base suficiente.</span></li></ol>
           </article>
+          </ExpandableDiagram>
         </div>
 
         <div className="rag-pipeline-bridge" aria-label="A ingestão prepara a base e a consulta usa a base"><span>INGESTÃO PREPARA A BASE</span><i>↓</i><b>BASE DE CONHECIMENTO</b><i>↑</i><span>CONSULTA USA A BASE</span></div>

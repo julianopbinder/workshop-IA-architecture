@@ -552,3 +552,9 @@
 ## Correção — Visualizações internas do Panorama
 
 - [x] Restaurar os quatro botões dentro de Panorama — Painel Circular, Barras Comparativas, Linha de Indicadores e Colunas de Adoção — mantendo o menu superior com somente o link PANORAMA e exibindo todos os blocos completos em cada tipo de gráfico.
+
+## Ampliação de imagens e leitura dos gráficos
+
+- [x] Tornar clicáveis e ampliáveis as imagens indicadas nas páginas MCPs, SubAgentes e RAG, incluindo os dois pipelines de RAG e as demais imagens didáticas da página.
+- [x] Aumentar o espaçamento vertical da imagem do fluxo “o agente pode consultar → RAG → contexto confiável” na página RAG.
+- [x] Revisar todos os gráficos de Panorama, ampliando o espaço e ajustando textos internos para eliminar cortes de rótulos como Esforço e Complexidade.

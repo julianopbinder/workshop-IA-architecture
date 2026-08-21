@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ArrowRight, Bot, CheckCircle2, Database, FileSearch, FileText, MessageSquareText, Search, ShieldCheck, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
+import { ExpandableDiagram } from "@/components/ExpandableDiagram";
 import { RagPipelines } from "@/components/RagPipelines";
 import "./RagPage.css";
 import "./RagMission.css";
@@ -109,6 +110,7 @@ export default function RagPage() {
             <p>Vamos seguir uma pergunta comum. O foco não é programar agora, mas enxergar exatamente o que o RAG faz entre a dúvida e a resposta.</p>
           </div>
 
+          <ExpandableDiagram className="rag-scenario-expandable" label="Ampliar o exemplo de consulta RAG sobre prazo de reembolso">
           <div className="rag-scenario">
             <div className="rag-question-node"><MessageSquareText size={22} /><span>PERGUNTA DA PESSOA</span><strong>“Qual é o prazo para pedir reembolso de uma despesa?”</strong></div>
             <div className="rag-scenario-route" aria-hidden="true"><i /><b /></div>
@@ -119,6 +121,7 @@ export default function RagPage() {
             </div>
             <div className="rag-scenario-status"><span>ROTA DE CONSULTA ATIVA</span><i /><b>pergunta</b><i /><b>fonte oficial</b><i /><b>contexto selecionado</b><i /><b>resposta verificável</b></div>
           </div>
+          </ExpandableDiagram>
 
           <div className="rag-grounding-note"><ShieldCheck size={21} /><p><strong>O ponto importante:</strong> a resposta não nasce apenas da memória geral da IA. Ela é orientada por uma fonte que a empresa escolheu. Se o manual não trouxer a resposta, o comportamento correto é informar isso — não inventar.</p></div>
         </div>
