@@ -576,3 +576,21 @@
 - [x] Redimensionar todos os gráficos circulares de Panorama e reorganizar todas as legendas para eliminar sobreposição de percentuais e cortes de rótulos.
 - [x] Permitir ampliar ao clique o gráfico de comparação de arquitetura nas visualizações de barras, linha e colunas.
 - [x] Redimensionar os cartões e gráficos superiores de Panorama e reorganizar as legendas para impedir qualquer número sobreposto ao texto.
+
+## Correção pontual — fluxo final de MCPs
+
+- [x] Remover as três setas decorativas restantes no cabeçalho de “Do comando até a resposta”, preservando os conectores entre as cinco etapas do fluxo.
+- [x] Ocultar as três linhas internas convergentes que terminam no marcador “COMANDO · MCP · RESPOSTA”, preservando as setas pequenas entre as etapas.
+
+## Ajuste final — posição do fluxo RAG
+
+- [x] Descer o fluxo “o agente pode consultar → RAG → contexto confiável” para a faixa abaixo dos dois cartões de comparação.
+
+## Correção de leitura — roscas de adoção
+
+- [x] Ampliar as três roscas de adoção, maturidade e governança para preservar os rótulos internos e os títulos completos.
+- [x] Ampliar o espaço interno de todos os gráficos de esforço e complexidade para exibir “COMPLEXIDADE” sem corte.
+
+## Correção de visibilidade — faixa de etapas
+
+- [x] Restaurar o fundo claro sólido e o contraste escuro da faixa de etapas, removendo a transparência e qualquer área preta.

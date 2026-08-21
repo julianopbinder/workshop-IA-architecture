@@ -9,6 +9,7 @@ describe("ampliação dos diagramas didáticos", () => {
   const ragPage = readFileSync(resolve(process.cwd(), "client/src/pages/RagPage.tsx"), "utf8");
   const pipelines = readFileSync(resolve(process.cwd(), "client/src/components/RagPipelines.tsx"), "utf8");
   const pipelineStyles = readFileSync(resolve(process.cwd(), "client/src/components/RagPipelines.css"), "utf8");
+  const refinements = readFileSync(resolve(process.cwd(), "client/src/visual-refinements.css"), "utf8");
 
   it("fornece clique, teclado e diálogo para ampliar diagramas", () => {
     expect(component).toContain('role="button"');
@@ -32,5 +33,18 @@ describe("ampliação dos diagramas didáticos", () => {
     expect(pipelines).toContain("ExpandableDiagram");
     expect(pipelines).toContain("PIPELINE 02");
     expect(pipelineStyles).toContain("margin-top:106px");
+    expect(refinements).toContain("bottom: -100px");
+    expect(refinements).toContain("margin-top: 200px");
+  });
+
+  it("remove o adorno convergente do cabeçalho MCP sem afetar os conectores do fluxo", () => {
+    expect(refinements).toContain(".mcp-execution-nexo {\n  display: none;");
+    expect(mcpPage).toContain("mcp-execution-flow");
+  });
+
+  it("mantém a rota de aprendizado de RAG em uma superfície clara e legível", () => {
+    expect(refinements).toContain(".rag-deck-progress {");
+    expect(refinements).toContain("background: var(--surface)");
+    expect(refinements).toContain(".rag-deck-progress a {\n  color: var(--ink)");
   });
 });

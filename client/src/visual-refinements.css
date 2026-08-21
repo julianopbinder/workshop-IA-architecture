@@ -124,6 +124,14 @@
   border-top-color: var(--line);
 }
 
+/* Remove somente o adorno de três linhas convergentes do cabeçalho.
+   Os conectores entre as cinco etapas permanecem nos cartões do fluxo. */
+.mcp-execution-nexo i,
+.mcp-execution-nexo b,
+.mcp-execution-nexo span {
+  display: none;
+}
+
 .mcp-execution-map .exec-node {
   border-color: var(--line);
   background: var(--surface);
@@ -280,9 +288,9 @@
   color: var(--ink-muted);
 }
 
-/* Afasta o conector da figura seguinte e mantém os dois caminhos de RAG ampliáveis. */
+/* Mantém o fluxo abaixo dos cartões, em uma faixa própria antes da figura seguinte. */
 .rag-role-connection {
-  bottom: -29px;
+  bottom: -100px;
   border-color: var(--accent);
   background: var(--surface);
   color: var(--ink-muted);
@@ -295,7 +303,7 @@
 }
 
 .rag-agent-visual {
-  margin-top: 126px;
+  margin-top: 200px;
 }
 
 .rag-query {
@@ -493,6 +501,84 @@
   height: min(610px, 70vh);
 }
 
+/* Remove todo o desenho convergente do cabeçalho MCP; as setas entre os cartões não pertencem a este bloco. */
+.mcp-execution-nexo {
+  display: none;
+}
+
+/* Amplia as três roscas de adoção e mantém os títulos abaixo de cada uma em leitura confortável. */
+.pie-scale-expanded .adoption-circles {
+  justify-content: center;
+  gap: 38px;
+  margin-top: 38px;
+}
+
+.pie-scale-expanded .adoption-circles .pie-widget {
+  width: 194px;
+  max-width: none;
+  flex: 0 1 194px;
+}
+
+.pie-scale-expanded .adoption-circles .pie-widget-center strong {
+  font-size: 39px;
+}
+
+.pie-scale-expanded .adoption-circles strong {
+  margin-top: 15px;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+/* Dá espaço real ao texto COMPLEXIDADE no centro de todos os cartões de arquitetura. */
+.pie-scale-expanded .architecture-pies {
+  justify-content: center;
+  gap: 46px;
+  margin: 34px 0;
+}
+
+.pie-scale-expanded .architecture-score {
+  width: 190px;
+  flex-basis: 190px;
+}
+
+.pie-scale-expanded .architecture-score .pie-widget-center strong {
+  font-size: 32px;
+}
+
+.pie-scale-expanded .architecture-score .pie-widget-center span {
+  width: 100%;
+  font-size: 10px;
+  letter-spacing: .06em;
+  line-height: 1.15;
+  white-space: normal;
+}
+
+/* A rota de aprendizado permanece legível mesmo com o hero em fundo claro. */
+.rag-deck-progress {
+  margin-top: 42px;
+  border: 1px solid var(--line);
+  padding: 16px 20px;
+  background: var(--surface);
+  box-shadow: 5px 6px 0 rgb(26 42 56 / 6%);
+}
+
+.rag-deck-progress a {
+  color: var(--ink);
+  opacity: 1;
+}
+
+.rag-deck-progress a:first-child {
+  color: var(--accent);
+}
+
+.rag-deck-progress a b {
+  background: #fff;
+}
+
+.rag-deck-progress > i {
+  opacity: 1;
+}
+
 @media (max-width: 720px) {
   .rag-role-connection,
   .rag-agent-visual {
@@ -526,6 +612,43 @@
     font-size: 11px;
   }
 
+  .pie-scale-expanded .adoption-circles {
+    gap: 15px;
+    margin-top: 26px;
+  }
+
+  .pie-scale-expanded .adoption-circles .pie-widget {
+    width: 112px;
+    flex-basis: 112px;
+  }
+
+  .pie-scale-expanded .adoption-circles .pie-widget-center strong {
+    font-size: 25px;
+  }
+
+  .pie-scale-expanded .adoption-circles strong {
+    margin-top: 10px;
+    font-size: 11px;
+  }
+
+  .pie-scale-expanded .architecture-pies {
+    gap: 20px;
+    margin: 26px 0;
+  }
+
+  .pie-scale-expanded .architecture-score {
+    width: 136px;
+    flex-basis: 136px;
+  }
+
+  .pie-scale-expanded .architecture-score .pie-widget-center span {
+    font-size: 8px;
+  }
+
+  .rag-deck-progress {
+    margin-top: 30px;
+    padding: 13px 15px;
+  }
   .pie-scale-expanded .pie-kpi-card p span b {
     min-width: 44px;
   }

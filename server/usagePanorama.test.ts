@@ -46,6 +46,12 @@ describe("dashboard executivo Panorama", () => {
     expect(refinements).toContain("min-width: 52px");
   });
 
+  it("amplia as roscas de adoção e preserva o rótulo COMPLEXIDADE nos cartões", () => {
+    expect(refinements).toContain("width: 194px");
+    expect(refinements).toContain("width: 190px");
+    expect(refinements).toContain("white-space: normal");
+  });
+
   it("mantém as quatro abas internas para trocar somente o tipo de gráfico", () => {
     expect(page).toContain("<PainelCircular />");
     expect(page).toContain("panorama-view-tabs");
