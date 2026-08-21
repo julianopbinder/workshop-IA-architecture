@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { QUIZ_DEFAULT_ROUND_DURATION_MINUTES, QUIZ_MAX_ROUND_DURATION_MINUTES, QUIZ_MIN_ROUND_DURATION_MINUTES } from "../shared/quizRound";
 
 /** Valida a identificação simples usada para entrar em uma rodada pública. */
 export const quizParticipantInputSchema = z.object({
@@ -14,6 +15,16 @@ export const quizParticipantInputSchema = z.object({
 /** Valida a chave anônima que identifica o navegador que controla a rodada. */
 export const quizRoundStarterInputSchema = z.object({
   participantKey: z.string().uuid("Não foi possível identificar este navegador."),
+});
+
+/** Valida a duração já normalizada para minutos antes de abrir uma rodada pública. */
+export const quizRoundStartInputSchema = quizRoundStarterInputSchema.extend({
+  durationMinutes: z
+    .number()
+    .int()
+    .min(QUIZ_MIN_ROUND_DURATION_MINUTES, "A duração mínima é de 1 minuto.")
+    .max(QUIZ_MAX_ROUND_DURATION_MINUTES, "A duração máxima é de 12 horas.")
+    .default(QUIZ_DEFAULT_ROUND_DURATION_MINUTES),
 });
 
 /**

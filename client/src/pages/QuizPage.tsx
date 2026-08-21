@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Check, ChevronRight, CircleHelp, Clock3, Crown, Loader2, Medal, RotateCcw, Send, Trophy, UserRound, X } from "lucide-react";
 import { LibraryNav } from "@/components/LibraryNav";
 import { trpc } from "@/lib/trpc";
-import { getQuizRoundRemainingMilliseconds, getQuizServerClockOffset, getSynchronizedQuizNow, isQuizRoundOpen } from "@shared/quizRound";
+import { getQuizRoundRemainingMilliseconds, getQuizServerClockOffset, getSynchronizedQuizNow, isQuizRoundOpen, parseQuizRoundDuration, QUIZ_DEFAULT_ROUND_DURATION_MINUTES } from "@shared/quizRound";
 import "./QuizPage.css";
 
 type Tema = "skill" | "mcps" | "subagentes" | "rag";
@@ -57,7 +57,14 @@ function getParticipantKey() {
 }
 function formatClock(milliseconds: number) {
   const seconds = Math.ceil(Math.max(0, milliseconds) / 1000);
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  if (hours > 0) return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
   return `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
+}
+function formatDuration(durationMinutes: number) {
+  if (durationMinutes >= 60) return `${Math.floor(durationMinutes / 60)}h${durationMinutes % 60 ? ` ${durationMinutes % 60}min` : ""}`;
+  return `${durationMinutes} min`;
 }
 function RankingMedal({ position }: { position: number }) {
   if (position === 1) return <Crown className="leaderboard-gold" size={19} aria-label="Medalha de ouro" />;
@@ -73,6 +80,9 @@ export default function QuizPage() {
   const [participantKey] = useState(getParticipantKey);
   const [participantReady, setParticipantReady] = useState(false);
   const [nameError, setNameError] = useState("");
+  const [durationInput, setDurationInput] = useState(String(QUIZ_DEFAULT_ROUND_DURATION_MINUTES));
+  const [durationError, setDurationError] = useState("");
+  const [durationDialogOpen, setDurationDialogOpen] = useState(false);
   const [submissionMessage, setSubmissionMessage] = useState("");
   const [now, setNow] = useState(() => Date.now());
   const [serverClockOffset, setServerClockOffset] = useState(0);
@@ -133,11 +143,11 @@ export default function QuizPage() {
     onError: (error) => setNameError(error.message || "Não foi possível registrar sua entrada agora."),
   });
   const startNextRound = trpc.quiz.startNextRound.useMutation({
-    onSuccess: async () => {
-      setRespostas({}); setTema("skill"); setParticipantReady(false); setSubmissionMessage("Nova rodada aberta. O relógio foi reiniciado em 10:00.");
+    onSuccess: async ({ round: startedRound }) => {
+      setRespostas({}); setTema("skill"); setParticipantReady(false); setDurationDialogOpen(false); setDurationError(""); setSubmissionMessage(`Nova rodada aberta por ${formatDuration(startedRound.durationMinutes)}.`);
       await trpcUtils.quiz.leaderboard.invalidate();
     },
-    onError: (error) => setSubmissionMessage(error.message || "Não foi possível começar uma nova rodada agora. Tente novamente em instantes."),
+    onError: (error) => setDurationError(error.message || "Não foi possível começar uma nova rodada agora. Tente novamente em instantes."),
   });
   const finishRound = trpc.quiz.finishRound.useMutation({
     onSuccess: async () => {
@@ -169,8 +179,16 @@ export default function QuizPage() {
     submitScore.mutate({ participantName, participantKey, totalScore, skillScore: pointsByTheme.skill, mcpScore: pointsByTheme.mcps, subagentsScore: pointsByTheme.subagentes, ragScore: pointsByTheme.rag });
   }
   function comecarQuiz() {
-    if (!window.confirm("Começar o Quiz para a equipe? O relógio terá 10 minutos.")) return;
-    startNextRound.mutate({ participantKey });
+    setDurationInput(String(QUIZ_DEFAULT_ROUND_DURATION_MINUTES));
+    setDurationError("");
+    setDurationDialogOpen(true);
+  }
+  function confirmarDuracao(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const parsedDuration = parseQuizRoundDuration(durationInput);
+    if (!parsedDuration.durationMinutes) { setDurationError(parsedDuration.error ?? "Informe uma duração válida."); return; }
+    setDurationError("");
+    startNextRound.mutate({ participantKey, durationMinutes: parsedDuration.durationMinutes });
   }
   function finalizarQuiz() {
     if (!window.confirm("Finalizar o Quiz agora? Nenhuma nova resposta poderá entrar no placar desta rodada.")) return;
@@ -180,11 +198,15 @@ export default function QuizPage() {
   return <main className="skill-reference quiz-page">
     <LibraryNav ativo="quiz" />
     <section className="quiz-hero"><div className="page-width quiz-hero-grid">
-      <div><p className="quiz-kicker"><CircleHelp size={15} />CENTRAL DE VERIFICAÇÃO</p><h1>Teste o que você <em>entendeu.</em></h1><p>Clique em COMEÇAR QUIZ na sua máquina. Durante dez minutos, toda a equipe entra pelo primeiro nome e responde as quatro frentes.</p></div>
-      <div className="quiz-round-control"><div className={`quiz-round-clock ${roundOpen ? "" : "is-closed"}`}><Clock3 size={19} /><div><small>{roundOpen ? "QUIZ EM ANDAMENTO · TEMPO RESTANTE" : "QUIZ AGUARDANDO INÍCIO"}</small><strong>{leaderboardQuery.isLoading ? "--:--" : formatClock(remainingMilliseconds)}</strong></div></div><div className="quiz-round-buttons"><button type="button" onClick={comecarQuiz} disabled={roundOpen || startNextRound.isPending}>{startNextRound.isPending ? <><Loader2 size={14} className="quiz-spin" />COMEÇANDO…</> : "COMEÇAR QUIZ"}</button><button type="button" className="quiz-finish-button" onClick={finalizarQuiz} disabled={!canFinishRound || finishRound.isPending} title={roundOpen && !canFinishRound ? "Somente quem iniciou esta rodada pode finalizá-la." : undefined}>{finishRound.isPending ? <><Loader2 size={14} className="quiz-spin" />FINALIZANDO…</> : "FINALIZAR QUIZ"}</button></div></div>
+      <div><p className="quiz-kicker"><CircleHelp size={15} />CENTRAL DE VERIFICAÇÃO</p><h1>Teste o que você <em>entendeu.</em></h1><p>Clique em COMEÇAR QUIZ na sua máquina, defina a duração e convide a equipe para entrar pelo primeiro nome.</p></div>
+      <div className="quiz-round-control"><div className={`quiz-round-clock ${roundOpen ? "" : "is-closed"}`}><Clock3 size={19} /><div><small>{roundOpen ? `DURAÇÃO: ${formatDuration(round?.durationMinutes ?? QUIZ_DEFAULT_ROUND_DURATION_MINUTES).toUpperCase()} · TEMPO RESTANTE` : "QUIZ AGUARDANDO INÍCIO"}</small><strong>{leaderboardQuery.isLoading ? "--:--" : formatClock(remainingMilliseconds)}</strong></div></div><div className="quiz-round-buttons"><button type="button" onClick={comecarQuiz} disabled={roundOpen || startNextRound.isPending}>{startNextRound.isPending ? <><Loader2 size={14} className="quiz-spin" />COMEÇANDO…</> : "COMEÇAR QUIZ"}</button><button type="button" className="quiz-finish-button" onClick={finalizarQuiz} disabled={!canFinishRound || finishRound.isPending} title={roundOpen && !canFinishRound ? "Somente quem iniciou esta rodada pode finalizá-la." : undefined}>{finishRound.isPending ? <><Loader2 size={14} className="quiz-spin" />FINALIZANDO…</> : "FINALIZAR QUIZ"}</button></div></div>
     </div></section>
     <section className="quiz-workspace"><div className="page-width">
-      {!leaderboardQuery.isLoading && !roundOpen && <aside className="quiz-round-closed"><Clock3 size={22} /><div><p>QUIZ AGUARDANDO INÍCIO</p><strong>O Quiz ainda não começou ou já foi finalizado.</strong><span>Clique em COMEÇAR QUIZ acima. Quando iniciar, todos terão dez minutos para responder.</span></div></aside>}
+      {!leaderboardQuery.isLoading && !roundOpen && <aside className="quiz-round-closed"><Clock3 size={22} /><div><p>QUIZ AGUARDANDO INÍCIO</p><strong>O Quiz ainda não começou ou já foi finalizado.</strong><span>Clique em COMEÇAR QUIZ acima e escolha quanto tempo a equipe terá para responder.</span></div></aside>}
+      {durationDialogOpen && <div className="quiz-name-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-duration-title"><form className="quiz-name-modal-card quiz-duration-modal-card" onSubmit={confirmarDuracao}>
+        <div className="quiz-identity-icon"><Clock3 size={23} /></div><p>CONFIGURAR RODADA</p><h2 id="quiz-duration-title">Quanto tempo o Quiz ficará aberto?</h2><small>Digite somente minutos, como <b>15</b>, ou horas e minutos no formato <b>HH:MM</b>, como <b>01:30</b>.</small>
+        <label><span>DURAÇÃO DA RODADA</span><input autoFocus value={durationInput} onChange={(event) => setDurationInput(event.target.value)} placeholder="Ex.: 15 ou 01:30" inputMode="text" pattern="[0-9:]*" maxLength={5} aria-describedby="quiz-duration-help" /></label><small id="quiz-duration-help" className="quiz-duration-help">Mínimo: 1 minuto · Máximo: 12 horas.</small><button type="submit" disabled={startNextRound.isPending}>{startNextRound.isPending ? "ABRINDO RODADA…" : "CONFIRMAR E COMEÇAR QUIZ"}</button>{durationError && <strong className="quiz-identity-error" role="alert">{durationError}</strong>}
+      </form></div>}
       {roundOpen && <div className="quiz-participation-summary"><span>PARTICIPAÇÃO DA RODADA</span><strong>{participation.started} {participation.started === 1 ? "entrou" : "entraram"} · {participation.completed} {participation.completed === 1 ? "concluiu" : "concluíram"}</strong></div>}
       {roundOpen && !participantReady && <div className="quiz-name-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-name-title"><form className="quiz-name-modal-card" onSubmit={confirmarParticipante}>
         <div className="quiz-identity-icon"><UserRound size={23} /></div><p>ENTRAR NA RODADA</p><h2 id="quiz-name-title">Qual é o seu primeiro nome?</h2><small>Use somente o nome para registrar sua participação nesta rodada.</small>

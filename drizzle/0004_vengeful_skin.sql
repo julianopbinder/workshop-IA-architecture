@@ -1,0 +1,1 @@
+ALTER TABLE `quiz_rounds` ADD `durationMinutes` int DEFAULT 10 NOT NULL;

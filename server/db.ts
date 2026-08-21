@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/mysql2";
 import { and, asc, count, desc, eq } from "drizzle-orm";
 import { InsertUser, quizParticipants, quizRounds, quizScores, users } from "../drizzle/schema";
-import { getQuizRoundEndAt } from "../shared/quizRound";
+import { getQuizRoundEndAt, QUIZ_DEFAULT_ROUND_DURATION_MINUTES } from "../shared/quizRound";
 import { buildQuizParticipantJoin, buildQuizScoreUpsert, type QuizScoreInput } from "./quizScore";
 import { ENV } from './_core/env';
 
@@ -91,16 +91,21 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-/** Cria uma nova janela de participação com duração fixa de dez minutos. */
-async function createQuizRound(startedByParticipantKey: string, startedAt = new Date()) {
+/** Cria uma nova janela de participação usando a duração confirmada pelo apresentador. */
+async function createQuizRound(
+  startedByParticipantKey: string,
+  durationMinutes = QUIZ_DEFAULT_ROUND_DURATION_MINUTES,
+  startedAt = new Date(),
+) {
   const db = await getDb();
   if (!db) return undefined;
 
-  const endsAt = getQuizRoundEndAt(startedAt);
+  const endsAt = getQuizRoundEndAt(startedAt, durationMinutes);
   const result = await db.insert(quizRounds).values({
     status: "active",
     startedAt,
     startedByParticipantKey,
+    durationMinutes,
     endsAt,
   }).$returningId();
 
@@ -143,12 +148,15 @@ export async function finishCurrentQuizRound(startedByParticipantKey: string) {
   return { ...currentRound, status: "closed" as const, endedAt };
 }
 
-/** Abre uma nova rodada de dez minutos quando não há uma rodada ativa. */
-export async function startNextQuizRound(startedByParticipantKey: string) {
+/** Abre uma nova rodada com a duração escolhida quando não há uma rodada ativa. */
+export async function startNextQuizRound(
+  startedByParticipantKey: string,
+  durationMinutes = QUIZ_DEFAULT_ROUND_DURATION_MINUTES,
+) {
   const currentRound = await getCurrentQuizRound();
   if (currentRound?.status === "active") return undefined;
 
-  return createQuizRound(startedByParticipantKey);
+  return createQuizRound(startedByParticipantKey, durationMinutes);
 }
 
 /** Registra a entrada de uma pessoa na rodada ativa sem exigir conta ou senha. */

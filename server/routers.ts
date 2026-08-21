@@ -4,7 +4,7 @@ import { finishCurrentQuizRound, getCurrentQuizRound, getQuizParticipationSummar
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
-import { formatParticipantName, quizParticipantInputSchema, quizRoundStarterInputSchema, quizScoreInputSchema } from "./quizScore";
+import { formatParticipantName, quizParticipantInputSchema, quizRoundStarterInputSchema, quizRoundStartInputSchema, quizScoreInputSchema } from "./quizScore";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -78,9 +78,9 @@ export const appRouter = router({
       if (!round) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Não foi possível encerrar a rodada agora." });
       return { round };
     }),
-    /** Inicia uma nova rodada de dez minutos e grava o navegador que poderá encerrá-la. */
-    startNextRound: publicProcedure.input(quizRoundStarterInputSchema).mutation(async ({ input }) => {
-      const round = await startNextQuizRound(input.participantKey);
+    /** Inicia uma nova rodada pública com a duração escolhida e grava o navegador que poderá encerrá-la. */
+    startNextRound: publicProcedure.input(quizRoundStartInputSchema).mutation(async ({ input }) => {
+      const round = await startNextQuizRound(input.participantKey, input.durationMinutes);
       if (!round) throw new TRPCError({ code: "CONFLICT", message: "Já existe uma rodada ativa. Aguarde o encerramento antes de iniciar outra." });
       return { round };
     }),

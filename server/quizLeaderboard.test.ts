@@ -39,6 +39,7 @@ const activeRound = {
   status: "active" as const,
   startedAt: new Date(now - 60_000),
   startedByParticipantKey: "a55db342-5c91-4d37-93cc-c87aec58b6b2",
+  durationMinutes: 10,
   endsAt: new Date(now + 9 * 60_000),
   endedAt: null,
   createdAt: new Date(now - 60_000),
@@ -46,13 +47,21 @@ const activeRound = {
 };
 
 describe("quiz rounds", () => {
-  it("permite que um visitante comece uma nova rodada de dez minutos sem login", async () => {
+  it("permite que um visitante defina a duração de uma nova rodada sem login", async () => {
     startNextQuizRoundMock.mockResolvedValueOnce(activeRound);
     const caller = appRouter.createCaller(createPublicContext());
     const participantKey = "a55db342-5c91-4d37-93cc-c87aec58b6b2";
 
-    await expect(caller.quiz.startNextRound({ participantKey })).resolves.toEqual({ round: activeRound });
-    expect(startNextQuizRoundMock).toHaveBeenCalledWith(participantKey);
+    await expect(caller.quiz.startNextRound({ participantKey, durationMinutes: 90 })).resolves.toEqual({ round: activeRound });
+    expect(startNextQuizRoundMock).toHaveBeenCalledWith(participantKey, 90);
+  });
+
+  it("recusa durações fora do intervalo seguro da rodada", async () => {
+    const caller = appRouter.createCaller(createPublicContext());
+    const participantKey = "a55db342-5c91-4d37-93cc-c87aec58b6b2";
+
+    await expect(caller.quiz.startNextRound({ participantKey, durationMinutes: 0 })).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    await expect(caller.quiz.startNextRound({ participantKey, durationMinutes: 721 })).rejects.toMatchObject({ code: "BAD_REQUEST" });
   });
 
   it("permite que quem iniciou a rodada a finalize antes do prazo sem login", async () => {
