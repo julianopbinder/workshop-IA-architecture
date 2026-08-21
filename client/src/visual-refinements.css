@@ -1,0 +1,404 @@
+/* Padronização clara dos módulos didáticos, preservando os sinais em laranja da biblioteca. */
+.mcp-hero,
+.subagent-hero,
+.rag-hero,
+.executive-hero,
+.executive-closing {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Mantém os títulos e descrições dos cabeçalhos legíveis sobre a superfície clara. */
+.mcp-hero h1,
+.subagent-hero h1,
+.rag-hero h1,
+.executive-hero h1,
+.executive-closing h2,
+.mcp-hero .hero-text strong {
+  color: var(--ink);
+}
+
+.mcp-hero h1 em,
+.subagent-hero h1 em,
+.rag-hero h1 em,
+.executive-hero h1 em,
+.executive-closing h2 em {
+  color: var(--accent);
+}
+
+.mcp-hero .hero-text,
+.subagent-hero .hero-text,
+.rag-hero .hero-text,
+.executive-hero > .page-width > div > p:not(.eyebrow),
+.executive-closing p {
+  color: var(--ink-muted);
+}
+
+.mcp-hero .button-link,
+.subagent-hero .button-link,
+.rag-hero-link,
+.executive-hero .eyebrow {
+  color: var(--accent);
+}
+
+/* Converte os cartões de introdução de MCPs e SubAgentes em superfícies claras. */
+.mcp-hero-card,
+.subagent-hero-card,
+.rag-hero-card,
+.executive-brief-card {
+  border-color: var(--line);
+  background: var(--surface);
+  box-shadow: 8px 9px 0 rgb(26 42 56 / 7%);
+}
+
+.mcp-hero-card h2,
+.subagent-hero-card h2,
+.rag-hero-card h2,
+.executive-brief-card strong {
+  color: var(--ink);
+}
+
+.mcp-hero-card > p:not(.mcp-hero-label),
+.subagent-hero-card > p:not(.subagent-card-label),
+.rag-hero-card > p:not(.rag-hero-label),
+.executive-brief-card > p {
+  color: var(--ink-muted);
+}
+
+.mcp-hero-route,
+.subagent-hero-route,
+.rag-hero-route,
+.executive-brief-card > p {
+  border-top-color: var(--line);
+}
+
+.mcp-hero-route,
+.subagent-hero-route,
+.rag-hero-route {
+  color: var(--ink);
+}
+
+/* Clareia a moldura do diagrama MCP sem alterar a imagem original. */
+.mcp-architecture-figure {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.mcp-architecture-figure button {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.mcp-architecture-figure figcaption {
+  color: var(--ink-muted);
+}
+
+/* Clareia a estação final do exemplo MCP e todos os seus cartões internos. */
+.mcp-execution-map {
+  border-color: var(--line);
+  background: #f7f9f6;
+  color: var(--ink);
+}
+
+.mcp-execution-head {
+  border-bottom-color: var(--line);
+}
+
+.mcp-execution-head h2,
+.mcp-execution-head h2 em {
+  color: var(--ink);
+}
+
+.mcp-execution-head .eyebrow,
+.mcp-execution-nexo span {
+  color: var(--accent);
+}
+
+.mcp-execution-context > p,
+.mcp-execution-map .exec-node p {
+  color: var(--ink-muted);
+}
+
+.mcp-execution-nexo {
+  border-top-color: var(--line);
+}
+
+.mcp-execution-map .exec-node {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.mcp-execution-map .exec-node h3,
+.mcp-execution-map .exec-node strong {
+  color: var(--ink);
+}
+
+.mcp-execution-map .exec-node pre,
+.mcp-execution-map .exec-node code,
+.mcp-execution-map .mcp-execution-note code,
+.mcp-execution-map .mcp-execution-head code {
+  border-color: var(--line);
+  background: #edf2ef;
+  color: var(--ink);
+}
+
+/* Mantém a operação de SubAgentes clara, separando missão e retorno apenas pelos acentos. */
+.subagent-operation {
+  background: #f1f4f2;
+}
+
+.subagent-operation-map {
+  border-color: var(--line);
+  background: #f7f9f6;
+  color: var(--ink);
+}
+
+.subagent-operation-head {
+  border-bottom-color: var(--line);
+}
+
+.subagent-operation-head p,
+.subagent-operation-head span {
+  color: var(--ink-muted);
+}
+
+.subagent-main-node {
+  background: #e8efec;
+}
+
+.subagent-main-node strong,
+.subagent-specialists article strong {
+  color: var(--ink);
+}
+
+.subagent-main-node p,
+.subagent-specialists article p {
+  color: var(--ink-muted);
+}
+
+.subagent-specialists article,
+.subagent-specialists .subagent-devops-node {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.subagent-specialists article > b {
+  border-top-color: var(--line);
+  color: #497661;
+}
+
+.subagent-return-lane {
+  border-color: #a7c2b2;
+  background: #e8f0ec;
+}
+
+.subagent-return-lane span,
+.subagent-return-lane svg {
+  color: #497661;
+}
+
+.subagent-return-lane p {
+  color: #244434;
+}
+
+/* Clareia os painéis e as molduras dos diagramas RAG sem perder a hierarquia da rota. */
+.rag-reference-figure,
+.rag-evidence-figure button {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.rag-reference-figure button {
+  background: var(--surface);
+}
+
+.rag-reference-figure figcaption {
+  color: var(--ink-muted);
+}
+
+.rag-reference-figure button span,
+.rag-evidence-figure button span {
+  background: var(--ink);
+}
+
+.rag-scenario {
+  border-color: var(--line);
+  background: #f7f9f6;
+  color: var(--ink);
+}
+
+.rag-question-node {
+  background: rgb(207 98 53 / 7%);
+}
+
+.rag-question-node strong,
+.rag-scenario-grid strong {
+  color: var(--ink);
+}
+
+.rag-scenario-grid article {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.rag-scenario-grid article span {
+  color: var(--ink-muted);
+}
+
+.rag-scenario-grid .rag-scenario-result {
+  border-color: #a7c2b2;
+  background: #e8f0ec;
+}
+
+.rag-scenario-grid .rag-scenario-result svg,
+.rag-scenario-grid .rag-scenario-result p {
+  color: #497661;
+}
+
+.rag-step-panel,
+.rag-step-source,
+.rag-step-context,
+.rag-step-result {
+  border-color: var(--line);
+  background: #f7f9f6;
+  color: var(--ink);
+}
+
+.rag-step-panel svg,
+.rag-step-panel > span,
+.rag-step-result svg,
+.rag-step-result > span {
+  color: var(--accent);
+}
+
+.rag-step-panel strong {
+  color: var(--ink);
+}
+
+.rag-step-panel p {
+  color: var(--ink-muted);
+}
+
+/* Afasta o conector da figura seguinte e mantém os dois caminhos de RAG ampliáveis. */
+.rag-role-connection {
+  bottom: -29px;
+  border-color: var(--accent);
+  background: var(--surface);
+  color: var(--ink-muted);
+}
+
+.rag-role-connection svg,
+.rag-role-connection strong,
+.rag-role-connection i {
+  color: var(--accent);
+}
+
+.rag-agent-visual {
+  margin-top: 126px;
+}
+
+.rag-query {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.rag-query header p,
+.rag-query header > span,
+.rag-query header svg {
+  color: var(--accent);
+}
+
+.rag-query > p,
+.rag-query li,
+.rag-query li b {
+  color: var(--ink-muted);
+}
+
+.rag-query li b {
+  color: var(--ink);
+}
+
+.rag-query .rag-pipeline-card,
+.rag-query ol,
+.rag-query li {
+  border-color: var(--line);
+}
+
+/* Remove as últimas faixas escuras do painel executivo, mantendo os dados inalterados. */
+.executive-brief-card > div,
+.executive-brief-card em {
+  color: var(--accent);
+}
+
+.dashboard-toolbar {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--ink-muted);
+}
+
+.dashboard-toolbar > div {
+  color: var(--accent);
+}
+
+.dashboard-toolbar p,
+.dashboard-toolbar b {
+  color: var(--ink-muted);
+}
+
+/* Aumenta a área útil das roscas e reserva uma coluna fixa para os percentuais. */
+.pie-widget,
+.pie-widget-center {
+  overflow: visible;
+}
+
+.pie-widget-center span {
+  max-width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.pie-scale-expanded .pie-kpi-card {
+  grid-template-columns: 146px minmax(0, 1fr);
+  min-height: 238px;
+}
+
+.pie-scale-expanded .pie-kpi-card p span {
+  grid-template-columns: 9px minmax(0, 1fr) 54px;
+  gap: 8px;
+}
+
+.pie-scale-expanded .pie-kpi-card p span b,
+.pie-scale-expanded .pie-legend p b {
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.pie-scale-expanded .pie-legend p {
+  grid-template-columns: 12px minmax(0, 1fr) 64px;
+  gap: 11px;
+}
+
+@media (max-width: 720px) {
+  .pie-scale-expanded .pie-kpi-card {
+    grid-template-columns: 134px minmax(0, 1fr);
+    min-height: 198px;
+  }
+
+  .pie-scale-expanded .pie-kpi-card p span {
+    grid-template-columns: 8px minmax(0, 1fr) 42px;
+    gap: 6px;
+  }
+
+  .pie-scale-expanded .pie-legend p {
+    grid-template-columns: 9px minmax(0, 1fr) 46px;
+    gap: 7px;
+  }
+
+  .rag-agent-visual {
+    margin-top: 64px;
+  }
+}

@@ -80,7 +80,7 @@ const arquiteturas = [
 
 function GraficoRosca({ data, value, caption, className = "" }: { data: Fatia[]; value: string; caption: string; className?: string }) {
   return <div className={`pie-widget ${className}`} role="img" aria-label={`${caption}: ${data.map((fatia) => `${fatia.label} ${fatia.value}%`).join(", ")}`}>
-    <ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={data} dataKey="value" nameKey="label" cx="50%" cy="50%" innerRadius="64%" outerRadius="92%" startAngle={90} endAngle={-270} paddingAngle={2} stroke="none">{data.map((fatia) => <Cell key={fatia.label} fill={fatia.color} />)}</Pie></PieChart></ResponsiveContainer>
+    <ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={data} dataKey="value" nameKey="label" cx="50%" cy="50%" innerRadius="58%" outerRadius="92%" startAngle={90} endAngle={-270} paddingAngle={2} stroke="none">{data.map((fatia) => <Cell key={fatia.label} fill={fatia.color} />)}</Pie></PieChart></ResponsiveContainer>
     <div className="pie-widget-center"><strong>{value}</strong><span>{caption}</span></div>
   </div>;
 }

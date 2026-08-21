@@ -558,3 +558,12 @@
 - [x] Tornar clicáveis e ampliáveis as imagens indicadas nas páginas MCPs, SubAgentes e RAG, incluindo os dois pipelines de RAG e as demais imagens didáticas da página.
 - [x] Aumentar o espaçamento vertical da imagem do fluxo “o agente pode consultar → RAG → contexto confiável” na página RAG.
 - [x] Revisar todos os gráficos de Panorama, ampliando o espaço e ajustando textos internos para eliminar cortes de rótulos como Esforço e Complexidade.
+
+## Padronização clara e ajustes finais de leitura
+
+- [x] Remover somente a palavra “Print” da página Skill, preservando o restante do conteúdo e do layout.
+- [x] Converter para fundo branco os banners, blocos didáticos e figuras indicados nas páginas MCPs, SubAgentes e RAG, preservando o contraste do texto e os detalhes em laranja.
+- [x] Afastar visualmente o fluxo “o agente pode consultar → RAG → contexto confiável” do conteúdo acima e garantir sua ampliação ao clique, junto de todas as imagens da página RAG.
+- [x] Revisar e ampliar todos os gráficos de pizza/rosca em Panorama para que rótulos internos, especialmente “DO RECORTE”, não sejam cortados.
+- [x] Separar percentuais e rótulos nas legendas dos gráficos de pizza para impedir sobreposição visual.
+- [x] Converter o banner de abertura escuro de Panorama para fundo branco, preservando a hierarquia tipográfica e os acentos em laranja.
