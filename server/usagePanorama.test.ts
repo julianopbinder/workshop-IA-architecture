@@ -36,4 +36,9 @@ describe("dashboard executivo Panorama", () => {
     expect(styles).toContain("width: 255px");
     expect(styles).toContain("grid-template-columns: repeat(2, 1fr)");
   });
+
+  it("mantém os quatro indicadores superiores contidos no espaço disponível", () => {
+    expect(styles).toContain("grid-template-columns: 132px minmax(0, 1fr)");
+    expect(styles).toContain("min-height: 228px");
+  });
 });

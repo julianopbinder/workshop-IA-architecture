@@ -516,3 +516,15 @@
 - [x] Aumentar o diâmetro de todos os gráficos de pizza e rosca do Panorama.
 - [x] Ampliar títulos, números centrais, legendas, textos explicativos e fontes de referência.
 - [x] Validar o novo tamanho em desktop e celular e publicar a melhoria na Railway.
+
+## Visualizações internas — Panorama
+
+- [ ] Criar a navegação interna com Painel Circular, Barras Comparativas, Linha de Evolução e Colunas de Adoção.
+- [ ] Criar a visualização de barras comparativas com os mesmos indicadores corporativos do painel circular.
+- [ ] Criar a visualização de linha usando a escala de maturidade e adoção como leitura didática claramente identificada.
+- [ ] Criar a visualização de colunas de adoção com os mesmos dados e fontes explícitas.
+- [ ] Atualizar testes, validar os quatro painéis em desktop e celular e publicar na Railway.
+
+## Ajuste de encaixe — Indicadores circulares
+
+- [x] Reduzir os quatro indicadores superiores para que caibam integralmente na tela sem corte.
