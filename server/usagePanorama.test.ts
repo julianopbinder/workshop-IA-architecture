@@ -58,6 +58,13 @@ describe("dashboard executivo Panorama", () => {
     expect(refinements).toContain("grid-row: 2");
   });
 
+  it("empilha os dois painéis superiores em largura total e centraliza seus gráficos", () => {
+    expect(refinements).toContain("grid-template-columns: minmax(0, 1fr)");
+    expect(refinements).toContain("width: min(820px, 100%)");
+    expect(refinements).toContain("width: min(760px, 100%)");
+    expect(refinements).toContain("justify-content: center");
+  });
+
   it("mantém as quatro abas internas para trocar somente o tipo de gráfico", () => {
     expect(page).toContain("<PainelCircular />");
     expect(page).toContain("panorama-view-tabs");

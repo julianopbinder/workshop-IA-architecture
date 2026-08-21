@@ -598,3 +598,8 @@
 ## Ajuste isolado — controle humano
 
 - [x] Recuar somente o quadro “O controle continua humano” para a esquerda, sem alterar o quadro “Da adoção ao valor”.
+
+## Refinamento do painel circular superior
+
+- [x] Ampliar os quadros “Da adoção ao valor” e “O controle continua humano” empilhados, preenchendo a largura disponível e redistribuindo os gráficos internos.
+- [x] Centralizar e distribuir os gráficos internos dos dois quadros, eliminando blocos vazios na composição.

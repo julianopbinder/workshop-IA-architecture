@@ -560,6 +560,40 @@
   width: 100%;
 }
 
+/* Empilha os dois painéis na largura completa do painel circular. */
+.pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
+}
+
+.pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .trust-circle-panel {
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .circular-panel {
+  min-height: 438px;
+}
+
+/* Distribui as três roscas de adoção no centro do painel ampliado. */
+.pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .adoption-circles {
+  width: min(820px, 100%);
+  margin: 38px auto auto;
+  gap: 56px;
+}
+
+.pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .adoption-circles .pie-widget {
+  max-width: 178px;
+}
+
+/* Centraliza o gráfico de confiança e sua legenda como um conjunto único. */
+.pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .trust-circle-content {
+  width: min(760px, 100%);
+  justify-content: center;
+  margin: 40px auto auto;
+  gap: 78px;
+}
+
 /* A rota de aprendizado permanece legível mesmo com o hero em fundo claro. */
 .rag-deck-progress {
   margin-top: 42px;
@@ -650,6 +684,30 @@
 
   .pie-scale-expanded .architecture-score .pie-widget-center span {
     font-size: 8px;
+  }
+
+  .pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) {
+    gap: 18px;
+  }
+
+  .pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .circular-panel {
+    min-height: 0;
+  }
+
+  .pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .adoption-circles {
+    width: 100%;
+    margin-top: 26px;
+    gap: 15px;
+  }
+
+  .pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .adoption-circles .pie-widget {
+    max-width: 112px;
+  }
+
+  .pie-scale-expanded .circular-story-grid:not(.circular-lower-grid) .trust-circle-content {
+    width: 100%;
+    margin-top: 28px;
+    gap: 22px;
   }
 
   .rag-deck-progress {
