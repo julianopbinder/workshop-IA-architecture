@@ -469,4 +469,4 @@
 - [x] Exibir em celular um menu branco de fundo, com texto preto para Skill, MCPs, SubAgentes, RAG, Resumo e Quiz.
 - [x] Corrigir o espaçamento do cabeçalho para não sobrepor o conteúdo da página em telas estreitas.
 - [x] Validar o menu e o conteúdo em um viewport de celular antes de publicar.
-- [ ] Publicar a correção do menu móvel na Railway.
+- [x] Publicar a correção do menu móvel na Railway.
