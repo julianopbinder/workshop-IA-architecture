@@ -536,3 +536,11 @@
 ## Submenus visíveis — Panorama
 
 - [x] Exibir Painel Circular, Barras Comparativas, Linha de Indicadores e Colunas de Adoção como submenus diretamente vinculados ao item PANORAMA da navegação superior.
+
+## Paridade de conteúdo — Visualizações do Panorama
+
+- [x] Repetir todos os indicadores, blocos analíticos, fontes e a avaliação orientativa do Painel Circular em Barras Comparativas, Linha de Indicadores e Colunas de Adoção, alterando exclusivamente o tipo de gráfico.
+
+## Cartões de arquitetura — Fundo claro
+
+- [x] Trocar o fundo escuro dos quatro cartões de Skills, MCPs, RAG e SubAgentes por branco, preservando contraste e legibilidade dos gráficos.

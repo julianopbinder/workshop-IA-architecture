@@ -62,4 +62,22 @@ describe("dashboard executivo Panorama", () => {
     expect(navigation).toContain("panorama-submenu");
     expect(navigation).toContain("mobile-panorama-submenu");
   });
+
+  it("repete todos os blocos analíticos e fontes nas três leituras alternativas", () => {
+    expect(page).toContain("alternative-detail-grid");
+    expect(page).toContain("Da adoção ao valor");
+    expect(page).toContain("O controle continua humano");
+    expect(page).toContain("Onde a IA aparece primeiro");
+    expect(page).toContain("Onde começar");
+    expect(page).toContain("ArquiteturaAlternativa");
+    expect(page).toContain("McKinsey Global Survey 2025");
+    expect(page).toContain("DORA, análise qualitativa de 2025");
+    expect(page).toContain("Roteiro recomendado para times iniciantes");
+  });
+
+  it("mantém os cartões de arquitetura em fundo branco e contraste escuro", () => {
+    expect(styles).toContain(".architecture-pie-card { display: flex");
+    expect(styles).toContain("background: #ffffff");
+    expect(styles).toContain(".architecture-pie-card h3 { margin: 4px 0 0; color: #1a2a38");
+  });
 });
