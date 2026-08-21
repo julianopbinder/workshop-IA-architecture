@@ -9,10 +9,19 @@ import {
   PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import { LibraryNav } from "@/components/LibraryNav";
+import { useState } from "react";
+import "./panorama-views.css";
 
 type Fatia = { label: string; value: number; color: string };
 type Visao = "circular" | "barras" | "linha" | "colunas";
 type Serie = { nome: string; valor: number; cor: string; fonte: string };
+
+const opcoesVisao: { id: Visao; titulo: string; descricao: string; Icon: typeof Activity }[] = [
+  { id: "circular", titulo: "Painel Circular", descricao: "Leitura por participação", Icon: Activity },
+  { id: "barras", titulo: "Barras Comparativas", descricao: "Leitura lado a lado", Icon: BarChart3 },
+  { id: "linha", titulo: "Linha de Indicadores", descricao: "Leitura em sequência", Icon: LineChartIcon },
+  { id: "colunas", titulo: "Colunas de Adoção", descricao: "Leitura por altura", Icon: Building2 },
+];
 
 const indicadores = [
   { value: "78%", label: "empresas usam IA em ao menos uma função", source: "McKinsey 2025", data: [{ label: "Usam IA", value: 78, color: "#cf6235" }, { label: "Ainda não usam", value: 22, color: "#dce4e0" }] },
@@ -84,6 +93,16 @@ function FontesIndicadores() {
   return <div className="same-data-note"><CheckCircle2 aria-hidden="true" /><p><strong>Mesmos dados, outra leitura.</strong> As quatro visualizações usam os mesmos indicadores e as mesmas fontes; muda apenas a forma de enxergar a comparação.</p></div>;
 }
 
+// Os botões ficam dentro da página de Panorama para alternar apenas a forma do gráfico, sem criar submenus no cabeçalho.
+function SeletorDeVisao({ ativa, aoSelecionar }: { ativa: Visao; aoSelecionar: (visao: Visao) => void }) {
+  return <section className="panorama-view-menu" aria-label="Visualizações do Panorama"><div className="page-width">
+    <p className="panorama-view-helper">Troque somente o tipo de gráfico: os dados, fontes e percentuais permanecem iguais.</p>
+    <div className="panorama-view-tabs" role="tablist" aria-label="Escolha o tipo de gráfico">
+      {opcoesVisao.map(({ id, titulo, descricao, Icon }) => <button key={id} type="button" role="tab" aria-selected={ativa === id} className={ativa === id ? "active" : ""} onClick={() => aoSelecionar(id)}><Icon aria-hidden="true" /><span><b>{titulo}</b><small>{descricao}</small></span></button>)}
+    </div>
+  </div></section>;
+}
+
 function FormatoValor({ valor, unidade }: { valor: number; unidade: string }) {
   return <>{valor}{unidade}</>;
 }
@@ -150,5 +169,13 @@ function PainelCircular() {
 }
 
 export default function UsagePanoramaPage() {
-  return <main className="skill-reference usage-panorama-page executive-panorama circular-panorama pie-scale-expanded"><LibraryNav ativo="panorama" /><section className="executive-hero"><div className="page-width executive-hero-grid"><div><p className="eyebrow">DASHBOARD EXECUTIVO · IA CORPORATIVA</p><h1>A questão deixou de ser <em>“usar IA?”</em><br />Agora é: onde ela gera valor com segurança?</h1><p>Um retrato visual da adoção corporativa e um caminho simples para a equipe avançar sem começar pela arquitetura mais complexa.</p></div><aside className="executive-brief-card"><div><Sparkles aria-hidden="true" /><span>LEITURA RÁPIDA</span></div><strong>Uso cresce rápido.<br />Maturidade cresce <em>mais devagar.</em></strong><p>Os gráficos mostram a distância entre experimentar IA e integrá-la de verdade ao trabalho.</p></aside></div></section><PainelCircular /><section className="executive-closing"><div className="page-width executive-closing-grid"><div><p className="eyebrow">FECHAMENTO</p><h2>O melhor uso de IA não é o mais complexo.<br /><em>É o que melhora o trabalho real.</em></h2></div><div><Users aria-hidden="true" /><p>Comece pequeno, meça o efeito, mantenha revisão humana e evolua a arquitetura à medida que o time ganha maturidade.</p><div className="executive-references"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value" target="_blank" rel="noreferrer">McKinsey 2025</a><a href="https://dora.dev/insights/balancing-ai-tensions/" target="_blank" rel="noreferrer">DORA 2025</a><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noreferrer">Stack Overflow 2025</a></div></div></div></section></main>;
+  const [visaoAtiva, setVisaoAtiva] = useState<Visao>("circular");
+
+  return <main className="skill-reference usage-panorama-page executive-panorama circular-panorama pie-scale-expanded">
+    <LibraryNav ativo="panorama" />
+    <section className="executive-hero"><div className="page-width executive-hero-grid"><div><p className="eyebrow">DASHBOARD EXECUTIVO · IA CORPORATIVA</p><h1>A questão deixou de ser <em>“usar IA?”</em><br />Agora é: onde ela gera valor com segurança?</h1><p>Um retrato visual da adoção corporativa e um caminho simples para a equipe avançar sem começar pela arquitetura mais complexa.</p></div><aside className="executive-brief-card"><div><Sparkles aria-hidden="true" /><span>LEITURA RÁPIDA</span></div><strong>Uso cresce rápido.<br />Maturidade cresce <em>mais devagar.</em></strong><p>Os gráficos mostram a distância entre experimentar IA e integrá-la de verdade ao trabalho.</p></aside></div></section>
+    <SeletorDeVisao ativa={visaoAtiva} aoSelecionar={setVisaoAtiva} />
+    {visaoAtiva === "circular" ? <PainelCircular /> : <GraficoAlternativo visao={visaoAtiva} />}
+    <section className="executive-closing"><div className="page-width executive-closing-grid"><div><p className="eyebrow">FECHAMENTO</p><h2>O melhor uso de IA não é o mais complexo.<br /><em>É o que melhora o trabalho real.</em></h2></div><div><Users aria-hidden="true" /><p>Comece pequeno, meça o efeito, mantenha revisão humana e evolua a arquitetura à medida que o time ganha maturidade.</p><div className="executive-references"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value" target="_blank" rel="noreferrer">McKinsey 2025</a><a href="https://dora.dev/insights/balancing-ai-tensions/" target="_blank" rel="noreferrer">DORA 2025</a><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noreferrer">Stack Overflow 2025</a></div></div></div></section>
+  </main>;
 }

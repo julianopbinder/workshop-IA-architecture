@@ -548,3 +548,7 @@
 ## Navegação simplificada — Panorama
 
 - [x] Remover o menu suspenso de visualizações e as quatro abas de gráfico, deixando somente o botão PANORAMA no cabeçalho e preservando todo o conteúdo do painel principal.
+
+## Correção — Visualizações internas do Panorama
+
+- [x] Restaurar os quatro botões dentro de Panorama — Painel Circular, Barras Comparativas, Linha de Indicadores e Colunas de Adoção — mantendo o menu superior com somente o link PANORAMA e exibindo todos os blocos completos em cada tipo de gráfico.

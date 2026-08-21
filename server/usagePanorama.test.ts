@@ -43,11 +43,14 @@ describe("dashboard executivo Panorama", () => {
     expect(styles).toContain("min-height: 228px");
   });
 
-  it("abre diretamente o painel principal sem abas de escolha de gráfico", () => {
+  it("mantém as quatro abas internas para trocar somente o tipo de gráfico", () => {
     expect(page).toContain("<PainelCircular />");
-    expect(page).not.toContain("panorama-view-tabs");
-    expect(page).not.toContain("selecionarVisao");
-    expect(page).not.toContain('get("visao")');
+    expect(page).toContain("panorama-view-tabs");
+    expect(page).toContain("Painel Circular");
+    expect(page).toContain("Barras Comparativas");
+    expect(page).toContain("Linha de Indicadores");
+    expect(page).toContain("Colunas de Adoção");
+    expect(page).toContain("GraficoAlternativo visao={visaoAtiva}");
   });
 
   it("mantém somente o link principal de Panorama na navegação", () => {
